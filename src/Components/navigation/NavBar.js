@@ -6,6 +6,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
 import PostIcon from "@material-ui/icons/PostAdd";
 import BookIcon from "@material-ui/icons/Book";
+import { Grid } from '@material-ui/core';
 
 function NavBar(props) {
     const [sidebar, setSidebar] = useState(false);
@@ -30,18 +31,24 @@ function NavBar(props) {
     return (
         <>
         <nav className='navBar'>
-            <Link to ="/" className='nav-logo'>
-                <MenuIcon onClick={showSidebar} />
-                <span>What-Post!</span>
-            </Link>            
-                
+            <MenuIcon onClick={showSidebar} className='sidebarBtn' />
+            <Link to ="/" className='temp-logo'>
+                What-Post!
+            </Link>
+
             <ul className= {sidebar ? 'nav-menu active' : 'nav-menu'} >
                 {menuItems.map( (item, index) => {
                     return (
                         <li key={index} className='nav-items'>
                             <Link to = {item.path} className='nav-item' onClick={showSidebar}>
-                                {item.icon}
-                                <span>{item.name}</span>
+                                <Grid container direction='row' alignItems='center'>
+                                    <Grid item>
+                                        {item.icon}
+                                    </Grid>
+                                    <Grid item>
+                                    <span>{item.name}</span>
+                                    </Grid>
+                                </Grid>
                             </Link>
                         </li>
                     );

@@ -2,16 +2,22 @@
     background: #6badb6;
     height: 80px;
     width: 100%;
-    display: flex;
+    display:flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
     font-size: 18px;
   }
 
-  .nav-logo {
-      text-decoration: none;
+  .sidebarBtn {
       color: #467379;
+  }
+  .temp-logo {
+    text-decoration: none;
+    color: white;
+    transition: 0.3s all;
+    position: absolute;
+    left: 70px;
   }
   
   /* .nav-menu.active {
@@ -37,7 +43,6 @@
     text-decoration: none;
     color: white;
     transition: 0.3s all;
-    border-radius: 4px;
     list-style: none;
   }
   
@@ -74,7 +79,7 @@
       }
 
       .nav-items {
-          padding: 10px 0;
+          padding: 10px 10px;
           border-bottom: 1px solid rgba(255, 255, 255, 20%);
       }
   }
