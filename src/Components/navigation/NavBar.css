@@ -1,0 +1,86 @@
+.navBar{
+    background: #6badb6;
+    height: 80px;
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    font-size: 18px;
+  }
+
+  .sidebarBtn {
+      color: #467379;
+  }
+  .temp-logo {
+    text-decoration: none;
+    font-weight: bold;
+    color: white;
+    transition: 0.3s all;
+    position: absolute;
+    left: 70px;
+  }
+  
+  /* .nav-menu.active {
+    left: 0;
+    transition: 350ms;
+    list-style: none;
+  } */
+  
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    column-gap: 35px;
+    list-style: none;
+  }
+
+  .nav-items {
+    width:100%;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-item{ 
+        /* 네비게이션 텍스트 및 로고 */
+    text-decoration: none;
+    color: white;
+    transition: 0.3s all;
+    list-style: none;
+  }
+  
+  .nav-item span:hover{
+    background-color: rgba(70, 115, 121, 60%);
+    color: white;
+  }
+
+  span {
+      margin-left: 8px;
+  }
+
+
+  /* ////////// 반응형 /////////// */
+  @media only screen and (max-width: 500px) {
+      .navBar {
+          position: relative;
+      }
+
+      .nav-menu {
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          text-align: center;
+          width: 100%;
+          top: 80px;
+          left: -100%;
+          transition: 0.5s all;
+      }
+
+      .nav-menu.active {
+          background: rgba(69, 114, 120, 90%);
+          left: 0;
+      }
+
+      .nav-items {
+          padding: 10px 10px;
+          border-bottom: 1px solid rgba(255, 255, 255, 20%);
+      }
+  }
