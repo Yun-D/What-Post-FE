@@ -1,0 +1,61 @@
+.navBar{
+    background: #6badb6;
+    height: 80px;
+    width: 100%;
+    display: flex;
+    justify-items: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    font-size: 18px;
+  }
+
+  .nav-logo {
+      text-decoration: none;
+      color: #467379;
+  }
+  
+  /* .nav-menu.active {
+    left: 0;
+    transition: 350ms;
+    list-style: none;
+  } */
+  
+  .nav-menu {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    grid-gap: 20px;
+    list-style: none;
+  }
+
+  .nav-items {
+    width:100%;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-item{ 
+        /* 네비게이션 텍스트 및 로고 */
+    text-decoration: none;
+    color: white;
+    transition: 0.3s all;
+    border-radius: 4px;
+    list-style: none;
+  }
+  
+  .nav-item span:hover{
+    background-color: rgba(70, 115, 121, 40%);
+    color: white;
+  }
+  
+  
+  /* .navbar-toggle {
+    background-color: #6badb6;
+    width:100%;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  } */
+
+  span {
+      margin-left: 10px;
+  }
