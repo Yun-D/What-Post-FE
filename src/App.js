@@ -1,17 +1,24 @@
 import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import NavBar from './Components/navigation/NavBar';
+import Home from './Components/Home/Home';
+import MyPost from './Components/MyPost/MyPost';
+import SearchBook from './Components/SearchBook/SearchBook';
 
 function App() {
   return (
-    <Router>
-      <NavBar />
-      {/* <Switch>
-        <Route path="/" exact component = {Home} />
-        <Route path="/my_post" component = {MyPost} />
-      </Switch> */}
-    </Router>
+    <div className='app'>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" exact element = { <Home /> } />
+          <Route path="/my_post" element = { <MyPost /> } />
+          <Route path="/search_book" element = { <SearchBook /> } />
+        </Routes>
+      </BrowserRouter>
+    </div>
+    
   );
 }
 
