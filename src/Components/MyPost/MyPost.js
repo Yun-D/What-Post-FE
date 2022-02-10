@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React from "react";
 
 const MyPost = () => {
-    return (
-        <>
-        MyPost 내 포스트
-        </>
-    );
-}
+  return (
+    <>
+      <div>
+        <p>유저 네임의 책장</p>
+      </div>
+    </>
+  );
+};
 
 export default MyPost;
