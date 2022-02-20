@@ -1,6 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import GlobalStyle from "./Components/Styles/GlobalStyle";
 import NavBar from "./Components/navigation/NavBar";
 import Home from "./Components/Home/Home";
 import MyPost from "./Components/MyPost/MyPost";
@@ -11,10 +12,11 @@ function App() {
     <div className="app">
       <BrowserRouter>
         <NavBar />
+        <GlobalStyle />
         <Routes>
           <Route path="/" exact element={<Home />} />
-          <Route path="/my_post" element={<MyPost />} />
           <Route path="/search_book" element={<SearchBook />} />
+          <Route path="/my_post" element={<MyPost />} />
         </Routes>
       </BrowserRouter>
     </div>
