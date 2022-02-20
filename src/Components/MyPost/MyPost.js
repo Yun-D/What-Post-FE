@@ -11,8 +11,8 @@ const MyPost = () => {
           <button>포스트 쓰기</button>
         </div>
         <div>책 사진 넣는 곳</div>
-        <Button_long>로그아웃</Button_long>
-        <Button_long>회원 탈퇴</Button_long>
+        <ButtonLong>로그아웃</ButtonLong>
+        <ButtonLong>회원 탈퇴</ButtonLong>
       </div>
     </Div>
   );
@@ -22,7 +22,7 @@ const Div = styled.div`
   margin: 20px;
 `;
 
-const Button_long = styled.button`
+const ButtonLong = styled.button`
   //글로벌 스타일 button 확장
   width: 100%;
   margin-bottom: 4px;

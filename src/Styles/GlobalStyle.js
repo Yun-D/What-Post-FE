@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 * {
@@ -8,14 +9,8 @@ const GlobalStyle = createGlobalStyle`
   box-sizing: border-box;
 }
 
-size {
-  mobile: "600px";
-  tablet: "900px";
-  laptop: "1200px";
-  desktop: "1800px";
-}
-
 button {
+  //width: ${(props) => (props.longBtn ? "100%" : "200px")};
   width: 200px;
   outline: none;
   font-size: 20px;
@@ -24,7 +19,7 @@ button {
   border-radius: 10px;
   border: none;
   cursor: pointer;
-  background-color: #6BADB6;
+  background-color: ${theme.colors.mainColor};
   color: white;
 }
 
