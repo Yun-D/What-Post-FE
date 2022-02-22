@@ -13,7 +13,7 @@ button {
   //width: ${(props) => (props.longBtn ? "100%" : "200px")};
   width: 200px;
   outline: none;
-  font-size: 20px;
+  font-size: ${theme.textSize.buttonText};
   font-weight: 700;
   padding: 10px;
   border-radius: 10px;
@@ -23,9 +23,18 @@ button {
   color: white;
 }
 
+input {
+  font-size: ${theme.textSize.placeholder};
+  width: 100%;
+  height: 40px;
+  padding: 2%;
+  margin-bottom: 10px;
+}
+
+//////////////// 기타 스타일
 p_title {
   font-weight: bold;
-  font-size: 24px;
+  font-size: ${theme.textSize.postTitle};
   width: 100%;
   position: flex;
 }

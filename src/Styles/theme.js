@@ -2,6 +2,13 @@ const colors = {
   mainColor: "#6BADB6",
 };
 
+const textSize = {
+  placeholder: "16px",
+  postTitle: "24px", //p태그 등 텍스트 타이틀
+  postContents: "16px", //본문 텍스트
+  buttonText: "20px", //버튼에 들어가는 텍스트
+};
+
 const size = {
   mobile: "600px",
   tablet: "900px",
@@ -17,6 +24,7 @@ const device = {
 
 const theme = {
   colors,
+  textSize,
   size,
   device,
 };

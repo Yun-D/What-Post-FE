@@ -7,19 +7,23 @@ import GlobalStyle from "./Styles/GlobalStyle";
 import NavBar from "./Components/navigation/NavBar";
 import Home from "./Components/Home/Home";
 import MyPost from "./Components/MyPost/MyPost";
+import WritePost from "./Components/MyPost/WritePost/WritePost";
 import SearchBook from "./Components/SearchBook/SearchBook";
 
 function App() {
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
+
         <BrowserRouter>
           <NavBar />
-          <GlobalStyle />
+
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/search_book" element={<SearchBook />} />
             <Route path="/my_post" element={<MyPost />} />
+            <Route path="/my_post/write_post" element={<WritePost />} />
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

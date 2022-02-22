@@ -4,7 +4,7 @@
 }
 
 .contents_div {
-  margin: 5%;
+  margin: auto 5%;
 }
 
 /* ////////// 반응형 /////////// */
@@ -16,6 +16,6 @@
 
 @media only screen and (min-width: 1280px) {
   .contents_div {
-    margin: 10%;
+    margin: auto 10%;
   }
 }
