@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../navigation/NavBar.css";
 
-import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
-import PostIcon from "@material-ui/icons/PostAdd";
-import BookIcon from "@material-ui/icons/Book";
 import { Grid } from "@material-ui/core";
 
 function NavBar(props) {
@@ -16,17 +13,14 @@ function NavBar(props) {
     {
       path: "/",
       name: "메인",
-      icon: <HomeIcon />,
     },
     {
       path: "/search_book",
       name: "책 검색",
-      icon: <BookIcon />,
     },
     {
       path: "/my_post",
       name: "나의 포스트",
-      icon: <PostIcon />,
     },
   ];
 
@@ -44,7 +38,6 @@ function NavBar(props) {
               <li key={index} className="nav-items">
                 <Link to={item.path} className="nav-item" onClick={showSidebar}>
                   <Grid container direction="row" alignItems="center">
-                    <Grid item>{item.icon}</Grid>
                     <Grid item>
                       <span>{item.name}</span>
                     </Grid>
