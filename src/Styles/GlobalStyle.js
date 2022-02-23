@@ -39,6 +39,24 @@ p_title {
   position: flex;
 }
 
+/////////////// css
+.contents_div {
+  margin: auto 5%;
+}
+
+/* ////////// 반응형 /////////// */
+@media only screen and (max-width: ${theme.size.mobile}) {
+  .contents_div {
+    margin: 0;
+  }
+}
+
+@media only screen and (min-width: ${theme.size.laptop}) {
+  .contents_div {
+    margin: auto 10%;
+  }
+}
+
 `;
 
 export default GlobalStyle;

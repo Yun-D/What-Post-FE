@@ -1,21 +1,44 @@
-import React from "react";
+import { React, useState } from "react";
 import styled from "styled-components";
 import "./WritePost.css";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import ReactHtmlParser from "react-html-parser";
 
 const WritePost = () => {
+  const [postContent, setPostContent] = useState({
+    title: "",
+    content: "",
+  });
+  const [viewContent, setViewContent] = useState([]);
+
+  const getValue = (e) => {
+    const { name, value } = e.target;
+    setPostContent({
+      ...postContent,
+      [name]: value, //여기서 name은 "title"
+    });
+  };
+
   return (
     <Div>
-      <div className="temp_postTest">
-        <h3>포스트 제목</h3>
-        <div>내용</div>
-      </div>
+      {viewContent.map((element) => (
+        <div className="temp_postTest">
+          <h3>{element.title}</h3>
+          <div>{ReactHtmlParser(element.content)}</div>
+        </div>
+      ))}
+
       <div className="contents_div">
         <div className="photoArea" />
         <div>
-          <input type="text" placeholder="포스트 제목을 입력하세요." />
+          <input
+            type="text"
+            placeholder="포스트 제목을 입력하세요."
+            onChange={getValue}
+            name="title"
+          />
 
           <CKEditor
             editor={ClassicEditor}
@@ -28,7 +51,10 @@ const WritePost = () => {
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
-              console.log({ event, editor, data });
+              setPostContent({
+                ...postContent,
+                content: data,
+              });
             }}
             onBlur={(event, editor) => {
               console.log("Blur.", editor);
@@ -38,7 +64,13 @@ const WritePost = () => {
             }}
           />
 
-          <ButtonLong>업로드</ButtonLong>
+          <ButtonLong
+            onClick={() => {
+              setViewContent(viewContent.concat({ ...postContent }));
+            }}
+          >
+            업로드
+          </ButtonLong>
         </div>
       </div>
     </Div>

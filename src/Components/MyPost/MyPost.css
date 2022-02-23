@@ -2,20 +2,3 @@
   display: flex;
   align-items: center;
 }
-
-.contents_div {
-  margin: auto 5%;
-}
-
-/* ////////// 반응형 /////////// */
-@media only screen and (max-width: 800px) {
-  .contents_div {
-    margin: 0;
-  }
-}
-
-@media only screen and (min-width: 1280px) {
-  .contents_div {
-    margin: auto 10%;
-  }
-}
