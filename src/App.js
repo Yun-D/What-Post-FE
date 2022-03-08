@@ -1,24 +1,33 @@
-import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 
-import NavBar from './Components/navigation/NavBar';
-import Home from './Components/Home/Home';
-import MyPost from './Components/MyPost/MyPost';
-import SearchBook from './Components/SearchBook/SearchBook';
+import theme from "./Styles/theme";
+import GlobalStyle from "./Styles/GlobalStyle";
+import NavBar from "./Components/navigation/NavBar";
+import Home from "./Components/Home/Home";
+import MyPost from "./Components/MyPost/MyPost";
+import WritePost from "./Components/MyPost/WritePost/WritePost";
+import SearchBook from "./Components/SearchBook/SearchBook";
 
 function App() {
   return (
-    <div className='app'>
-      <BrowserRouter>
-        <NavBar />
-        <Routes>
-          <Route path="/" exact element = { <Home /> } />
-          <Route path="/my_post" element = { <MyPost /> } />
-          <Route path="/search_book" element = { <SearchBook /> } />
-        </Routes>
-      </BrowserRouter>
+    <div className="app">
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+
+        <BrowserRouter>
+          <NavBar />
+
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/search_book" element={<SearchBook />} />
+            <Route path="/my_post" element={<MyPost />} />
+            <Route path="/my_post/write_post" element={<WritePost />} />
+          </Routes>
+        </BrowserRouter>
+      </ThemeProvider>
     </div>
-    
   );
 }
 
