@@ -32,14 +32,14 @@ input {
 }
 
 //////////////// 기타 스타일
-p_title {
+/////////////// css
+.p_title {
   font-weight: bold;
   font-size: ${theme.textSize.postTitle};
   width: 100%;
   position: flex;
 }
 
-/////////////// css
 .contents_div {
   margin: auto 5%;
 }

@@ -23,10 +23,10 @@ const WritePost = () => {
 
   return (
     <Div>
-      {viewContent.map((element) => (
+      {viewContent.map((ele) => (
         <div className="temp_postTest">
-          <h3>{element.title}</h3>
-          <div>{ReactHtmlParser(element.content)}</div>
+          <h3>{ele.title}</h3>
+          <div>{ReactHtmlParser(ele.content)}</div>
         </div>
       ))}
 
