@@ -43,6 +43,12 @@ input {
 .contents_div {
   margin: auto 5%;
 }
+.rowDirection {
+  //컴포넌트 가로정렬
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
 
 /* ////////// 반응형 /////////// */
 @media only screen and (max-width: ${theme.size.mobile}) {
