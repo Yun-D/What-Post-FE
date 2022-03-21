@@ -1,14 +1,11 @@
 .list_li {
   list-style: none;
-  border: 1px solid #bbbbbb;
-  padding: 20px;
+  border: 0.5px solid #bbbbbb;
+  padding: 20px 30px;
   overflow: auto;
   margin-bottom: 4px;
-}
-
-.list_ul {
-  padding: 20px;
-  margin: auto;
+  background-color: white;
+  border-radius: 8px;
 }
 
 .list_dl {
@@ -18,5 +15,18 @@
 
 .list_dd {
   flex: 1;
-  margin-left: 20px;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+/* *************** 세부 항목 스타일 */
+.title {
+  color: #1491a1;
+}
+.author {
+  color: rgb(97, 97, 97);
+}
+.smallText {
+  color: gray;
+  font-size: 12px;
 }

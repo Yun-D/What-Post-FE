@@ -12,10 +12,13 @@ const ListItem = (props) => {
           height="auto"
         />
         <dd className="list_dd">
-          <h3>{props.title}</h3>
-          <h4>{props.authors}</h4>
-          <p>{props.datetime}</p>
-          <p>{props.publisher}</p>
+          <h3 className="title">{props.title}</h3>
+          <h4 className="author">{props.authors}</h4>
+          <br />
+          <p className="smallText">
+            {props.publisher} | {props.datetime}
+          </p>
+
           <article>{props.contents}</article>
         </dd>
       </dl>

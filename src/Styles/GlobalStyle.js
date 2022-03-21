@@ -29,7 +29,13 @@ input {
   height: 40px;
   padding: 2%;
   margin-bottom: 10px;
+  border-radius: 8px;
+  border: 0.5px solid gray;
 }
+
+/* div ::-webkit-scrollbar {
+    display: none;
+} */
 
 //////////////// 기타 스타일
 /////////////// css

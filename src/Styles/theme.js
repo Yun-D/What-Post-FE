@@ -1,5 +1,10 @@
 const colors = {
   mainColor: "#6BADB6",
+  boxColor: "#EFF6F6",
+  shadowColor: "#467379",
+
+  lightGray: "#bbbbbb",
+  peacock: "#1491a1", //mainColor 텍스트 버전
 };
 
 const textSize = {

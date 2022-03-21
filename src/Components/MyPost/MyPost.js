@@ -92,7 +92,6 @@ const MyPost = () => {
 
         {modalState ? (
           <ModalFrame state={modalState} closeModal={closeModal}>
-            <Blank /> <Blank /> <Blank />
             <div className="rowDirection">
               <InputSmall
                 placeholder="검색어를 입력하세요."
