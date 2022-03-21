@@ -2,7 +2,8 @@
   list-style: none;
   border: 1px solid #bbbbbb;
   padding: 20px;
-  width: 70%;
+  overflow: auto;
+  margin-bottom: 4px;
 }
 
 .list_ul {

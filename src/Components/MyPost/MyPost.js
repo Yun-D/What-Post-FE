@@ -3,14 +3,21 @@ import styled from "styled-components";
 
 import { bookSearch } from "../../APIs/api";
 import Item from "../etc/ListItem";
+import ModalFrame from "../etc/ModalFrame";
 
 import { Link } from "react-router-dom";
 
 const MyPost = () => {
-  //데이터셋, 검색어, 쿼리 state 생성
+  //책검색 데이터셋, 검색어, 쿼리 state 생성
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
+
+  //모달 state
+  const [modalState, setModalState] = useState(false);
+
+  //임시 변수 모음
+  const searchPageNum = 0;
 
   useEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
@@ -20,6 +27,7 @@ const MyPost = () => {
     }
   }, [query]); //이부분이 없어지려면 로딩 결과를 보여줘야 할듯
 
+  /////////////////////////////////책 검색용 함수들
   const onClickSearch = () => {
     setQuery(search);
   };
@@ -32,12 +40,11 @@ const MyPost = () => {
   };
 
   //text 검색어가 바뀔 때 호출되는 함수.
-  //TODO: 이것도 따로 뗄 수 있다면 분리하기
   const onTextUpdate = (e) => {
     setSearch(e.target.value);
   };
 
-  //책 검색 (임시 구현)
+  //책 검색
   const bookSearchHandler = async (query, reset) => {
     const params = {
       query: query, //검색어
@@ -53,44 +60,65 @@ const MyPost = () => {
       setBooks(books.concat(data.documents));
     }
   };
+  /////////////////////////////////책 검색용 함수들 닫음
+
+  /////////////////////////////////모달용 함수들
+  const openModal = () => {
+    setModalState(true);
+  };
+  const closeModal = (e) => {
+    e.preventDefault();
+    setModalState(false);
+
+    //모달창 닫기와 동시에 쿼리 초기화
+    setQuery(" ");
+    setSearch();
+  };
+  /////////////////////////////////모달용 함수들 닫음
 
   return (
     <Div>
       <div className="contents_div">
         <div className="rowDirection">
           <p className="p_title">유저 네임의 책장</p>
-          <Link to={"/my_post/write_post"}>
+          {/* <Link to={"/my_post/write_post"}>
             <button>포스트 쓰기</button>
-          </Link>
+          </Link> */}
+          <button onClick={openModal}>포스트 쓰기</button>
         </div>
         <div>책 사진 넣는 곳</div>
         <ButtonLong>로그아웃</ButtonLong>
         <ButtonLong>회원 탈퇴</ButtonLong>
 
-        <div>** 임시 구역 **</div>
-        <div className="rowDirection">
-          <InputSmall
-            placeholder="검색어를 입력하세요."
-            name="query"
-            value={search}
-            onKeyDown={onEnter}
-            onChange={onTextUpdate}
-          />
-          <ButtonSmall onClick={onClickSearch}>검색</ButtonSmall>
-        </div>
-
-        <ul className="test">
-          {books.map((book, idx) => (
-            <Item
-              key={idx}
-              thumbnail={book.thumbnail}
-              title={book.title}
-              authors={book.authors}
-              datetime={book.datetime.substr(0, 4)}
-              publisher={book.publisher}
-            />
-          ))}
-        </ul>
+        {modalState ? (
+          <ModalFrame state={modalState} closeModal={closeModal}>
+            <Blank /> <Blank /> <Blank />
+            <div className="rowDirection">
+              <InputSmall
+                placeholder="검색어를 입력하세요."
+                name="query"
+                value={search}
+                onKeyDown={onEnter}
+                onChange={onTextUpdate}
+              />
+              <ButtonSmall onClick={onClickSearch}>검색</ButtonSmall>
+            </div>
+            <Blank />
+            {books.map((book, idx) => (
+              <Item
+                key={idx}
+                thumbnail={book.thumbnail}
+                title={book.title}
+                authors={book.authors}
+                datetime={book.datetime.substr(0, 4)}
+                publisher={book.publisher}
+                meta={book.total_count}
+              />
+            ))}
+          </ModalFrame>
+        ) : (
+          <></>
+        )}
       </div>
     </Div>
   );
@@ -98,6 +126,9 @@ const MyPost = () => {
 
 const Div = styled.div`
   margin: 20px;
+`;
+const Blank = styled.div`
+  height: 10px;
 `;
 
 const ButtonSmall = styled.button`
