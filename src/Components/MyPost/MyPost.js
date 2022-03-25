@@ -6,26 +6,29 @@ import Item from "../etc/ListItem";
 import ModalFrame from "../etc/ModalFrame";
 
 import { Link } from "react-router-dom";
+import { useLayoutEffect } from "react";
 
 const MyPost = () => {
   //책검색 데이터셋, 검색어, 쿼리 state 생성
   const [books, setBooks] = useState([]);
   const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(""); //책 검색 쿼리
+  const [page, setPage] = useState(1); //페이지 수. 기본 값은 1
 
   //모달 state
   const [modalState, setModalState] = useState(false);
 
-  //임시 변수 모음
-  const searchPageNum = 0;
+  //임시 변수
+  let isEnd = true;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
     //(query state가 업데이트되면 api 호출)
-    if (query.length > 0) {
-      bookSearchHandler(query, true);
+    if (query.length > 1) {
+      bookSearchHandler(query, false, page);
     }
-  }, [query]); //이부분이 없어지려면 로딩 결과를 보여줘야 할듯
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [query, page]);
 
   /////////////////////////////////책 검색용 함수들
   const onClickSearch = () => {
@@ -45,11 +48,11 @@ const MyPost = () => {
   };
 
   //책 검색
-  const bookSearchHandler = async (query, reset) => {
+  const bookSearchHandler = async (query, reset, page) => {
     const params = {
       query: query, //검색어
       sort: "accuracy", //accuracy: 정확도, latest: 발간일 순
-      page: 1,
+      page: page,
       size: 10, //1~50. 출력할 검색 결과 수
     };
 
@@ -59,11 +62,14 @@ const MyPost = () => {
     } else {
       setBooks(books.concat(data.documents));
     }
+
+    isEnd = data.meta.is_end; //다음 페이지가 있으면 false
   };
   /////////////////////////////////책 검색용 함수들 닫음
 
   /////////////////////////////////모달용 함수들
-  const openModal = () => {
+  const openModal = (e) => {
+    e.preventDefault();
     setModalState(true);
   };
   const closeModal = (e) => {
@@ -72,7 +78,9 @@ const MyPost = () => {
 
     //모달창 닫기와 동시에 쿼리 초기화
     setQuery(" ");
+    setPage(1);
     setSearch();
+    setBooks([]);
   };
   /////////////////////////////////모달용 함수들 닫음
 
@@ -111,9 +119,18 @@ const MyPost = () => {
                 authors={book.authors}
                 datetime={book.datetime.substr(0, 4)}
                 publisher={book.publisher}
-                meta={book.total_count}
               />
             ))}
+            <Blank />
+
+            <ButtonSmall
+              onClick={() => {
+                setPage(page + 1);
+                bookSearchHandler(query, false, page);
+              }}
+            >
+              더보기
+            </ButtonSmall>
           </ModalFrame>
         ) : (
           <></>

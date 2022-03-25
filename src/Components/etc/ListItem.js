@@ -4,6 +4,11 @@ import "./ListItem.css";
 const ListItem = (props) => {
   return (
     <li className="list_li">
+      <dl>
+        <dd>
+          <p>{props.is_end}</p>
+        </dd>
+      </dl>
       <dl className="list_dl">
         <img
           src={props.thumbnail}
