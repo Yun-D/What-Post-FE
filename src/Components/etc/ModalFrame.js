@@ -46,21 +46,17 @@ const ModalBlock = styled.div`
   background-color: ${theme.colors.boxColor};
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.3);
   padding: 30px;
-  align-content: center;
-  align-items: center;
-  align-self: center;
 `;
 
 const Contents = styled.div`
   width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
   overflow-y: auto;
-  margin-top: 5%;
+  margin-top: 3%;
   scrollbar-width: none;
   scroll-behavior: smooth;
-  flex: 1;
+  display: flex;
+  align-items: center;
 `;
 
 const Close = styled.div`

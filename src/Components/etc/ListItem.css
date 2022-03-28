@@ -1,8 +1,8 @@
 .list_li {
+  width: 100%;
   list-style: none;
   border: 0.5px solid #bbbbbb;
   padding: 20px 30px;
-  overflow: auto;
   margin-bottom: 4px;
   background-color: white;
   border-radius: 8px;

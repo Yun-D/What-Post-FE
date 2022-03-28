@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from "react";
+import { React, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 
 import { bookSearch } from "../../APIs/api";
@@ -6,7 +6,6 @@ import Item from "../etc/ListItem";
 import ModalFrame from "../etc/ModalFrame";
 
 import { Link } from "react-router-dom";
-import { useLayoutEffect } from "react";
 
 const MyPost = () => {
   //책검색 데이터셋, 검색어, 쿼리 state 생성
@@ -14,18 +13,19 @@ const MyPost = () => {
   const [search, setSearch] = useState("");
   const [query, setQuery] = useState(""); //책 검색 쿼리
   const [page, setPage] = useState(1); //페이지 수. 기본 값은 1
+  const [isEnd, setIsEnd] = useState(true);
 
   //모달 state
   const [modalState, setModalState] = useState(false);
 
   //임시 변수
-  let isEnd = true;
+  //let isEnd = true;
 
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
     //(query state가 업데이트되면 api 호출)
     if (query.length > 1) {
-      bookSearchHandler(query, false, page);
+      bookSearchHandler(query, page);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query, page]);
@@ -48,7 +48,7 @@ const MyPost = () => {
   };
 
   //책 검색
-  const bookSearchHandler = async (query, reset, page) => {
+  const bookSearchHandler = async (query, page) => {
     const params = {
       query: query, //검색어
       sort: "accuracy", //accuracy: 정확도, latest: 발간일 순
@@ -57,13 +57,13 @@ const MyPost = () => {
     };
 
     const { data } = await bookSearch(params); //책 검색 api 호출
-    if (reset) {
+    if (page === 1) {
       setBooks(data.documents);
-    } else {
+    } else if (page >= 2) {
       setBooks(books.concat(data.documents));
     }
 
-    isEnd = data.meta.is_end; //다음 페이지가 있으면 false
+    setIsEnd(data.meta.is_end); //다음 페이지가 있으면 false
   };
   /////////////////////////////////책 검색용 함수들 닫음
 
@@ -81,6 +81,7 @@ const MyPost = () => {
     setPage(1);
     setSearch();
     setBooks([]);
+    setIsEnd(true);
   };
   /////////////////////////////////모달용 함수들 닫음
 
@@ -123,14 +124,17 @@ const MyPost = () => {
             ))}
             <Blank />
 
-            <ButtonSmall
-              onClick={() => {
-                setPage(page + 1);
-                bookSearchHandler(query, false, page);
-              }}
-            >
-              더보기
-            </ButtonSmall>
+            {!isEnd ? (
+              <ButtonSmall
+                onClick={() => {
+                  setPage(page + 1);
+                }}
+              >
+                더보기
+              </ButtonSmall>
+            ) : (
+              <></>
+            )}
           </ModalFrame>
         ) : (
           <></>
@@ -151,6 +155,7 @@ const ButtonSmall = styled.button`
   //[검색] 글로벌 스타일 button 확장
   flex: 1;
   width: 100px;
+  margin: 10px;
 `;
 const ButtonLong = styled.button`
   //글로벌 스타일 button 확장
