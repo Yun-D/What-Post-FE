@@ -1,0 +1,32 @@
+.list_li {
+  width: 100%;
+  list-style: none;
+  border: 0.5px solid #bbbbbb;
+  padding: 20px 30px;
+  margin-bottom: 4px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.list_dl {
+  display: flex;
+  flex-direction: row;
+}
+
+.list_dd {
+  flex: 1;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+/* *************** 세부 항목 스타일 */
+.title {
+  color: #1491a1;
+}
+.author {
+  color: rgb(97, 97, 97);
+}
+.smallText {
+  color: gray;
+  font-size: 12px;
+}

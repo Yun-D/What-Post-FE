@@ -29,19 +29,32 @@ input {
   height: 40px;
   padding: 2%;
   margin-bottom: 10px;
+  border-radius: 8px;
+  border: 0.5px solid gray;
 }
 
+/* div ::-webkit-scrollbar {
+    display: none;
+} */
+
 //////////////// 기타 스타일
-p_title {
+/////////////// css
+.p_title {
   font-weight: bold;
   font-size: ${theme.textSize.postTitle};
   width: 100%;
   position: flex;
 }
 
-/////////////// css
 .contents_div {
   margin: auto 5%;
+}
+.rowDirection {
+  //컴포넌트 가로정렬
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
 /* ////////// 반응형 /////////// */
