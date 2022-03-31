@@ -1,17 +1,34 @@
 import { React, useState } from "react";
 import styled from "styled-components";
+import theme from "../../../Styles/theme";
 import "./WritePost.css";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ReactHtmlParser from "react-html-parser";
+import { useLocation } from "react-router-dom";
+import CircleIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 const WritePost = () => {
+  const location = useLocation(); //ListItem에서 선택하여 state로 보낸 책 데이터를 받는다
+
+  //글 내용 state들
   const [postContent, setPostContent] = useState({
     title: "",
     content: "",
   });
   const [viewContent, setViewContent] = useState([]);
+  //책 정보 state들
+  // const [bookData, setBookData] = useState({
+  //   thumbnail: location.state.thumbnail,
+  //   title: location.state.title,
+  //   author: location.state.authors,
+  //   publisher: location.state.publisher,
+  //   publishDate: location.state.datetime,
+  //   contents: location.state.contents,
+  // });
+
+  console.log(location);
 
   const getValue = (e) => {
     const { name, value } = e.target;
@@ -31,7 +48,30 @@ const WritePost = () => {
       ))}
 
       <div className="contents_div">
-        <div className="photoArea" />
+        <Div className="rowDirection">
+          <img src={location.state.thumbnail} alt={location.state.thumbnail} />
+          <DivBookInfo>
+            <H1>{location.state.title}</H1>
+            <div className="rowDirection">
+              <H3>{location.state.authors}</H3>
+              <CircleIcon
+                style={{
+                  color: `${theme.colors.peacockGray}`,
+                  fontSize: "8px",
+                  marginRight: "2%",
+                }}
+              />
+              <p className="subText">
+                {location.state.publisher} ({location.state.publishDate})
+              </p>
+            </div>
+            <br /> <Hr /> <br />
+            <DivBookArticle>
+              <article>{location.state.contents + " ..."}</article>
+            </DivBookArticle>
+          </DivBookInfo>
+        </Div>
+
         <div>
           <input
             type="text"
@@ -80,6 +120,15 @@ const WritePost = () => {
 const Div = styled.div`
   margin: 20px;
 `;
+const DivBookInfo = styled.div`
+  margin-left: 50px;
+  width: 100%;
+  height: auto;
+`;
+const DivBookArticle = styled.div`
+  height: 100px;
+  //overflow-y: scroll;
+`;
 
 const ButtonLong = styled.button`
   //글로벌 스타일 button 확장
@@ -87,4 +136,17 @@ const ButtonLong = styled.button`
   margin-bottom: 4px;
 `;
 
+const Hr = styled.hr`
+  background-color: ${theme.colors.lightGray};
+  border-width: 1px 0px 0px 0px;
+  height: 1px;
+`;
+
+const H1 = styled.h1`
+  color: ${theme.colors.peacock};
+`;
+const H3 = styled.h3`
+  color: ${theme.colors.peacockGray};
+  margin-right: 2%;
+`;
 export default WritePost;

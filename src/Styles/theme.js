@@ -5,12 +5,14 @@ const colors = {
 
   lightGray: "#bbbbbb",
   peacock: "#1491a1", //mainColor 텍스트 버전
+  peacockGray: "#225251",
 };
 
 const textSize = {
   placeholder: "16px",
   postTitle: "24px", //p태그 등 텍스트 타이틀
   postContents: "16px", //본문 텍스트
+  subText: "18px",
   buttonText: "20px", //버튼에 들어가는 텍스트
 };
 

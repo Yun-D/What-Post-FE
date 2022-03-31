@@ -56,7 +56,10 @@ input {
   align-items: center;
   width: 100%;
 }
-
+.subText {
+  font-size: ${theme.textSize.subText};
+  color: gray;
+}
 /* ////////// 반응형 /////////// */
 @media only screen and (max-width: ${theme.size.mobile}) {
   .contents_div {

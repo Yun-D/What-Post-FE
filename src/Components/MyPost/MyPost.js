@@ -5,8 +5,6 @@ import { bookSearch } from "../../APIs/api";
 import Item from "../etc/ListItem";
 import ModalFrame from "../etc/ModalFrame";
 
-import { Link } from "react-router-dom";
-
 const MyPost = () => {
   //책검색 데이터셋, 검색어, 쿼리 state 생성
   const [books, setBooks] = useState([]);
@@ -17,9 +15,6 @@ const MyPost = () => {
 
   //모달 state
   const [modalState, setModalState] = useState(false);
-
-  //임시 변수
-  //let isEnd = true;
 
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
@@ -90,9 +85,6 @@ const MyPost = () => {
       <div className="contents_div">
         <div className="rowDirection">
           <p className="p_title">유저 네임의 책장</p>
-          {/* <Link to={"/my_post/write_post"}>
-            <button>포스트 쓰기</button>
-          </Link> */}
           <button onClick={openModal}>포스트 쓰기</button>
         </div>
         <div>책 사진 넣는 곳</div>
@@ -120,6 +112,7 @@ const MyPost = () => {
                 authors={book.authors}
                 datetime={book.datetime.substr(0, 4)}
                 publisher={book.publisher}
+                contents={book.contents}
               />
             ))}
             <Blank />
