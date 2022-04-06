@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 
 const Home = () => {
   return (
     <>
+      <div>통합검색</div>
       <div>
-        <p>최신 포스트</p>
+        <p>각 분야별 최신 포스트</p>
       </div>
-      <div>포스트 카드형 배치</div>
     </>
   );
 };

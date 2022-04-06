@@ -18,17 +18,6 @@ const WritePost = () => {
     content: "",
   });
   const [viewContent, setViewContent] = useState([]);
-  //책 정보 state들
-  // const [bookData, setBookData] = useState({
-  //   thumbnail: location.state.thumbnail,
-  //   title: location.state.title,
-  //   author: location.state.authors,
-  //   publisher: location.state.publisher,
-  //   publishDate: location.state.datetime,
-  //   contents: location.state.contents,
-  // });
-
-  console.log(location);
 
   const getValue = (e) => {
     const { name, value } = e.target;
