@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
+    // <div className="contents_div">
     <Container>
       <DivBox>
         <H2>로그인</H2>
@@ -22,6 +23,7 @@ const Login = () => {
         </Link>
       </DivBox>
     </Container>
+    //</div>
   );
 };
 
@@ -33,17 +35,34 @@ const Container = styled.div`
   display: flex;
 `;
 const DivBox = styled.div`
-  width: 45%;
+  width: 60%;
   height: 70%;
-  //border: 1px solid ${theme.colors.lightGray};
   border-radius: 10px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 0 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.1);
   background-color: white;
 
   align-items: center;
   justify-content: center;
   flex-direction: column;
   display: flex;
+
+  @media only screen and (max-width: ${theme.size.mobile}) {
+    margin: 0;
+    width: 75%;
+  }
+  @media only screen and (min-width: ${theme.size.tablet}) {
+    width: 50%;
+  }
+  @media only screen and (min-width: ${theme.size.laptop}) {
+    margin: auto 10%;
+    width: 35%;
+  }
+  @media only screen and (max-height: 500px) {
+    padding: 10px;
+    height: auto;
+    z-index: -1;
+    box-shadow: none;
+  }
 `;
 
 const Input = styled.input`
