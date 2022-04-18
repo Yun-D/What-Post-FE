@@ -11,6 +11,10 @@ function NavBar(props) {
 
   const menuItems = [
     {
+      path: "/login",
+      name: "로그인",
+    },
+    {
       path: "/",
       name: "메인",
     },

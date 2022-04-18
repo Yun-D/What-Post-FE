@@ -9,6 +9,7 @@ import Home from "./Components/Home/Home";
 import MyPost from "./Components/MyPost/MyPost";
 import WritePost from "./Components/MyPost/WritePost/WritePost";
 import SearchBook from "./Components/SearchBook/SearchBook";
+import Login from "./Components/Login/Login";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
 
           <Routes>
             <Route path="/" exact element={<Home />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/search_book" element={<SearchBook />} />
             <Route path="/my_post" element={<MyPost />} />
             <Route path="/my_post/write_post" element={<WritePost />} />
