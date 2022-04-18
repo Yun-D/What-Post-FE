@@ -33,22 +33,30 @@ const BookMain = () => {
   };
 
   return (
-    <>
-      <div>
-        <div className="rowDirection">
-          <input
-            placeholder="검색어를 입력하세요."
-            name="query"
-            value={search}
-            onKeyDown={onEnter}
-            onChange={onTextUpdate}
-          />
-          <button onClick={onClickSearch}>검색</button>
-        </div>
-      </div>
+    <div className="contents_div">
+      <Div className="rowDirection">
+        <Input
+          placeholder="검색어를 입력하세요."
+          name="query"
+          value={search}
+          onKeyDown={onEnter}
+          onChange={onTextUpdate}
+        />
+        <button onClick={onClickSearch}>검색</button>
+      </Div>
+
       <div> 최신/랜덤 이용자 포스트 </div>
-    </>
+    </div>
   );
 };
+
+const Div = styled.div`
+  margin: 1rem 0 1rem;
+`;
+
+const Input = styled.input`
+  margin-bottom: 0;
+  margin-right: 1rem;
+`;
 
 export default BookMain;

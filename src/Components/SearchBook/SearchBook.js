@@ -61,48 +61,59 @@ const SearchBook = () => {
   /////////////////////////////////책 검색용 함수들 닫음
 
   return (
-    <>
-      <div>
-        <div className="rowDirection">
-          <input
-            placeholder="검색어를 입력하세요."
-            name="query"
-            value={search}
-            onKeyDown={onEnter}
-            onChange={onTextUpdate}
-          />
-          <button onClick={onClickSearch}>검색</button>
-        </div>
-        <br />
-        {books.map((book, idx) => (
-          <Item
-            key={idx}
-            thumbnail={book.thumbnail}
-            title={book.title}
-            authors={book.authors}
-            datetime={book.datetime.substr(0, 4)}
-            publisher={book.publisher}
-            contents={book.contents}
-          />
-        ))}
-        <br />
+    <Container className="contents_div">
+      <Div className="rowDirection">
+        <Input
+          placeholder="검색어를 입력하세요."
+          name="query"
+          value={search}
+          onKeyDown={onEnter}
+          onChange={onTextUpdate}
+        />
+        <button onClick={onClickSearch}>검색</button>
+      </Div>
 
-        {!isEnd ? (
-          <ButtonSmall
-            onClick={() => {
-              setPage(page + 1);
-            }}
-          >
-            더보기
-          </ButtonSmall>
-        ) : (
-          <></>
-        )}
-      </div>
-    </>
+      {books.map((book, idx) => (
+        <Item
+          key={idx}
+          thumbnail={book.thumbnail}
+          title={book.title}
+          authors={book.authors}
+          datetime={book.datetime.substr(0, 4)}
+          publisher={book.publisher}
+          contents={book.contents}
+        />
+      ))}
+      <br />
+
+      {!isEnd ? (
+        <ButtonSmall
+          onClick={() => {
+            setPage(page + 1);
+          }}
+        >
+          더보기
+        </ButtonSmall>
+      ) : (
+        <></>
+      )}
+    </Container>
   );
 };
 
+const Container = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+`;
+const Div = styled.div`
+  margin: 1rem 0;
+`;
+
+const Input = styled.input`
+  margin-bottom: 0;
+  margin-right: 1rem;
+`;
 const ButtonSmall = styled.button`
   //[검색] 글로벌 스타일 button 확장
   flex: 1;
