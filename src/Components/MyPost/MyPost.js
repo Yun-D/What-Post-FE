@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { bookSearch } from "../../APIs/api";
 import Item from "../etc/ListItem";
 import ModalFrame from "../etc/ModalFrame";
+import { FullSizeBtn } from "../etc/LongButton";
 
 const MyPost = () => {
   //책검색 데이터셋, 검색어, 쿼리 state 생성
@@ -88,8 +89,8 @@ const MyPost = () => {
           <button onClick={openModal}>포스트 쓰기</button>
         </div>
         <div>책 사진 넣는 곳</div>
-        <ButtonLong>로그아웃</ButtonLong>
-        <ButtonLong>회원 탈퇴</ButtonLong>
+        <FullSizeBtn>로그아웃</FullSizeBtn>
+        <FullSizeBtn>회원 탈퇴</FullSizeBtn>
 
         {modalState ? (
           <ModalFrame state={modalState} closeModal={closeModal}>
@@ -149,11 +150,6 @@ const ButtonSmall = styled.button`
   flex: 1;
   width: 100px;
   margin: 10px;
-`;
-const ButtonLong = styled.button`
-  //글로벌 스타일 button 확장
-  width: 100%;
-  margin-bottom: 4px;
 `;
 
 const InputSmall = styled.input`

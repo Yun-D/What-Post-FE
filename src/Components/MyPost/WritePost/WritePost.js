@@ -2,6 +2,7 @@ import { React, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../Styles/theme";
 import "./WritePost.css";
+import { FullSizeBtn } from "../../etc/LongButton";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
@@ -18,15 +19,6 @@ const WritePost = () => {
     content: "",
   });
   const [viewContent, setViewContent] = useState([]);
-  //책 정보 state들
-  // const [bookData, setBookData] = useState({
-  //   thumbnail: location.state.thumbnail,
-  //   title: location.state.title,
-  //   author: location.state.authors,
-  //   publisher: location.state.publisher,
-  //   publishDate: location.state.datetime,
-  //   contents: location.state.contents,
-  // });
 
   console.log(location);
 
@@ -104,13 +96,13 @@ const WritePost = () => {
             }}
           />
 
-          <ButtonLong
+          <FullSizeBtn
             onClick={() => {
               setViewContent(viewContent.concat({ ...postContent }));
             }}
           >
             업로드
-          </ButtonLong>
+          </FullSizeBtn>
         </div>
       </div>
     </Div>
@@ -128,12 +120,6 @@ const DivBookInfo = styled.div`
 const DivBookArticle = styled.div`
   height: 100px;
   //overflow-y: scroll;
-`;
-
-const ButtonLong = styled.button`
-  //글로벌 스타일 button 확장
-  width: 100%;
-  margin-bottom: 4px;
 `;
 
 const Hr = styled.hr`

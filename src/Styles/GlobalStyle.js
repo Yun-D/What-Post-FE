@@ -66,7 +66,6 @@ input {
     margin: 0;
   }
 }
-
 @media only screen and (min-width: ${theme.size.laptop}) {
   .contents_div {
     margin: auto 10%;
