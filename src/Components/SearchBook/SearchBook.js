@@ -12,8 +12,8 @@ const SearchBook = () => {
   const [books, setBooks] = useState([]);
   const [page, setPage] = useState(1); //페이지 수. 기본 값은 1
   const [isEnd, setIsEnd] = useState(true);
-  const [search, setSearch] = useState(navigateState && navigateState.state);
-  const [query, setQuery] = useState(navigateState && navigateState.state); //책 검색 쿼리
+  const [search, setSearch] = useState(navigateState.state);
+  const [query, setQuery] = useState(navigateState.state); //책 검색 쿼리
 
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
