@@ -20,7 +20,7 @@ function NavBar(props) {
     },
     {
       path: "/search_book",
-      name: "책 검색",
+      name: "책",
     },
     {
       path: "/my_post",

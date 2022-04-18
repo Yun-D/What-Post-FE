@@ -20,8 +20,6 @@ const WritePost = () => {
   });
   const [viewContent, setViewContent] = useState([]);
 
-  console.log(location);
-
   const getValue = (e) => {
     const { name, value } = e.target;
     setPostContent({

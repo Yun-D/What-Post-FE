@@ -8,6 +8,7 @@ import NavBar from "./Components/navigation/NavBar";
 import Home from "./Components/Home/Home";
 import MyPost from "./Components/MyPost/MyPost";
 import WritePost from "./Components/MyPost/WritePost/WritePost";
+import BookMain from "./Components/SearchBook/BookMain";
 import SearchBook from "./Components/SearchBook/SearchBook";
 import Login from "./Components/Login/Login";
 
@@ -23,7 +24,8 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/search_book" element={<SearchBook />} />
+            <Route path="/search_book" element={<BookMain />} />
+            <Route path="/search_book/search" element={<SearchBook />} />
             <Route path="/my_post" element={<MyPost />} />
             <Route path="/my_post/write_post" element={<WritePost />} />
           </Routes>
