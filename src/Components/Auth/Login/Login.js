@@ -5,8 +5,6 @@ import styled from "styled-components";
 import { LongBtn } from "../../etc/LongButton";
 import { StyledLink } from "../../etc/StyledLink";
 
-import { Link } from "react-router-dom";
-
 const Login = () => {
   return (
     <Container>
@@ -37,9 +35,13 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+
+  @media only screen and (max-height: 500px) {
+    height: 100%;
+  }
 `;
 const DivBox = styled.div`
-  width: 60%;
+  width: 350px;
   height: 70%;
   border-radius: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.1);
@@ -50,22 +52,14 @@ const DivBox = styled.div`
   flex-direction: column;
   display: flex;
 
-  @media only screen and (max-width: ${theme.size.mobile}) {
-    margin: 0;
-    width: 75%;
-  }
-  @media only screen and (min-width: ${theme.size.tablet}) {
-    width: 50%;
-  }
   @media only screen and (min-width: ${theme.size.laptop}) {
     margin: auto 10%;
     width: 35%;
   }
   @media only screen and (max-height: 500px) {
+    margin: 5%;
     padding: 10px;
     height: auto;
-    z-index: -1;
-    box-shadow: none;
   }
 `;
 
