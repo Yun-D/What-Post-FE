@@ -51,12 +51,12 @@ const BookMain = () => {
 };
 
 const Div = styled.div`
-  margin: 1rem 0 1rem;
+  margin: 2% 0 2%;
 `;
 
 const Input = styled.input`
   margin-bottom: 0;
-  margin-right: 1rem;
+  margin-right: 2%;
 `;
 
 export default BookMain;

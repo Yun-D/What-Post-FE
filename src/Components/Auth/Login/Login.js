@@ -1,14 +1,14 @@
 import React from "react";
 
-import theme from "../../Styles/theme";
+import theme from "../../../Styles/theme";
 import styled from "styled-components";
-import { LongBtn } from "../etc/LongButton";
+import { LongBtn } from "../../etc/LongButton";
+import { StyledLink } from "../../etc/StyledLink";
 
 import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    // <div className="contents_div">
     <Container>
       <DivBox>
         <H2>로그인</H2>
@@ -18,12 +18,16 @@ const Login = () => {
         <LongBtn>로그인</LongBtn>
         <br />
         <br />
-        <Link to={""}>
+        <StyledLink
+          to={"/signup"}
+          color={`${theme.colors.peacockGray}`}
+          decoration_color={`${theme.colors.peacockGray}`}
+          font_size="0.8rem"
+        >
           <p>아직 회원이 아니십니까?</p>
-        </Link>
+        </StyledLink>
       </DivBox>
     </Container>
-    //</div>
   );
 };
 

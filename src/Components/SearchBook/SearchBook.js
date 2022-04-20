@@ -107,12 +107,12 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Div = styled.div`
-  margin: 1rem 0;
+  margin: 2% 0 2%;
 `;
 
 const Input = styled.input`
   margin-bottom: 0;
-  margin-right: 1rem;
+  margin-right: 2%;
 `;
 const ButtonSmall = styled.button`
   //[검색] 글로벌 스타일 button 확장

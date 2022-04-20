@@ -2,8 +2,7 @@ import React from "react";
 import "./ListItem.css";
 import theme from "../../Styles/theme";
 
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { StyledLink } from "./StyledLink";
 
 const ListItem = (props) => {
   return (
@@ -32,6 +31,8 @@ const ListItem = (props) => {
               publishDate: props.datetime,
               contents: props.contents,
             }}
+            decoration_color={`${theme.colors.peacock}`}
+            decoration_thckness="2px"
           >
             <h3 className="title">{props.title}</h3>
           </StyledLink>
@@ -46,14 +47,5 @@ const ListItem = (props) => {
     </li>
   );
 };
-
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  &:hover {
-    text-decoration: underline;
-    text-decoration-color: ${theme.colors.peacock};
-    text-decoration-thickness: 2px;
-  }
-`;
 
 export default ListItem;

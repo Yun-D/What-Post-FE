@@ -10,7 +10,8 @@ import MyPost from "./Components/MyPost/MyPost";
 import WritePost from "./Components/MyPost/WritePost/WritePost";
 import BookMain from "./Components/SearchBook/BookMain";
 import SearchBook from "./Components/SearchBook/SearchBook";
-import Login from "./Components/Login/Login";
+import Login from "./Components/Auth/Login/Login";
+import SignUp from "./Components/Auth/SignUp/SignUp";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
             <Route path="/search_book" element={<BookMain />} />
             <Route path="/search_book/search" element={<SearchBook />} />
             <Route path="/my_post" element={<MyPost />} />

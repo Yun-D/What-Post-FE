@@ -7,5 +7,5 @@ export const LongBtn = styled.button`
 
 export const FullSizeBtn = styled.button`
   width: 100%;
-  margin-bottom: 0.4rem;
+  margin-bottom: 6px;
 `;
