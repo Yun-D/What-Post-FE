@@ -1,6 +1,6 @@
 import { React, useState, useLayoutEffect } from "react";
 import { bookSearch } from "../../APIs/api";
-import Item from "../etc/ListItem";
+import Item from "../../Components/etc/ListItem";
 
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
@@ -86,7 +86,7 @@ const SearchBook = () => {
       ))}
       <br />
 
-      {!isEnd ? (
+      {!isEnd && (
         <ButtonSmall
           onClick={() => {
             setPage(page + 1);
@@ -94,8 +94,6 @@ const SearchBook = () => {
         >
           더보기
         </ButtonSmall>
-      ) : (
-        <></>
       )}
     </Container>
   );

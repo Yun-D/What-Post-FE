@@ -2,7 +2,7 @@ import { React, useState } from "react";
 import styled from "styled-components";
 import theme from "../../../Styles/theme";
 import "./WritePost.css";
-import { FullSizeBtn } from "../../etc/LongButton";
+import { FullSizeBtn } from "../../../Components/etc/LongButton";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";

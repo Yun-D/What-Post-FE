@@ -1,29 +1,29 @@
 import React from "react";
 
-import styled from "styled-components";
 import theme from "../../../Styles/theme";
-import { LongBtn } from "../../etc/LongButton";
+import styled from "styled-components";
+import { LongBtn } from "../../../Components/etc/LongButton";
+import { StyledLink } from "../../../Components/etc/StyledLink";
 
-const SignUp = () => {
+const Login = () => {
   return (
     <Container>
       <DivBox>
-        <H2>회원가입</H2>
-        <InputBox>
-          <label>아이디</label>
-          <input />
-        </InputBox>
-        <InputBox>
-          <label>이메일</label>
-          <input type="email" />
-        </InputBox>
-        <InputBox>
-          <label>비밀번호</label>
-          <input type="password" />
-        </InputBox>
-
+        <H2>로그인</H2>
+        <Input placeholder="아이디" />
+        <Input placeholder="비밀번호" type="password" />
         <br />
-        <LongBtn>회원가입</LongBtn>
+        <LongBtn>로그인</LongBtn>
+        <br />
+        <br />
+        <StyledLink
+          to={"/signup"}
+          color={`${theme.colors.peacockGray}`}
+          decoration_color={`${theme.colors.peacockGray}`}
+          font_size="0.8rem"
+        >
+          <p>아직 회원이 아니십니까?</p>
+        </StyledLink>
       </DivBox>
     </Container>
   );
@@ -41,8 +41,8 @@ const Container = styled.div`
   }
 `;
 const DivBox = styled.div`
-  width: 500px;
-  height: 90%;
+  width: 350px;
+  height: 70%;
   border-radius: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.1);
   background-color: white;
@@ -52,12 +52,9 @@ const DivBox = styled.div`
   flex-direction: column;
   display: flex;
 
-  @media only screen and (max-width: ${theme.size.mobile}) {
-    width: 90%;
-  }
   @media only screen and (min-width: ${theme.size.laptop}) {
     margin: auto 10%;
-    width: 50%;
+    width: 35%;
   }
   @media only screen and (max-height: 500px) {
     margin: 5%;
@@ -65,15 +62,12 @@ const DivBox = styled.div`
     height: auto;
   }
 `;
-const InputBox = styled.div`
-  flex-direction: column;
-  display: flex;
-  width: 70%;
-  margin-bottom: 10px;
-`;
 
+const Input = styled.input`
+  width: 70%;
+`;
 const H2 = styled.h2`
   margin-bottom: 12%;
 `;
 
-export default SignUp;
+export default Login;

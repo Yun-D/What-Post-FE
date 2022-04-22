@@ -5,13 +5,13 @@ import { ThemeProvider } from "styled-components";
 import theme from "./Styles/theme";
 import GlobalStyle from "./Styles/GlobalStyle";
 import NavBar from "./Components/navigation/NavBar";
-import Home from "./Components/Home/Home";
-import MyPost from "./Components/MyPost/MyPost";
-import WritePost from "./Components/MyPost/WritePost/WritePost";
-import BookMain from "./Components/SearchBook/BookMain";
-import SearchBook from "./Components/SearchBook/SearchBook";
-import Login from "./Components/Auth/Login/Login";
-import SignUp from "./Components/Auth/SignUp/SignUp";
+import Home from "./Pages/Home/Home";
+import MyPost from "./Pages/MyPost/MyPost";
+import WritePost from "./Pages/MyPost/WritePost/WritePost";
+import BookMain from "./Pages/SearchBook/BookMain";
+import SearchBook from "./Pages/SearchBook/SearchBook";
+import Login from "./Pages/Auth/Login/Login";
+import SignUp from "./Pages/Auth/SignUp/SignUp";
 
 function App() {
   return (

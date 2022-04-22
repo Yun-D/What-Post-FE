@@ -2,9 +2,9 @@ import { React, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 
 import { bookSearch } from "../../APIs/api";
-import Item from "../etc/ListItem";
-import ModalFrame from "../etc/ModalFrame";
-import { FullSizeBtn } from "../etc/LongButton";
+import Item from "../../Components/etc/ListItem";
+import ModalFrame from "../../Components/etc/ModalFrame";
+import { FullSizeBtn } from "../../Components/etc/LongButton";
 
 const MyPost = () => {
   //책검색 데이터셋, 검색어, 쿼리 state 생성
@@ -92,7 +92,7 @@ const MyPost = () => {
         <FullSizeBtn>로그아웃</FullSizeBtn>
         <FullSizeBtn>회원 탈퇴</FullSizeBtn>
 
-        {modalState ? (
+        {modalState && (
           <ModalFrame state={modalState} closeModal={closeModal}>
             <div className="rowDirection">
               <InputSmall
@@ -118,7 +118,7 @@ const MyPost = () => {
             ))}
             <Blank />
 
-            {!isEnd ? (
+            {!isEnd && (
               <ButtonSmall
                 onClick={() => {
                   setPage(page + 1);
@@ -126,12 +126,8 @@ const MyPost = () => {
               >
                 더보기
               </ButtonSmall>
-            ) : (
-              <></>
             )}
           </ModalFrame>
-        ) : (
-          <></>
         )}
       </div>
     </Div>
