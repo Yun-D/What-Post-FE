@@ -7,6 +7,9 @@ const GlobalStyle = createGlobalStyle`
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  padding-top: 80px;
+}
 
 button {
   //width: ${(props) => (props.longBtn ? "100%" : "200px")};

@@ -135,7 +135,7 @@ const MyPost = () => {
 };
 
 const Div = styled.div`
-  margin: 20px;
+  margin: 2% 0 2%;
 `;
 const Blank = styled.div`
   height: 10px;
