@@ -22,7 +22,7 @@ const ListItem = (props) => {
 
         <dd className="list_dd">
           <StyledLink
-            to="/my_post/write_post"
+            to={props.tolink}
             state={{
               thumbnail: props.thumbnail,
               title: props.title,

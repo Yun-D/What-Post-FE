@@ -11,3 +11,7 @@ export const StyledLink = styled(Link)`
     text-decoration-thickness: ${(props) => props.decoration_thckness};
   }
 `;
+
+StyledLink.defaultProps = {
+  tolink: "/",
+};

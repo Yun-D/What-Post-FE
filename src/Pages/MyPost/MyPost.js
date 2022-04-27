@@ -114,6 +114,7 @@ const MyPost = () => {
                 datetime={book.datetime.substr(0, 4)}
                 publisher={book.publisher}
                 contents={book.contents}
+                tolink={"/my_post/write_post"}
               />
             ))}
             <Blank />

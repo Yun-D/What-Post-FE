@@ -82,6 +82,7 @@ const SearchBook = () => {
           datetime={book.datetime.substr(0, 4)}
           publisher={book.publisher}
           contents={book.contents}
+          tolink={"/search_book/info"}
         />
       ))}
       <br />
