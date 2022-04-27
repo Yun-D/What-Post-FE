@@ -3,7 +3,7 @@ import { React, useState, memo, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-import Masonry from "../../Components/etc/Masonry";
+import Masonry from "../../Components/layout/Masonry";
 import { initialTexts, initialImages } from "../../Assets/dummy";
 import theme from "../../Styles/theme";
 

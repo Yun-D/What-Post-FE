@@ -10,8 +10,9 @@ import MyPost from "./Pages/MyPost/MyPost";
 import WritePost from "./Pages/MyPost/WritePost/WritePost";
 import BookMain from "./Pages/SearchBook/BookMain";
 import SearchBook from "./Pages/SearchBook/SearchBook";
-import Login from "./Pages/Auth/Login/Login";
-import SignUp from "./Pages/Auth/SignUp/SignUp";
+import BookDetail from "./Pages/SearchBook/BookDetail";
+import Login from "./Pages/Auth/Login";
+import SignUp from "./Pages/Auth/SignUp";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/search_book" element={<BookMain />} />
             <Route path="/search_book/search" element={<SearchBook />} />
+            <Route path="/search_book/info/:id" element={<BookDetail />} />
+            <Route path="/search_book/info" element={<BookDetail />} />
             <Route path="/my_post" element={<MyPost />} />
             <Route path="/my_post/write_post" element={<WritePost />} />
           </Routes>

@@ -2,8 +2,8 @@ import { React, useLayoutEffect, useState } from "react";
 import styled from "styled-components";
 
 import { bookSearch } from "../../APIs/api";
-import Item from "../../Components/etc/ListItem";
-import ModalFrame from "../../Components/etc/ModalFrame";
+import Item from "../../Components/layout/ListItem";
+import ModalFrame from "../../Components/layout/ModalFrame";
 import { FullSizeBtn } from "../../Components/etc/LongButton";
 
 const MyPost = () => {

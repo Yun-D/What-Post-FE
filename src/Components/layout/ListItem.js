@@ -2,8 +2,9 @@ import React from "react";
 import "./ListItem.css";
 import theme from "../../Styles/theme";
 
-import { StyledLink } from "./StyledLink";
+import { StyledLink } from "../etc/StyledLink";
 
+/////////////////////////////// 책 검색 결과를 리스트형태로 보여주는 컴포넌트
 const ListItem = (props) => {
   return (
     <li className="list_li">

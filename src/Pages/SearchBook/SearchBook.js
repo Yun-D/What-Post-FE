@@ -1,6 +1,6 @@
 import { React, useState, useLayoutEffect } from "react";
 import { bookSearch } from "../../APIs/api";
-import Item from "../../Components/etc/ListItem";
+import Item from "../../Components/layout/ListItem";
 
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
