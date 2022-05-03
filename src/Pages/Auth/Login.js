@@ -42,7 +42,7 @@ const Container = styled.div`
 `;
 const DivBox = styled.div`
   width: 350px;
-  height: 70%;
+  height: 400px;
   border-radius: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.1);
   background-color: white;
