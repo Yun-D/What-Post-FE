@@ -17,7 +17,7 @@ const ListItem = (props) => {
         <img
           src={props.thumbnail}
           alt={props.thumbnail}
-          width="80px"
+          width="auto"
           height="auto"
         />
 

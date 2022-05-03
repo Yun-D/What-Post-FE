@@ -6,6 +6,7 @@ const BookDetail = () => {
   return (
     <div className="contents_div">
       <BookInfo />
+      <hr />
     </div>
   );
 };

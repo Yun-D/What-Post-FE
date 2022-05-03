@@ -10,47 +10,50 @@ const BookInfo = () => {
   const location = useLocation();
 
   return (
-    <div className="contents_div">
-      <Div className="rowDirection">
-        <img src={location.state.thumbnail} alt={location.state.thumbnail} />
-        <DivBookInfo>
-          <H1>{location.state.title}</H1>
-          <div className="rowDirection">
-            <H3>{location.state.authors}</H3>
-            <CircleIcon
-              style={{
-                color: `${theme.colors.peacockGray}`,
-                fontSize: "8px",
-                marginRight: "2%",
-              }}
-            />
-            <p className="subText">
-              {location.state.publisher} ({location.state.publishDate})
-            </p>
-          </div>
-          <br /> <Hr /> <br />
-          <DivBookArticle>
-            {location.state.contents && (
-              <article>{location.state.contents + " ..."}</article>
-            )}
-          </DivBookArticle>
-        </DivBookInfo>
-      </Div>
-    </div>
+    <Div className="rowDirection">
+      <img
+        src={location.state.thumbnail}
+        alt={location.state.thumbnail}
+        width="20%"
+        height="auto"
+      />
+      <DivBookInfo>
+        <H1>{location.state.title}</H1>
+        <div className="rowDirection">
+          <H3>{location.state.authors}</H3>
+          <CircleIcon
+            style={{
+              color: `${theme.colors.peacockGray}`,
+              fontSize: "8px",
+              marginRight: "2%",
+            }}
+          />
+          <p className="subText">
+            {location.state.publisher} ({location.state.publishDate})
+          </p>
+        </div>
+        <br /> <Hr /> <br />
+        <DivBookArticle>
+          {location.state.contents && (
+            <article>{location.state.contents + " ..."}</article>
+          )}
+        </DivBookArticle>
+      </DivBookInfo>
+    </Div>
   );
 };
 
 const Div = styled.div`
-  margin: 20px;
+  margin-top: 20px;
   width: 100%;
 `;
 const DivBookInfo = styled.div`
-  margin-left: 50px;
-  width: 100%;
+  margin-left: 5%;
+  margin-bottom: 20px;
   height: auto;
 `;
 const DivBookArticle = styled.div`
-  height: 100px;
+  height: 100px auto;
   //overflow-y: scroll;
 `;
 
