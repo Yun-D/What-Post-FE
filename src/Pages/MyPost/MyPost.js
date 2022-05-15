@@ -6,13 +6,24 @@ import Item from "../../Components/layout/ListItem";
 import ModalFrame from "../../Components/layout/ModalFrame";
 import { FullSizeBtn } from "../../Components/etc/LongButton";
 
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSearch,
+  setQuery,
+  setBooks,
+  setPage,
+  nextPage,
+  isEndPage,
+} from "../../Store/store";
+
 const MyPost = () => {
-  //책검색 데이터셋, 검색어, 쿼리 state 생성
-  const [books, setBooks] = useState([]);
-  const [search, setSearch] = useState("");
-  const [query, setQuery] = useState(""); //책 검색 쿼리
-  const [page, setPage] = useState(1); //페이지 수. 기본 값은 1
-  const [isEnd, setIsEnd] = useState(true);
+  //저장소에서 책검색 데이터 읽어오기
+  const searchItem = useSelector((state) => state.bookSearch.search);
+  const queryData = useSelector((state) => state.bookSearch.query);
+  const bookList = useSelector((state) => state.bookSearch.books);
+  const pageNum = useSelector((state) => state.bookSearch.page);
+  const isEnd = useSelector((state) => state.bookSearch.isEnd);
+  const dispatch = useDispatch(); //작업 전달하기
 
   //모달 state
   const [modalState, setModalState] = useState(false);
@@ -20,15 +31,15 @@ const MyPost = () => {
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
     //(query state가 업데이트되면 api 호출)
-    if (query.length > 1) {
-      bookSearchHandler(query, page);
+    if (searchItem.length > 1) {
+      bookSearchHandler(queryData, pageNum);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, page]);
+  }, [queryData, pageNum]);
 
   /////////////////////////////////책 검색용 함수들
   const onClickSearch = () => {
-    setQuery(search);
+    dispatch(setQuery(searchItem));
   };
 
   //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
@@ -40,7 +51,7 @@ const MyPost = () => {
 
   //text 검색어가 바뀔 때 호출되는 함수.
   const onTextUpdate = (e) => {
-    setSearch(e.target.value);
+    dispatch(setSearch(e.target.value));
   };
 
   //책 검색
@@ -54,12 +65,12 @@ const MyPost = () => {
 
     const { data } = await bookSearch(params); //책 검색 api 호출
     if (page === 1) {
-      setBooks(data.documents);
+      dispatch(setBooks(data.documents));
     } else if (page >= 2) {
-      setBooks(books.concat(data.documents));
+      dispatch(setBooks(bookList.concat(data.documents)));
     }
 
-    setIsEnd(data.meta.is_end); //다음 페이지가 있으면 false
+    dispatch(isEndPage(data.meta.is_end)); //다음 페이지가 있으면 false
   };
   /////////////////////////////////책 검색용 함수들 닫음
 
@@ -73,11 +84,11 @@ const MyPost = () => {
     setModalState(false);
 
     //모달창 닫기와 동시에 쿼리 초기화
-    setQuery(" ");
-    setPage(1);
-    setSearch();
-    setBooks([]);
-    setIsEnd(true);
+    dispatch(setQuery(""));
+    dispatch(setSearch(""));
+    dispatch(setPage(1));
+    dispatch(setBooks([]));
+    dispatch(isEndPage(true));
   };
   /////////////////////////////////모달용 함수들 닫음
 
@@ -98,14 +109,14 @@ const MyPost = () => {
               <InputSmall
                 placeholder="검색어를 입력하세요."
                 name="query"
-                value={search}
+                value={searchItem}
                 onKeyDown={onEnter}
                 onChange={onTextUpdate}
               />
               <ButtonSmall onClick={onClickSearch}>검색</ButtonSmall>
             </div>
             <Blank />
-            {books.map((book, idx) => (
+            {bookList.map((book, idx) => (
               <Item
                 key={idx}
                 thumbnail={book.thumbnail}
@@ -122,7 +133,7 @@ const MyPost = () => {
             {!isEnd && (
               <ButtonSmall
                 onClick={() => {
-                  setPage(page + 1);
+                  dispatch(nextPage());
                 }}
               >
                 더보기
