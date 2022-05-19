@@ -4,7 +4,8 @@ import styled from "styled-components";
 import { bookSearch } from "../../APIs/api";
 import Item from "../../Components/layout/ListItem";
 import ModalFrame from "../../Components/layout/ModalFrame";
-import { FullSizeBtn } from "../../Components/etc/LongButton";
+import { FullSizeBtn, SmallBtn } from "../../Components/etc/Buttons";
+import { SearchBar } from "../../Components/etc/SearchBar";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -105,16 +106,12 @@ const MyPost = () => {
 
         {modalState && (
           <ModalFrame state={modalState} closeModal={closeModal}>
-            <div className="rowDirection">
-              <InputSmall
-                placeholder="검색어를 입력하세요."
-                name="query"
-                value={searchItem}
-                onKeyDown={onEnter}
-                onChange={onTextUpdate}
-              />
-              <ButtonSmall onClick={onClickSearch}>검색</ButtonSmall>
-            </div>
+            <SearchBar
+              value={searchItem}
+              onKeyDown={onEnter}
+              onChange={onTextUpdate}
+              onClick={onClickSearch}
+            />
             <Blank />
             {bookList.map((book, idx) => (
               <Item
@@ -131,13 +128,13 @@ const MyPost = () => {
             <Blank />
 
             {!isEnd && (
-              <ButtonSmall
+              <SmallBtn
                 onClick={() => {
                   dispatch(nextPage());
                 }}
               >
                 더보기
-              </ButtonSmall>
+              </SmallBtn>
             )}
           </ModalFrame>
         )}
@@ -151,20 +148,6 @@ const Div = styled.div`
 `;
 const Blank = styled.div`
   height: 10px;
-`;
-
-const ButtonSmall = styled.button`
-  //[검색] 글로벌 스타일 button 확장
-  flex: 1;
-  width: 100px;
-  margin: 10px;
-`;
-
-const InputSmall = styled.input`
-  //[검색] 작은 사이즈의 input
-  flex: 3;
-  margin-right: 8px;
-  margin-bottom: 0px;
 `;
 
 export default MyPost;

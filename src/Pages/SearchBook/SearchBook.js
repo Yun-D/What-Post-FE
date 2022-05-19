@@ -4,6 +4,8 @@ import Item from "../../Components/layout/ListItem";
 
 import styled from "styled-components";
 import { useLocation } from "react-router-dom";
+import { SearchBar } from "../../Components/etc/SearchBar";
+import { SmallBtn } from "../../Components/etc/Buttons";
 
 const SearchBook = () => {
   const navigateState = useLocation();
@@ -61,16 +63,14 @@ const SearchBook = () => {
   /////////////////////////////////책 검색용 함수들 닫음
 
   return (
-    <Container className="contents_div">
-      <Div className="rowDirection">
-        <Input
-          placeholder="검색어를 입력하세요."
-          name="query"
+    <div className="contents_div">
+      <Div>
+        <SearchBar
           value={search}
           onKeyDown={onEnter}
           onChange={onTextUpdate}
+          onClick={onClickSearch}
         />
-        <button onClick={onClickSearch}>검색</button>
       </Div>
 
       {books.map((book, idx) => (
@@ -87,37 +87,27 @@ const SearchBook = () => {
       ))}
       <br />
 
-      {!isEnd && (
-        <ButtonSmall
-          onClick={() => {
-            setPage(page + 1);
-          }}
-        >
-          더보기
-        </ButtonSmall>
-      )}
-    </Container>
+      <FlexZone>
+        {!isEnd && (
+          <SmallBtn
+            onClick={() => {
+              setPage(page + 1);
+            }}
+          >
+            더보기
+          </SmallBtn>
+        )}
+      </FlexZone>
+    </div>
   );
 };
-
-const Container = styled.div`
+const FlexZone = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
 `;
 const Div = styled.div`
   margin: 2% 0 2%;
-`;
-
-const Input = styled.input`
-  margin-bottom: 0;
-  margin-right: 2%;
-`;
-const ButtonSmall = styled.button`
-  //[검색] 글로벌 스타일 button 확장
-  flex: 1;
-  width: 100px;
-  margin: 10px;
 `;
 
 export default SearchBook;

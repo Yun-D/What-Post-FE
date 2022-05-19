@@ -2,7 +2,7 @@ import React from "react";
 
 import styled from "styled-components";
 import theme from "../../Styles/theme";
-import { LongBtn } from "../../Components/etc/LongButton";
+import { LongBtn } from "../../Components/etc/Buttons";
 
 const SignUp = () => {
   return (

@@ -9,3 +9,8 @@ export const FullSizeBtn = styled.button`
   width: 100%;
   margin-bottom: 6px;
 `;
+
+export const SmallBtn = styled.button`
+  width: 20%;
+  margin: 10px;
+`;

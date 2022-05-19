@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Masonry from "../../Components/layout/Masonry";
 import { initialTexts, initialImages } from "../../Assets/dummy";
 import theme from "../../Styles/theme";
+import { SearchBar } from "../../Components/etc/SearchBar";
 
 //Masonry 레이아웃을 위한 코드
 const MasonryElement = memo(({ value }) => (
@@ -88,15 +89,13 @@ const BookMain = () => {
 
   return (
     <div className="contents_div">
-      <Div className="rowDirection">
-        <Input
-          placeholder="검색어를 입력하세요."
-          name="query"
+      <Div>
+        <SearchBar
           value={search}
           onKeyDown={onEnter}
           onChange={onTextUpdate}
+          onClick={onClickSearch}
         />
-        <button onClick={onClickSearch}>검색</button>
       </Div>
 
       <div> 최신/랜덤 이용자 포스트 </div>
@@ -124,11 +123,6 @@ const BookMain = () => {
 
 const Div = styled.div`
   margin: 2% 0 2%;
-`;
-
-const Input = styled.input`
-  margin-bottom: 0;
-  margin-right: 2%;
 `;
 
 const StyledMasonryCard = styled.div`
