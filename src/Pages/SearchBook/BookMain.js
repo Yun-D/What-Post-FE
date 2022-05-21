@@ -2,11 +2,13 @@ import { React, useState, memo, useCallback, useEffect } from "react";
 
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-
 import Masonry from "../../Components/layout/Masonry";
 import { initialTexts, initialImages } from "../../Assets/dummy";
 import theme from "../../Styles/theme";
 import { SearchBar } from "../../Components/etc/SearchBar";
+
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch, setQuery } from "../../Store/store";
 
 //Masonry 레이아웃을 위한 코드
 const MasonryElement = memo(({ value }) => (
@@ -24,21 +26,21 @@ const ImageElement = memo(({ value }) => (
   </div>
 ));
 
-//TODO: 향후 리팩토링 필요, 중복 코드 수정요
 const BookMain = () => {
-  //책검색 데이터셋, 검색어, 쿼리 state 생성
-  const [search, setSearch] = useState("");
-  const [query, setQuery] = useState(""); //책 검색 쿼리
+  //저장소에서 책검색 데이터 읽어오기
+  const searchItem = useSelector((state) => state.bookSearch.search);
+  const dispatch = useDispatch(); //작업 전달하기
 
   const navigate = useNavigate();
 
   /////////////////////////////////책 검색용 함수들
-  const onClickSearch = () => {
-    setQuery(search);
-    goToSearch();
-  };
   const goToSearch = () => {
-    navigate("/search_book/search", { state: search });
+    navigate("/search_book/search", { state: searchItem });
+  };
+
+  const onClickSearch = () => {
+    dispatch(setQuery(searchItem));
+    goToSearch();
   };
 
   //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
@@ -50,8 +52,9 @@ const BookMain = () => {
 
   //text 검색어가 바뀔 때 호출되는 함수.
   const onTextUpdate = (e) => {
-    setSearch(e.target.value);
+    dispatch(setSearch(e.target.value));
   };
+  /////////////////////////////////책 검색용 함수들 닫음
 
   //////////////////////////////Masonry 레이아웃을 위한 코드
   const [data, setData] = useState(initialTexts);
@@ -91,7 +94,7 @@ const BookMain = () => {
     <div className="contents_div">
       <Div>
         <SearchBar
-          value={search}
+          value={searchItem}
           onKeyDown={onEnter}
           onChange={onTextUpdate}
           onClick={onClickSearch}

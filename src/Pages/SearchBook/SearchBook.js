@@ -3,28 +3,56 @@ import { bookSearch } from "../../APIs/api";
 import Item from "../../Components/layout/ListItem";
 
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
 import { SearchBar } from "../../Components/etc/SearchBar";
 import { SmallBtn } from "../../Components/etc/Buttons";
 
-const SearchBook = () => {
-  const navigateState = useLocation();
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setSearch,
+  setQuery,
+  setBooks,
+  setPage,
+  nextPage,
+  isEndPage,
+} from "../../Store/store";
 
-  //책검색 데이터셋, 검색어, 쿼리 state 생성
-  const [books, setBooks] = useState([]);
-  const [page, setPage] = useState(1); //페이지 수. 기본 값은 1
-  const [isEnd, setIsEnd] = useState(true);
-  const [search, setSearch] = useState(navigateState.state);
-  const [query, setQuery] = useState(navigateState.state); //책 검색 쿼리
+const SearchBook = () => {
+  //const navigateState = useLocation();
+
+  //저장소에서 책검색 데이터 읽어오기
+  const searchItem = useSelector((state) => state.bookSearch.search);
+  const queryData = useSelector((state) => state.bookSearch.query);
+  const bookList = useSelector((state) => state.bookSearch.books);
+  const pageNum = useSelector((state) => state.bookSearch.page);
+  const isEnd = useSelector((state) => state.bookSearch.isEnd);
+  const dispatch = useDispatch(); //작업 전달하기
 
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
     //(query state가 업데이트되면 api 호출)
-    if (query.length > 1) {
-      bookSearchHandler(query, page);
+    if (searchItem.length > 1) {
+      bookSearchHandler(queryData, pageNum);
     }
-    //eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [query, page]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryData, pageNum]);
+
+  //책 검색
+
+  const onClickSearch = () => {
+    dispatch(setQuery(searchItem));
+  };
+
+  //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
+  const onEnter = (e) => {
+    if (e.keyCode === 13) {
+      onClickSearch();
+    }
+  };
+
+  //text 검색어가 바뀔 때 호출되는 함수.
+  const onTextUpdate = (e) => {
+    dispatch(setSearch(e.target.value));
+  };
 
   //책 검색
   const bookSearchHandler = async (query, page) => {
@@ -37,28 +65,12 @@ const SearchBook = () => {
 
     const { data } = await bookSearch(params); //책 검색 api 호출
     if (page === 1) {
-      setBooks(data.documents);
+      dispatch(setBooks(data.documents));
     } else if (page >= 2) {
-      setBooks(books.concat(data.documents));
+      dispatch(setBooks(bookList.concat(data.documents)));
     }
 
-    setIsEnd(data.meta.is_end); //다음 페이지가 있으면 false
-  };
-
-  const onClickSearch = () => {
-    setQuery(search);
-  };
-
-  //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
-  const onEnter = (e) => {
-    if (e.keyCode === 13) {
-      onClickSearch();
-    }
-  };
-
-  //text 검색어가 바뀔 때 호출되는 함수.
-  const onTextUpdate = (e) => {
-    setSearch(e.target.value);
+    dispatch(isEndPage(data.meta.is_end)); //다음 페이지가 있으면 false
   };
   /////////////////////////////////책 검색용 함수들 닫음
 
@@ -66,14 +78,14 @@ const SearchBook = () => {
     <div className="contents_div">
       <Div>
         <SearchBar
-          value={search}
+          value={searchItem}
           onKeyDown={onEnter}
           onChange={onTextUpdate}
           onClick={onClickSearch}
         />
       </Div>
 
-      {books.map((book, idx) => (
+      {bookList.map((book, idx) => (
         <Item
           key={idx}
           thumbnail={book.thumbnail}
@@ -91,7 +103,7 @@ const SearchBook = () => {
         {!isEnd && (
           <SmallBtn
             onClick={() => {
-              setPage(page + 1);
+              dispatch(nextPage());
             }}
           >
             더보기
