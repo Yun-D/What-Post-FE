@@ -11,7 +11,6 @@ import {
   setSearch,
   setQuery,
   setBooks,
-  setPage,
   nextPage,
   isEndPage,
 } from "../../Store/store";
@@ -37,7 +36,6 @@ const SearchBook = () => {
   }, [queryData, pageNum]);
 
   //책 검색
-
   const onClickSearch = () => {
     dispatch(setQuery(searchItem));
   };

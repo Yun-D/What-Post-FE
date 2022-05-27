@@ -8,7 +8,13 @@ import theme from "../../Styles/theme";
 import { SearchBar } from "../../Components/etc/SearchBar";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch, setQuery } from "../../Store/store";
+import {
+  setSearch,
+  setQuery,
+  setPage,
+  setBooks,
+  isEndPage,
+} from "../../Store/store";
 
 //Masonry 레이아웃을 위한 코드
 const MasonryElement = memo(({ value }) => (
@@ -84,6 +90,11 @@ const BookMain = () => {
 
   useEffect(() => {
     window.addEventListener("resize", () => setColumn(() => settingColumns()));
+    dispatch(setQuery(""));
+    dispatch(setSearch(""));
+    dispatch(setPage(1));
+    dispatch(setBooks([]));
+    dispatch(isEndPage(true));
 
     return window.removeEventListener("resize", () =>
       setColumn(() => settingColumns())

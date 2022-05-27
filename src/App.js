@@ -29,7 +29,6 @@ function App() {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/search_book" element={<BookMain />} />
             <Route path="/search_book/search" element={<SearchBook />} />
-            <Route path="/search_book/info/:id" element={<BookDetail />} />
             <Route path="/search_book/info" element={<BookDetail />} />
             <Route path="/my_post" element={<MyPost />} />
             <Route path="/my_post/write_post" element={<WritePost />} />
