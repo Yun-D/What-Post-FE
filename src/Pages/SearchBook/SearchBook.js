@@ -1,4 +1,4 @@
-import { React, useState, useLayoutEffect } from "react";
+import { React, useLayoutEffect, useState } from "react";
 import { bookSearch } from "../../APIs/api";
 import Item from "../../Components/layout/ListItem";
 
@@ -6,20 +6,21 @@ import styled from "styled-components";
 import { SearchBar } from "../../Components/etc/SearchBar";
 import { SmallBtn } from "../../Components/etc/Buttons";
 
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  setSearch,
   setQuery,
   setBooks,
   nextPage,
   isEndPage,
+  setPage,
 } from "../../Store/store";
 
 const SearchBook = () => {
-  //const navigateState = useLocation();
+  const navigateState = useLocation();
+  const [search, setSearch] = useState(navigateState.state);
 
   //저장소에서 책검색 데이터 읽어오기
-  const searchItem = useSelector((state) => state.bookSearch.search);
   const queryData = useSelector((state) => state.bookSearch.query);
   const bookList = useSelector((state) => state.bookSearch.books);
   const pageNum = useSelector((state) => state.bookSearch.page);
@@ -28,8 +29,10 @@ const SearchBook = () => {
 
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
+    dispatch(setQuery(search));
+
     //(query state가 업데이트되면 api 호출)
-    if (searchItem.length > 1) {
+    if (search.length > 1) {
       bookSearchHandler(queryData, pageNum);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,7 +40,9 @@ const SearchBook = () => {
 
   //책 검색
   const onClickSearch = () => {
-    dispatch(setQuery(searchItem));
+    dispatch(setQuery(search));
+    dispatch(setPage(1));
+    dispatch(setBooks([]));
   };
 
   //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
@@ -49,7 +54,7 @@ const SearchBook = () => {
 
   //text 검색어가 바뀔 때 호출되는 함수.
   const onTextUpdate = (e) => {
-    dispatch(setSearch(e.target.value));
+    setSearch(e.target.value);
   };
 
   //책 검색
@@ -76,7 +81,7 @@ const SearchBook = () => {
     <div className="contents_div">
       <Div>
         <SearchBar
-          value={searchItem}
+          value={search}
           onKeyDown={onEnter}
           onChange={onTextUpdate}
           onClick={onClickSearch}

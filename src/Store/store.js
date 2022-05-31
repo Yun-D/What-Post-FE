@@ -4,17 +4,12 @@ import { configureStore, createSlice } from "@reduxjs/toolkit";
 export const bookSearchSlice = createSlice({
   name: "bookSearch",
   initialState: {
-    search: "",
     query: "",
     books: [],
     page: 1, //결과 페이지 번호
     isEnd: true,
   },
   reducers: {
-    setSearch: (state, action) => {
-      //검색어 저장(텍스트 필드로 변화하는 값)
-      state.search = action.payload;
-    },
     setQuery: (state, action) => {
       //검색어 저장(검색 쿼리로 들어갈 값)
       state.query = action.payload;

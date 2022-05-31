@@ -7,14 +7,9 @@ import { initialTexts, initialImages } from "../../Assets/dummy";
 import theme from "../../Styles/theme";
 import { SearchBar } from "../../Components/etc/SearchBar";
 
-import { useDispatch, useSelector } from "react-redux";
-import {
-  setSearch,
-  setQuery,
-  setPage,
-  setBooks,
-  isEndPage,
-} from "../../Store/store";
+import { useDispatch } from "react-redux";
+import { setQuery, setPage, setBooks, isEndPage } from "../../Store/store";
+import useIsMount from "../../Utils/hooks/useIsMount";
 
 //Masonry 레이아웃을 위한 코드
 const MasonryElement = memo(({ value }) => (
@@ -33,10 +28,11 @@ const ImageElement = memo(({ value }) => (
 ));
 
 const BookMain = () => {
-  //저장소에서 책검색 데이터 읽어오기
-  const searchItem = useSelector((state) => state.bookSearch.search);
-  const dispatch = useDispatch(); //작업 전달하기
+  const isMount = useIsMount(); //useEffect 클린업 시 isMount를 false로 만들어 메모리 누수 방지
 
+  //저장소에서 책검색 데이터 읽어오기
+  const [searchItem, setSearch] = useState("");
+  const dispatch = useDispatch(); //작업 전달하기
   const navigate = useNavigate();
 
   /////////////////////////////////책 검색용 함수들
@@ -58,7 +54,7 @@ const BookMain = () => {
 
   //text 검색어가 바뀔 때 호출되는 함수.
   const onTextUpdate = (e) => {
-    dispatch(setSearch(e.target.value));
+    setSearch(e.target.value);
   };
   /////////////////////////////////책 검색용 함수들 닫음
 
@@ -90,16 +86,21 @@ const BookMain = () => {
 
   useEffect(() => {
     window.addEventListener("resize", () => setColumn(() => settingColumns()));
-    dispatch(setQuery(""));
-    dispatch(setSearch(""));
-    dispatch(setPage(1));
-    dispatch(setBooks([]));
-    dispatch(isEndPage(true));
 
-    return window.removeEventListener("resize", () =>
-      setColumn(() => settingColumns())
-    );
-  }, [setColumn, settingColumns]);
+    if (isMount.current) {
+      //console.log("test");
+      dispatch(setQuery(""));
+      dispatch(setPage(1));
+      dispatch(setBooks([]));
+      dispatch(isEndPage(true));
+    }
+
+    return () => {
+      window.removeEventListener("resize", () =>
+        setColumn(() => settingColumns())
+      );
+    };
+  }, [dispatch, isMount, setColumn, settingColumns]);
 
   return (
     <div className="contents_div">
