@@ -37,7 +37,7 @@ const BookMain = () => {
 
   /////////////////////////////////책 검색용 함수들
   const goToSearch = () => {
-    navigate("/search_book/search", { state: searchItem });
+    navigate(`/search_book/search/${searchItem}`);
   };
 
   const onClickSearch = () => {

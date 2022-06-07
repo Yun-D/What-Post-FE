@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { SearchBar } from "../../Components/etc/SearchBar";
 import { SmallBtn } from "../../Components/etc/Buttons";
 
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setQuery,
@@ -17,8 +17,8 @@ import {
 } from "../../Store/store";
 
 const SearchBook = () => {
-  const navigateState = useLocation();
-  const [search, setSearch] = useState(navigateState.state);
+  const { query } = useParams();
+  const [search, setSearch] = useState(query);
 
   //저장소에서 책검색 데이터 읽어오기
   const queryData = useSelector((state) => state.bookSearch.query);
@@ -29,10 +29,11 @@ const SearchBook = () => {
 
   useLayoutEffect(() => {
     //componentDidMount/Update/WillUnmount 일 경우 실행
-    dispatch(setQuery(search));
+    //dispatch(setQuery(search));
 
     //(query state가 업데이트되면 api 호출)
-    if (search.length > 1) {
+    //if (search.length > 1) {
+    if (search === queryData) {
       bookSearchHandler(queryData, pageNum);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
