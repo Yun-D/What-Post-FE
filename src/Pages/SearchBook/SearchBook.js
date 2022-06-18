@@ -28,14 +28,9 @@ const SearchBook = () => {
   const dispatch = useDispatch(); //작업 전달하기
 
   useLayoutEffect(() => {
-    //componentDidMount/Update/WillUnmount 일 경우 실행
-    //dispatch(setQuery(search));
-
-    //(query state가 업데이트되면 api 호출)
-    //if (search.length > 1) {
-    if (search === queryData) {
-      bookSearchHandler(queryData, pageNum);
-    }
+    //if (search === queryData) {
+    bookSearchHandler(search, pageNum);
+    //}
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryData, pageNum]);
 
