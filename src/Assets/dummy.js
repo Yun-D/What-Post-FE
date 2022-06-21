@@ -40,3 +40,16 @@ export const initialImages = [
   "https://images.unsplash.com/flagged/photo-1559717865-a99cac1c95d8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y2l0eSxuaWdodHx8fHx8fDE2NDI3NTIzODE&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
   "https://images.unsplash.com/photo-1475066392170-59d55d96fe51?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Y2l0eSxuaWdodHx8fHx8fDE2NDI3NTIzODg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
 ];
+
+export const postDummy = [
+  {
+    title: "titleData1",
+    contents: "contentsData1 입니다.",
+    nickname: "nickname1",
+  },
+  {
+    title: "titleData2",
+    contents: "contentsData2입니다. 저는 양이 좀 많아요. 테스트 중이에요.",
+    nickname: "nickname2",
+  },
+];
