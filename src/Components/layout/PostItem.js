@@ -31,11 +31,10 @@ const PostItem = () => {
 const PostBoxArea = styled.div`
   background-color: beige;
   width: 100%;
-  height: 180px;
+  height: 150px;
   border-radius: ${theme.size.radius};
   box-shadow: ${theme.size.boxShadow};
   margin-top: 15px;
-  scroll-behavior: smooth;
 `;
 const Contents = styled.div`
   padding: 20px;
@@ -49,6 +48,12 @@ const PostTitle = styled.h2`
 `;
 const PostContents = styled.p`
   font-size: ${theme.textSize.postContents};
+  text-overflow: ellipsis; // 글자 자르고 생략 표시
+  overflow: hidden;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 const Div = styled.div`
   flex: 1;
@@ -56,6 +61,7 @@ const Div = styled.div`
 const Blank = styled.div`
   flex: 999;
   width: 100%;
+  height: 100%;
 `;
 
 export default PostItem;
