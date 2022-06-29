@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import theme from "./Styles/theme";
 import GlobalStyle from "./Styles/GlobalStyle";
 import NavBar from "./Components/navigation/NavBar";
+import Footer from "./Components/layout/Footer";
 import Home from "./Pages/Home/Home";
 import MyPost from "./Pages/MyPost/MyPost";
 import WritePost from "./Pages/MyPost/WritePost/WritePost";
@@ -34,6 +35,8 @@ function App() {
             <Route path="/my_post" element={<MyPost />} />
             <Route path="/my_post/write_post" element={<WritePost />} />
           </Routes>
+
+          <Footer />
         </BrowserRouter>
       </ThemeProvider>
     </div>

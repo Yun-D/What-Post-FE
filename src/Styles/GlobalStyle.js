@@ -3,12 +3,12 @@ import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 * {
-  margin: 0;
+  //margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  padding-top: 80px;
+  margin-top: 80px;
 }
 
 button {
@@ -58,10 +58,19 @@ input {
   align-items: center;
   width: 100%;
 }
+.wrapper {
+  height: auto;
+  //min-height: 100%;
+  min-height: calc(100vh - 100px);
+  padding-bottom: 100px;
+  flex: 1;
+}
+
 .subText {
   font-size: ${theme.textSize.subText};
   color: gray;
 }
+
 /* ////////// 반응형 /////////// */
 @media only screen and (max-width: ${theme.size.mobile}) {
   .contents_div {
