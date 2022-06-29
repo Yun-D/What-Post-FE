@@ -31,7 +31,7 @@ const Login = () => {
 
 const Container = styled.div`
   width: 100%;
-  height: calc(85vh - 100px);
+  height: 85vh;
   align-items: center;
   justify-content: center;
   display: flex;

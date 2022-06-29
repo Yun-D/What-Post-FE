@@ -3,7 +3,6 @@ import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 * {
-  //margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
@@ -60,10 +59,8 @@ input {
 }
 .wrapper {
   height: auto;
-  //min-height: 100%;
-  min-height: calc(100vh - 100px);
-  padding-bottom: 100px;
-  flex: 1;
+  min-height: calc(100vh - 300px);
+  //padding-bottom: 100px;
 }
 
 .subText {
