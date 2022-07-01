@@ -137,7 +137,7 @@ const BookMain = () => {
 };
 
 const Div = styled.div`
-  margin: 2% 0 2%;
+  margin: 9% 0 2%;
 `;
 
 const StyledMasonryCard = styled.div`
