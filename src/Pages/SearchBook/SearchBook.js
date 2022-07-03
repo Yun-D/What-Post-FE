@@ -118,7 +118,7 @@ const FlexZone = styled.div`
   flex-direction: column;
 `;
 const Div = styled.div`
-  margin: 2% 0 2%;
+  padding: 2% 0;
 `;
 
 export default SearchBook;

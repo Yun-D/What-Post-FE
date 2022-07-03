@@ -3,11 +3,12 @@ import theme from "./theme";
 
 const GlobalStyle = createGlobalStyle`
 * {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  margin-top: 80px;
+  padding-top: 80px;
 }
 
 button {
@@ -59,7 +60,7 @@ input {
 }
 .wrapper {
   height: auto;
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 280px);
   //padding-bottom: 100px;
 }
 
