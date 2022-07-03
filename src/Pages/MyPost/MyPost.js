@@ -95,58 +95,53 @@ const MyPost = () => {
   /////////////////////////////////모달용 함수들 닫음
 
   return (
-    <Div>
-      <div className="contents_div">
-        <div className="rowDirection">
-          <p className="p_title">유저 네임의 책장</p>
-          <button onClick={openModal}>포스트 쓰기</button>
-        </div>
-        <div>책 사진 넣는 곳</div>
-        <FullSizeBtn>로그아웃</FullSizeBtn>
-        <FullSizeBtn>회원 탈퇴</FullSizeBtn>
-
-        {modalState && (
-          <ModalFrame state={modalState} closeModal={closeModal}>
-            <SearchBar
-              value={searchItem}
-              onKeyDown={onEnter}
-              onChange={onTextUpdate}
-              onClick={onClickSearch}
-            />
-            <Blank />
-            {bookList.map((book, idx) => (
-              <Item
-                key={idx}
-                thumbnail={book.thumbnail}
-                title={book.title}
-                authors={book.authors}
-                datetime={book.datetime.substr(0, 4)}
-                publisher={book.publisher}
-                contents={book.contents}
-                tolink={"/my_post/write_post"}
-              />
-            ))}
-            <Blank />
-
-            {!isEnd && (
-              <SmallBtn
-                onClick={() => {
-                  dispatch(nextPage());
-                }}
-              >
-                더보기
-              </SmallBtn>
-            )}
-          </ModalFrame>
-        )}
+    <div className="contents_div">
+      <div className="rowDirection">
+        <p className="p_title">유저 네임의 책장</p>
+        <button onClick={openModal}>포스트 쓰기</button>
       </div>
-    </Div>
+      <div>책 사진 넣는 곳</div>
+      <FullSizeBtn>로그아웃</FullSizeBtn>
+      <FullSizeBtn>회원 탈퇴</FullSizeBtn>
+
+      {modalState && (
+        <ModalFrame state={modalState} closeModal={closeModal}>
+          <SearchBar
+            value={searchItem}
+            onKeyDown={onEnter}
+            onChange={onTextUpdate}
+            onClick={onClickSearch}
+          />
+          <Blank />
+          {bookList.map((book, idx) => (
+            <Item
+              key={idx}
+              thumbnail={book.thumbnail}
+              title={book.title}
+              authors={book.authors}
+              datetime={book.datetime.substr(0, 4)}
+              publisher={book.publisher}
+              contents={book.contents}
+              tolink={"/my_post/write_post"}
+            />
+          ))}
+          <Blank />
+
+          {!isEnd && (
+            <SmallBtn
+              onClick={() => {
+                dispatch(nextPage());
+              }}
+            >
+              더보기
+            </SmallBtn>
+          )}
+        </ModalFrame>
+      )}
+    </div>
   );
 };
 
-const Div = styled.div`
-  padding: 2% 0 0 0;
-`;
 const Blank = styled.div`
   height: 10px;
 `;

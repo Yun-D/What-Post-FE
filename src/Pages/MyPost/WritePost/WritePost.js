@@ -26,7 +26,7 @@ const WritePost = () => {
   };
 
   return (
-    <Div>
+    <div className="contents_div">
       {viewContent.map((ele) => (
         <div className="temp_postTest">
           <h3>{ele.title}</h3>
@@ -78,12 +78,8 @@ const WritePost = () => {
           </FullSizeBtn>
         </div>
       </div>
-    </Div>
+    </div>
   );
 };
-
-const Div = styled.div`
-  margin: 20px;
-`;
 
 export default WritePost;

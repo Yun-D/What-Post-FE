@@ -44,7 +44,6 @@ const BookInfo = () => {
 };
 
 const Div = styled.div`
-  margin-top: 20px;
   width: 100%;
 `;
 const DivBookInfo = styled.div`

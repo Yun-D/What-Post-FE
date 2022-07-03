@@ -104,14 +104,12 @@ const BookMain = () => {
 
   return (
     <div className="contents_div">
-      <Div>
-        <SearchBar
-          value={searchItem}
-          onKeyDown={onEnter}
-          onChange={onTextUpdate}
-          onClick={onClickSearch}
-        />
-      </Div>
+      <SearchBar
+        value={searchItem}
+        onKeyDown={onEnter}
+        onChange={onTextUpdate}
+        onClick={onClickSearch}
+      />
 
       <div> 최신/랜덤 이용자 포스트 </div>
       <div style={{ padding: "5px" }}>
@@ -135,10 +133,6 @@ const BookMain = () => {
     </div>
   );
 };
-
-const Div = styled.div`
-  padding: 2% 0;
-`;
 
 const StyledMasonryCard = styled.div`
   padding: 10px;

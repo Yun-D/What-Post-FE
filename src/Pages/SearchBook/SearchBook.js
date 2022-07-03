@@ -75,14 +75,12 @@ const SearchBook = () => {
 
   return (
     <div className="contents_div">
-      <Div>
-        <SearchBar
-          value={search}
-          onKeyDown={onEnter}
-          onChange={onTextUpdate}
-          onClick={onClickSearch}
-        />
-      </Div>
+      <SearchBar
+        value={search}
+        onKeyDown={onEnter}
+        onChange={onTextUpdate}
+        onClick={onClickSearch}
+      />
 
       {bookList.map((book, idx) => (
         <Item
@@ -116,9 +114,6 @@ const FlexZone = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
-`;
-const Div = styled.div`
-  padding: 2% 0;
 `;
 
 export default SearchBook;

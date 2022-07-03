@@ -50,6 +50,7 @@ input {
 
 .contents_div {
   margin: auto 5%;
+  padding: 2% 0;
 }
 .rowDirection {
   //컴포넌트 가로정렬
