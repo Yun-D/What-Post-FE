@@ -34,6 +34,13 @@ const MyPost = () => {
     if (searchItem.length > 1) {
       bookSearchHandler(queryData, pageNum);
     }
+
+    //초기화 처리
+    dispatch(setQuery(""));
+    dispatch(setPage(1));
+    dispatch(setBooks([]));
+    dispatch(isEndPage(true));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryData, pageNum]);
 
