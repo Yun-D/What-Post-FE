@@ -1,6 +1,7 @@
 const colors = {
   mainColor: "#6BADB6",
   boxColor: "#EFF6F6",
+  boxColor_light: "#F1F5F5",
   shadowColor: "#467379",
 
   lightGray: "#bbbbbb",
@@ -22,7 +23,8 @@ const size = {
   laptop: "1200px",
   desktop: "1800px",
   radius: "8px",
-  boxShadow: "0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.3)",
+  boxShadow:
+    "0 6px 10px rgba(0, 0, 0, 0.1), 0 3px 5px rgba(226, 235, 238, 0.5)",
 };
 
 const device = {

@@ -29,9 +29,9 @@ const PostItem = () => {
 };
 
 const PostBoxArea = styled.div`
-  background-color: beige;
+  background-color: ${theme.colors.boxColor_light};
   width: 100%;
-  height: 150px;
+  height: 145px;
   border-radius: ${theme.size.radius};
   box-shadow: ${theme.size.boxShadow};
   margin-top: 15px;
