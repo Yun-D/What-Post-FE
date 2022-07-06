@@ -10,7 +10,7 @@ const PostItem = () => {
   return (
     <div>
       {postDummy.map((data) => (
-        <PostBoxArea>
+        <PostBoxArea key={data.id}>
           <Contents>
             <PostTitle>{data.title}</PostTitle>
             <PostContents>{data.contents}</PostContents>
