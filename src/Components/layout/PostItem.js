@@ -18,7 +18,12 @@ const PostItem = () => {
             <Blank />
             <Div className="rowDirection">
               <Blank />
-              <NoteIcon />
+              <NoteIcon
+                style={{
+                  color: `${theme.colors.peacock}`,
+                  marginRight: "5px",
+                }}
+              />
               <PostContents>{data.nickname}</PostContents>
             </Div>
           </Contents>
@@ -34,7 +39,7 @@ const PostBoxArea = styled.div`
   height: 145px;
   border-radius: ${theme.size.radius};
   box-shadow: ${theme.size.boxShadow};
-  margin-top: 15px;
+  margin-top: 25px;
 `;
 const Contents = styled.div`
   padding: 20px;
