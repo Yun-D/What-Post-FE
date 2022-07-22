@@ -44,7 +44,8 @@ export const initialImages = [
 export const postDummy = [
   {
     id: "testID_1",
-    title: "titleData1",
+    title:
+      "titleData1titleData1titleData1titleData1titleData1titleData1titleData1titleData1titleData1titleData1titleData1",
     contents: "contentsData1 입니다.",
     nickname: "nickname1",
   },

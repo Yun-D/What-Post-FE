@@ -68,6 +68,12 @@ const Contents = styled.div`
 
 const PostTitle = styled.h2`
   font-size: ${theme.textSize.postTitle};
+  height: auto;
+
+  //////////////////////ellipsis 처리 위한 코드부분
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 const PostContents = styled.div`
   font-size: ${theme.textSize.postContents};
