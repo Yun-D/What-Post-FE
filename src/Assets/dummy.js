@@ -55,4 +55,24 @@ export const postDummy = [
       "contentsData2입니다. 저는 양이 좀 많아요. 테스트 중이에요. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae labore obcaecati ipsam numquam eligendi a iste porro, quis blanditiis reiciendis. Voluptatibus veniam numquam a dolor quasi, recusandae temporibus! Rem, dolor. Sint quis vel, ex eaque aperiam eum inventore? Distinctio sed autem ea temporibus cupiditate laboriosam esse sunt minus exercitationem. Autem, explicabo omnis amet alias distinctio velit quisquam obcaecati provident ratione! Eligendi delectus aliquid sit perferendis deleniti culpa numquam possimus non. Deserunt, ab quod. Suscipit impedit atque ipsam dolores? Est in maiores possimus neque consequatur alias debitis deleniti veniam fugit voluptatum? Sed mollitia perspiciat",
     nickname: "nickname2",
   },
+  {
+    id: "3",
+    title: "titleData3",
+    contents: "contentsData3입니다. 저는 양이 좀 많아요. ",
+    nickname: "nickname3",
+  },
+  {
+    id: "testID_4",
+    title: "titleData4",
+    contents:
+      "contentsData4입니다. 저는 양이 좀 많아요. 테스트 중이에요. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae labore ob",
+    nickname: "nickname4",
+  },
+  {
+    id: "testID_5",
+    title: "titleData5",
+    contents:
+      "contentsData5입니다. 저는 양이 좀 많아요. 테스트 중이에요. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae labore obcaecati ipsam numquam eligendi a iste porro, quis blanditiis reiciendis. Voluptatibus veniam numquam a dolor quasi, recusandae temporibus! Rem, dolor. Sint quis vel, ex eaque aperiam eum inventore? Distinctio sed autem ea temporibus cupiditate laboriosam esse sunt minus exercitationem. Autem, explicabo omnis amet alias distinctio velit quisquam obcaecati provident ratione! t",
+    nickname: "nickname5",
+  },
 ];
