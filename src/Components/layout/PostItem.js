@@ -2,15 +2,26 @@ import React, { useEffect, useRef, useState } from "react";
 
 import theme from "../../Styles/theme";
 import styled from "styled-components";
+import ModalFrame from "../../Components/layout/ModalFrame";
+
 import NoteIcon from "@material-ui/icons/TextsmsOutlined"; //ModeCommentOutlined
 
 const PostItem = (data) => {
+  const [modalState, setModalState] = useState(false); //모달 출력을 위한 state
   const [isShowMore, setIsShowMore] = useState(false); //ellipsis처리되어 더보기 버튼 출력해야하는지 (필요하면 true, 아니면 false)
 
   const postRef = useRef();
+
+  /////////////////////////////////모달용 함수들
   const showMore = (e) => {
-    //모달 출력
+    e.preventDefault();
+    setModalState(true);
   };
+  const closeModal = (e) => {
+    e.preventDefault();
+    setModalState(false);
+  };
+  ////////////////////////////////////////////
 
   useEffect(() => {
     const element = postRef.current;
@@ -47,6 +58,25 @@ const PostItem = (data) => {
           </Div>
         </Contents>
       </PostBoxArea>
+
+      {modalState && (
+        <ModalFrame state={modalState} closeModal={closeModal}>
+          <PostTitle>{data.title}</PostTitle>
+          <Blank />
+          <Div className="rowDirection">
+            <Blank />
+            <NoteIcon
+              style={{
+                color: `${theme.colors.peacock}`,
+                marginRight: "5px",
+              }}
+            />
+            <PostContents>{data.nickname}</PostContents>
+          </Div>
+          <Blank />
+          <p>{data.contents}</p>
+        </ModalFrame>
+      )}
     </div>
   );
 };
