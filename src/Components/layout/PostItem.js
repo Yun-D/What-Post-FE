@@ -39,9 +39,11 @@ const PostItem = (data) => {
     <div>
       <PostBoxArea>
         <Contents>
-          <PostTitle>{data.title}</PostTitle>
+          <PostTitle notFullSize>{data.title}</PostTitle>
           <div>
-            <PostContents ref={postRef}>{data.contents}</PostContents>
+            <PostContents notFullSize ref={postRef}>
+              {data.contents}
+            </PostContents>
             {isShowMore && <Button onClick={showMore}>더보기</Button>}
           </div>
 
@@ -59,9 +61,12 @@ const PostItem = (data) => {
         </Contents>
       </PostBoxArea>
 
+      {/***************** 모달&전체 데이터 출력 부분 ******************/}
       {modalState && (
         <ModalFrame state={modalState} closeModal={closeModal}>
-          <PostTitle>{data.title}</PostTitle>
+          <Div>
+            <PostTitle>{data.title}</PostTitle>
+          </Div>
           <Blank />
           <Div className="rowDirection">
             <Blank />
@@ -73,8 +78,8 @@ const PostItem = (data) => {
             />
             <PostContents>{data.nickname}</PostContents>
           </Div>
-          <Blank />
-          <p>{data.contents}</p>
+
+          <PostContents>{data.contents}</PostContents>
         </ModalFrame>
       )}
     </div>
@@ -98,23 +103,31 @@ const Contents = styled.div`
 
 const PostTitle = styled.h2`
   font-size: ${theme.textSize.postTitle};
-  height: auto;
 
-  //////////////////////ellipsis 처리 위한 코드부분
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+  height: auto;
+  color: rebeccapurple;
+
+  ${(props) =>
+    props.notFullSize &&
+    ` //////////////////////ellipsis 처리 위한 코드부분
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  `};
 `;
 const PostContents = styled.div`
   font-size: ${theme.textSize.postContents};
   height: auto;
 
-  //////////////////////ellipsis 처리 위한 코드부분
-  text-overflow: ellipsis; // 글자 자르고 생략 표시
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  ${(props) =>
+    props.notFullSize &&
+    ` //////////////////////ellipsis 처리 위한 코드부분
+    text-overflow: ellipsis; // 글자 자르고 생략 표시
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    `}
 `;
 
 const Button = styled.button`
@@ -131,6 +144,7 @@ const Button = styled.button`
 
 const Div = styled.div`
   flex: 1;
+  width: 100%;
 `;
 const Blank = styled.div`
   flex: 999;
