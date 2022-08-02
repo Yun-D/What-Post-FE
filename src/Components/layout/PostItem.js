@@ -10,7 +10,10 @@ const PostItem = (data) => {
   const [modalState, setModalState] = useState(false); //모달 출력을 위한 state
   const [isShowMore, setIsShowMore] = useState(false); //ellipsis처리되어 더보기 버튼 출력해야하는지 (필요하면 true, 아니면 false)
 
-  const postRef = useRef();
+  ////////////////////////////////////데이터 Ref
+  const postTitleRef = useRef();
+  const postContentRef = useRef();
+  ////////////////////////////////////////////
 
   /////////////////////////////////모달용 함수들
   const showMore = (e) => {
@@ -24,13 +27,14 @@ const PostItem = (data) => {
   ////////////////////////////////////////////
 
   useEffect(() => {
-    const element = postRef.current;
+    const eleTitle = postTitleRef.current;
+    const eleContent = postContentRef.current;
 
-    if (element.offsetHeight < element.scrollHeight) {
-      //요소 원래 높이 > 화면에 보이는 높이
-      console.log(
-        "scroll: " + element.scrollHeight + " client: " + element.clientHeight
-      );
+    if (
+      eleContent.offsetHeight < eleContent.scrollHeight ||
+      eleTitle.offsetWidth < eleTitle.scrollWidth
+    ) {
+      //요소 원래 높이(길이) > 화면에 보이는 높이(길이)
       setIsShowMore(true);
     }
   }, []);
@@ -39,9 +43,11 @@ const PostItem = (data) => {
     <div>
       <PostBoxArea>
         <Contents>
-          <PostTitle notFullSize>{data.title}</PostTitle>
+          <PostTitle notFullSize ref={postTitleRef}>
+            {data.title}
+          </PostTitle>
           <div>
-            <PostContents notFullSize ref={postRef}>
+            <PostContents notFullSize ref={postContentRef}>
               {data.contents}
             </PostContents>
             {isShowMore && <Button onClick={showMore}>더보기</Button>}
@@ -103,9 +109,7 @@ const Contents = styled.div`
 
 const PostTitle = styled.h2`
   font-size: ${theme.textSize.postTitle};
-
   height: auto;
-  color: rebeccapurple;
 
   ${(props) =>
     props.notFullSize &&
