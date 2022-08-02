@@ -70,22 +70,27 @@ const PostItem = (data) => {
       {/***************** 모달&전체 데이터 출력 부분 ******************/}
       {modalState && (
         <ModalFrame state={modalState} closeModal={closeModal}>
-          <Div>
-            <PostTitle>{data.title}</PostTitle>
-          </Div>
-          <Blank />
-          <Div className="rowDirection">
-            <Blank />
-            <NoteIcon
-              style={{
-                color: `${theme.colors.peacock}`,
-                marginRight: "5px",
-              }}
-            />
-            <PostContents>{data.nickname}</PostContents>
-          </Div>
+          <ModalContents>
+            <PadDiv marginBottom="80px">
+              <PostTitle>{data.title}</PostTitle>
+              <StyledLine />
+            </PadDiv>
 
-          <PostContents>{data.contents}</PostContents>
+            <PadDiv marginBottom="40px">
+              <Div className="rowDirection">
+                <Blank />
+                <NoteIcon
+                  style={{
+                    color: `${theme.colors.peacock}`,
+                    marginRight: "5px",
+                  }}
+                />
+                <PostContents>{data.nickname}</PostContents>
+              </Div>
+            </PadDiv>
+
+            <PostContents>{data.contents}</PostContents>
+          </ModalContents>
         </ModalFrame>
       )}
     </div>
@@ -95,7 +100,7 @@ const PostItem = (data) => {
 const PostBoxArea = styled.div`
   background-color: ${theme.colors.boxColor_light};
   width: 100%;
-  height: 165px;
+  height: 180px;
   border-radius: ${theme.size.radius};
   box-shadow: ${theme.size.boxShadow};
   margin-top: 25px;
@@ -106,17 +111,29 @@ const Contents = styled.div`
   display: flex;
   flex-direction: column;
 `;
+const ModalContents = styled.div`
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+`;
 
-const PostTitle = styled.h2`
+const PostTitle = styled.p`
   font-size: ${theme.textSize.postTitle};
+  font-weight: 600;
   height: auto;
+  word-break: break-all;
 
   ${(props) =>
-    props.notFullSize &&
-    ` //////////////////////ellipsis 처리 위한 코드부분
+    props.notFullSize
+      ? ` //////////////////////ellipsis 처리 위한 코드부분
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    margin-bottom: 15px;
+  `
+      : `
+    font-size: 2.5rem
   `};
 `;
 const PostContents = styled.div`
@@ -124,14 +141,16 @@ const PostContents = styled.div`
   height: auto;
 
   ${(props) =>
-    props.notFullSize &&
-    ` //////////////////////ellipsis 처리 위한 코드부분
+    props.notFullSize
+      ? ` //////////////////////ellipsis 처리 위한 코드부분
     text-overflow: ellipsis; // 글자 자르고 생략 표시
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    `}
+    `
+      : `
+    line-height: 27px;`}
 `;
 
 const Button = styled.button`
@@ -145,7 +164,17 @@ const Button = styled.button`
   cursor: pointer;
   color: ${theme.colors.peacockGray};
 `;
+const StyledLine = styled.hr`
+  width: 25%;
+  height: 5px;
+  background-color: ${theme.colors.peacock};
+  margin-top: 10px;
+  border: 0;
+`;
 
+const PadDiv = styled.div`
+  margin-bottom: ${(props) => props.marginBottom};
+`;
 const Div = styled.div`
   flex: 1;
   width: 100%;

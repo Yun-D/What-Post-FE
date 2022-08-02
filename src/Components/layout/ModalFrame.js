@@ -50,6 +50,7 @@ const ModalBlock = styled.div`
 
 const Contents = styled.div`
   width: 100%;
+  height: 100%;
   flex-direction: column;
   overflow-y: auto;
   margin-top: 3%;
