@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import theme from "../../Styles/theme";
 
@@ -72,6 +72,23 @@ const Close = styled.div`
 `;
 
 const ModalFrame = ({ state, closeModal, children }) => {
+  useEffect(() => {
+    // 모달 오버레이에서 스크롤 방지
+    document.body.style.cssText = `
+      position: fixed;
+      overflow-y: scroll;
+      width: 100%;
+      top: -${window.scrollY}px; //현재위치로 고정
+    `;
+
+    return () => {
+      //모달 사라질 때 cssText 리셋
+      const scrollY = document.body.style.top;
+      document.body.style.cssText = "";
+      window.scrollTo(0, parseInt(scrollY || "0", 10) * -1);
+    };
+  });
+
   return (
     <Container>
       <Overlay onClick={(e) => closeModal(e)} />
