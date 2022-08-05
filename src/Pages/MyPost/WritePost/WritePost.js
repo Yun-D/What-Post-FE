@@ -8,6 +8,7 @@ import BookInfo from "../../../Components/layout/BookInfo";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ReactHtmlParser from "react-html-parser";
+import theme from "../../../Styles/theme";
 
 const WritePost = () => {
   //글 내용 state들
@@ -34,8 +35,13 @@ const WritePost = () => {
         </div>
       ))}
 
-      <div className="contents_div">
-        <BookInfo />
+      <div>
+        {/* <BookInfo /> */}
+        <SubjectDiv>
+          <button>도서</button>
+          <button>드라마</button>
+          <button>영화</button>
+        </SubjectDiv>
 
         <div>
           <input
@@ -81,5 +87,15 @@ const WritePost = () => {
     </div>
   );
 };
+
+const SubjectDiv = styled.div`
+  background-color: ${theme.colors.boxColor};
+  height: 80px;
+  margin-bottom: 20px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  //display: block;
+`;
 
 export default WritePost;

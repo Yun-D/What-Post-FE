@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import { bookSearch } from "../../APIs/api";
 import Item from "../../Components/layout/ListItem";
-import ModalFrame from "../../Components/layout/ModalFrame";
+//import ModalFrame from "../../Components/layout/ModalFrame";
 import { FullSizeBtn, SmallBtn } from "../../Components/etc/Buttons";
 import { SearchBar } from "../../Components/etc/SearchBar";
 
@@ -15,6 +15,7 @@ import {
   nextPage,
   isEndPage,
 } from "../../Store/store";
+import { Link } from "react-router-dom";
 
 const MyPost = () => {
   //저장소에서 책검색 데이터 읽어오기
@@ -105,13 +106,15 @@ const MyPost = () => {
     <div className="contents_div">
       <div className="rowDirection">
         <p className="p_title">유저 네임의 책장</p>
-        <button onClick={openModal}>포스트 쓰기</button>
+        <Link to="/my_post/write_post">
+          <button>포스트 쓰기</button>
+        </Link>
       </div>
       <div>책 사진 넣는 곳</div>
       <FullSizeBtn>로그아웃</FullSizeBtn>
       <FullSizeBtn>회원 탈퇴</FullSizeBtn>
 
-      {modalState && (
+      {/* {modalState && (
         <ModalFrame state={modalState} closeModal={closeModal}>
           <SearchBar
             value={searchItem}
@@ -144,7 +147,7 @@ const MyPost = () => {
             </SmallBtn>
           )}
         </ModalFrame>
-      )}
+      )} */}
     </div>
   );
 };
