@@ -2,13 +2,13 @@ import { React, useState } from "react";
 import styled from "styled-components";
 import "./WritePost.css";
 
+import theme from "../../../Styles/theme";
 import { FullSizeBtn } from "../../../Components/etc/Buttons";
 import BookInfo from "../../../Components/layout/BookInfo";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ReactHtmlParser from "react-html-parser";
-import theme from "../../../Styles/theme";
 
 const WritePost = () => {
   //글 내용 state들
@@ -38,9 +38,17 @@ const WritePost = () => {
       <div>
         {/* <BookInfo /> */}
         <SubjectDiv>
-          <button>도서</button>
-          <button>드라마</button>
-          <button>영화</button>
+          <SubjectButton>
+            <ImgIcon src={require("Assets/icn_book.png")} alt="book" /> 도서
+          </SubjectButton>
+          <SubjectButton>
+            <ImgIcon src={require("Assets/icn_drama.png")} alt="drama" />
+            드라마
+          </SubjectButton>
+          <SubjectButton>
+            <ImgIcon src={require("Assets/icn_movie.png")} alt="movie" />
+            영화
+          </SubjectButton>
         </SubjectDiv>
 
         <div>
@@ -91,11 +99,34 @@ const WritePost = () => {
 const SubjectDiv = styled.div`
   background-color: ${theme.colors.boxColor};
   height: 80px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   flex-direction: row;
+  align-items: center;
+  display: flex;
+  padding: 0 1%;
+
+  @media only screen and (max-width: 700px) {
+    justify-content: center;
+  }
+`;
+
+const SubjectButton = styled.button`
+  background-color: white;
+  color: gray;
+  height: 60px;
+  width: 170px;
+  padding: 3px;
   justify-content: center;
   align-items: center;
-  //display: block;
+  margin-right: 1%;
+  display: flex;
+  font-size: 1.3rem;
+  box-shadow: ${theme.size.boxLightShadow};
+`;
+const ImgIcon = styled.img`
+  height: 35px;
+  width: auto;
+  margin-right: 8%;
 `;
 
 export default WritePost;
