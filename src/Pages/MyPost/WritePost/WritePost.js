@@ -36,6 +36,8 @@ const WritePost = () => {
   //도서 state
   const [modalState, setModalState] = useState(false); //모달
   const [searchItem, setSearch] = useState("");
+  //주제 state
+  const [isBookSelected, setIsBookSelected] = useState(false); //책 데이터 선택 됐을 경우 true
   ///////////////////////////////////////////  state 선언 닫음
 
   useLayoutEffect(() => {
@@ -112,6 +114,12 @@ const WritePost = () => {
   };
   /////////////////////////////////모달용 함수들 닫음
 
+  ////////////////////////////////주제 선택용 함수
+  const select_Book = () => {
+    setIsBookSelected(true);
+  };
+  ////////////////////////////주제 선택용 함수 닫음
+
   const getValue = (e) => {
     const { name, value } = e.target;
     setPostContent({
@@ -152,7 +160,7 @@ const WritePost = () => {
             name="title"
           />
 
-          {queryData && <BookInfo />}
+          {isBookSelected && <BookInfo />}
 
           <CKEditor
             editor={ClassicEditor}
@@ -206,7 +214,8 @@ const WritePost = () => {
               datetime={book.datetime.substr(0, 4)}
               publisher={book.publisher}
               contents={book.contents}
-              tolink={"/my_post/write_post"}
+              tolink={"./"}
+              onClick={select_Book}
             />
           ))}
           <Blank />

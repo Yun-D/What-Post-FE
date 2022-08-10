@@ -34,6 +34,7 @@ const ListItem = (props) => {
             }}
             decoration_color={`${theme.colors.peacock}`}
             decoration_thckness="2px"
+            onClick={props.onClick}
           >
             <h3 className="title">{props.title}</h3>
           </StyledLink>
