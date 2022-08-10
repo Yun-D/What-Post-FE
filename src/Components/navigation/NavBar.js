@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "../navigation/NavBar.css";
 
 import MenuIcon from "@material-ui/icons/Menu";
+import logo from "../../Assets/logo.png";
 import { Grid } from "@material-ui/core";
 
 function NavBar(props) {
@@ -33,7 +34,7 @@ function NavBar(props) {
       <nav className="navBar">
         <MenuIcon onClick={showSidebar} className="sidebarBtn" />
         <Link to="/" className="temp-logo">
-          What-Post!
+          <img src={logo} alt="logo" width="80px" height="auto" />
         </Link>
 
         <ul className={sidebar ? "nav-menu active" : "nav-menu"}>
