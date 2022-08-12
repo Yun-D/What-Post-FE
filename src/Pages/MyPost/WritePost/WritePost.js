@@ -115,8 +115,13 @@ const WritePost = () => {
   /////////////////////////////////모달용 함수들 닫음
 
   ////////////////////////////////주제 선택용 함수
-  const select_Book = () => {
+  const selectBook = () => {
+    //도서 주제 선택
     setIsBookSelected(true);
+  };
+  const cancelSubject = () => {
+    //주제 선택 취소
+    setIsBookSelected(false);
   };
   ////////////////////////////주제 선택용 함수 닫음
 
@@ -160,7 +165,15 @@ const WritePost = () => {
             name="title"
           />
 
-          {isBookSelected && <BookInfo />}
+          {isBookSelected && (
+            <div className="contents_div">
+              <BookInfo />
+              <Div className="rowDirection">
+                <Blank />
+                <TinyButton onClick={cancelSubject}>주제 선택 취소</TinyButton>
+              </Div>
+            </div>
+          )}
 
           <CKEditor
             editor={ClassicEditor}
@@ -215,7 +228,7 @@ const WritePost = () => {
               publisher={book.publisher}
               contents={book.contents}
               tolink={"./"}
-              onClick={select_Book}
+              onClick={selectBook}
             />
           ))}
           <Blank />
@@ -262,14 +275,27 @@ const SubjectButton = styled.button`
   font-size: 1.3rem;
   box-shadow: ${theme.size.boxLightShadow};
 `;
+const TinyButton = styled.button`
+  height: 35px;
+  flex: 1;
+  font-size: 0.8rem;
+  background-color: ${theme.colors.boxColor_light};
+  color: gray;
+  font-weight: 500;
+`;
 const ImgIcon = styled.img`
   height: 35px;
   width: auto;
   margin-right: 8%;
 `;
 
+const Div = styled.div`
+  flex: 1;
+  margin: 0.1% 0 2%;
+`;
 const Blank = styled.div`
   height: 10px;
+  flex: 9;
 `;
 
 export default WritePost;
