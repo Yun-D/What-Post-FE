@@ -102,7 +102,7 @@ const WritePost = () => {
     setModalState(true);
   };
   const closeModal = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     setModalState(false);
 
     //모달창 닫기와 동시에 쿼리 초기화
@@ -118,6 +118,7 @@ const WritePost = () => {
   const selectBook = () => {
     //도서 주제 선택
     setIsBookSelected(true);
+    closeModal();
   };
   const cancelSubject = () => {
     //주제 선택 취소
