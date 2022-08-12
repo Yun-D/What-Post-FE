@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import theme from "../../Styles/theme";
 import styled from "styled-components";
 import ModalFrame from "../../Components/layout/ModalFrame";
+import { TextButton } from "Components/etc/Buttons";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined"; //ModeCommentOutlined
 
@@ -48,7 +49,7 @@ const PostItem = (data) => {
             <PostContents notFullSize ref={postContentRef}>
               {data.contents}
             </PostContents>
-            {isShowMore && <Button onClick={showMore}>더보기</Button>}
+            {isShowMore && <TextButton onClick={showMore}>더보기</TextButton>}
           </div>
 
           <Blank />
@@ -151,17 +152,6 @@ const PostContents = styled.div`
     line-height: 27px;`}
 `;
 
-const Button = styled.button`
-  max-height: 2rem;
-  line-height: 2rem;
-  width: auto;
-  font-size: ${theme.textSize.postContents};
-  font-weight: 700;
-  padding: 0px;
-  background-color: unset;
-  cursor: pointer;
-  color: ${theme.colors.peacockGray};
-`;
 const StyledLine = styled.hr`
   width: 25%;
   height: 5px;

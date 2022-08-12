@@ -10,11 +10,11 @@ const colors = {
 };
 
 const textSize = {
-  placeholder: "16px",
-  postTitle: "24px", //p태그 등 텍스트 타이틀
-  postContents: "16px", //본문 텍스트
-  subText: "18px",
-  buttonText: "20px", //버튼에 들어가는 텍스트
+  placeholder: "1rem",
+  postTitle: "1.45rem", //p태그 등 텍스트 타이틀
+  postContents: "1rem", //본문 텍스트
+  subText: "1.1rem",
+  buttonText: "1.15rem", //버튼에 들어가는 텍스트
 };
 
 const size = {
