@@ -16,12 +16,10 @@ const PostItem = (data) => {
   ////////////////////////////////////////////
 
   /////////////////////////////////모달용 함수들
-  const showMore = (e) => {
-    e.preventDefault();
+  const showMore = () => {
     setModalState(true);
   };
-  const closeModal = (e) => {
-    e.preventDefault();
+  const closeModal = () => {
     setModalState(false);
   };
   ////////////////////////////////////////////

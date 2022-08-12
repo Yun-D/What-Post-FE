@@ -97,12 +97,11 @@ const WritePost = () => {
   /////////////////////////////////책 검색용 함수들 닫음
 
   /////////////////////////////////모달용 함수들
-  const openModal = (e) => {
-    e.preventDefault();
+  const openModal = () => {
+    //e.preventDefault();
     setModalState(true);
   };
-  const closeModal = (e) => {
-    //e.preventDefault();
+  const closeModal = () => {
     setModalState(false);
 
     //모달창 닫기와 동시에 쿼리 초기화
