@@ -65,11 +65,17 @@ span {
     width: 100%;
     top: 80px;
     left: -100%;
+    /* 
+    추후 위에서 아래로 떨어지게끔 수정해보기
+    top: -200px;
+    left: 0; */
     transition: 0.5s all;
+    z-index: -999;
   }
 
   .nav-menu.active {
     background: rgba(69, 114, 120, 90%);
+    /* top: 80px; */
     left: 0;
   }
 
