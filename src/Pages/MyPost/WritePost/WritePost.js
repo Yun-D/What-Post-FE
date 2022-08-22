@@ -257,7 +257,7 @@ const SubjectDiv = styled.div`
   display: flex;
   padding: 0 1%;
 
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: ${theme.size.mobile_landscape}) {
     justify-content: center;
   }
 `;
