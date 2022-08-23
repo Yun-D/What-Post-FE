@@ -56,7 +56,7 @@ span {
 }
 
 /* ////////// 반응형 /////////// */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 640px) {
   .sidebarBtn {
     color: #467379;
   }

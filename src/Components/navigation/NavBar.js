@@ -8,6 +8,7 @@ import { Grid } from "@material-ui/core";
 
 function NavBar(props) {
   const [sidebar, setSidebar] = useState(false);
+  const resetSidebar = () => setSidebar(false);
   const showSidebar = () => setSidebar(!sidebar);
 
   const menuItems = [
@@ -41,7 +42,11 @@ function NavBar(props) {
           {menuItems.map((item, index) => {
             return (
               <li key={index} className="nav-items">
-                <Link to={item.path} className="nav-item" onClick={showSidebar}>
+                <Link
+                  to={item.path}
+                  className="nav-item"
+                  onClick={resetSidebar}
+                >
                   <Grid container direction="row" alignItems="center">
                     <Grid item>
                       <span>{item.name}</span>
