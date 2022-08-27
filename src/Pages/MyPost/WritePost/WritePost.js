@@ -277,11 +277,15 @@ const SubjectButton = styled.button`
 `;
 const TinyButton = styled.button`
   height: 35px;
-  flex: 1;
+  flex: 1.5;
   font-size: 0.8rem;
   background-color: ${theme.colors.boxColor_light};
   color: gray;
   font-weight: 500;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    flex: 4;
+  }
 `;
 const ImgIcon = styled.img`
   height: 35px;
@@ -295,7 +299,11 @@ const Div = styled.div`
 `;
 const Blank = styled.div`
   height: 10px;
-  flex: 9;
+  flex: 8.5;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    flex: 6;
+  }
 `;
 
 export default WritePost;

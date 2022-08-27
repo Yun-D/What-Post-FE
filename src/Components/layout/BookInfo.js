@@ -50,6 +50,10 @@ const DivBookInfo = styled.div`
   margin-left: 5%;
   margin-bottom: 20px;
   height: auto;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    font-size: 0.9rem;
+  }
 `;
 const DivBookArticle = styled.div`
   height: 100px auto;
@@ -63,10 +67,18 @@ const Hr = styled.hr`
 `;
 const H1 = styled.h1`
   color: ${theme.colors.peacock};
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    font-size: 1.5rem;
+  }
 `;
 const H3 = styled.h3`
   color: ${theme.colors.peacockGray};
   margin-right: 2%;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    font-size: 0.9rem;
+  }
 `;
 
 export default BookInfo;

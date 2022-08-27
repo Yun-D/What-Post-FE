@@ -51,6 +51,11 @@ input {
 .contents_div {
   margin: auto 5%;
   padding: 2% 0;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    margin: 0 3%;
+    padding: 4%;
+  }
 }
 .rowDirection {
   //컴포넌트 가로정렬
@@ -68,6 +73,10 @@ input {
 .subText {
   font-size: ${theme.textSize.subText};
   color: gray;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    font-size: 0.9rem;
+  }
 }
 
 /* ////////// 반응형 /////////// */
