@@ -28,7 +28,7 @@
 
 .nav-menu {
   display: grid;
-  grid-template-columns: repeat(4, auto);
+  grid-template-columns: repeat(5, auto);
   column-gap: 35px;
   list-style: none;
 }

@@ -25,6 +25,10 @@ function NavBar(props) {
       name: "책",
     },
     {
+      path: "/search_movie",
+      name: "영화",
+    },
+    {
       path: "/my_post",
       name: "나의 포스트",
     },
