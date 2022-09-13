@@ -11,7 +11,7 @@ const kakaoBookSearch = axios.create({
 
 //네이버 영화 검색 API
 const naverMovieSearch = axios.create({
-  baseURL: "https://openapi.naver.com/v1/search/movie.json",
+  //baseURL: "https://openapi.naver.com",
   headers: {
     "X-Naver-Client-Id": `${keys.NAVER_CLIENT_ID}`,
     "X-Naver-Client-Secret": `${keys.NAVER_CLIENT_SECRET}`,
@@ -25,5 +25,5 @@ export const bookSearch = (params) => {
 };
 
 export const movieSearch = (params) => {
-  return naverMovieSearch.get(params);
+  return naverMovieSearch.get("/naver_api/v1/search/movie.json", { params });
 };
