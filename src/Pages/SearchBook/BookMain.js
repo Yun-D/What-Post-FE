@@ -88,7 +88,6 @@ const BookMain = () => {
     window.addEventListener("resize", () => setColumn(() => settingColumns()));
 
     if (isMount.current) {
-      //console.log("test");
       dispatch(setQuery(""));
       dispatch(setPage(1));
       dispatch(setBooks([]));
