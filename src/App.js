@@ -14,7 +14,8 @@ import SearchBook from "./Pages/SearchBook/SearchBook";
 import BookDetail from "./Pages/SearchBook/BookDetail";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
-import MovieMain from "Pages/Movie/MovieMain";
+import MovieMain from "Pages/SearchMovie/MovieMain";
+import SearchMovie from "./Pages/SearchMovie/SearchMovie";
 
 function App() {
   return (
@@ -38,6 +39,10 @@ function App() {
               />
               <Route path="/search_book/info" element={<BookDetail />} />
               <Route path="/search_movie" element={<MovieMain />} />
+              <Route
+                path="/search_movie/search/:query"
+                element={<SearchMovie />}
+              />
               <Route path="/my_post" element={<MyPost />} />
               <Route path="/my_post/write_post" element={<WritePost />} />
             </Routes>
