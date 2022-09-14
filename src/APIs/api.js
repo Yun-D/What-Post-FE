@@ -25,5 +25,5 @@ export const bookSearch = (params) => {
 };
 
 export const movieSearch = (params) => {
-  return naverMovieSearch.get("/naver_api/v1/search/movie.json", { params });
+  return naverMovieSearch.get("/v1/search/movie.json", { params });
 };
