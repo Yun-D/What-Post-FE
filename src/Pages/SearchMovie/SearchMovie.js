@@ -53,7 +53,6 @@ const SearchMovie = () => {
     };
 
     const { data } = await movieSearch(params); //api 호출
-    console.log("데이터 " + data.items);
     if (start === 1) {
       dispatch(m_setItems(data.items));
     } else if (start >= 11) {
@@ -80,7 +79,7 @@ const SearchMovie = () => {
           datetime={movie.pubDate}
           director={movie.director}
           actor={movie.actor}
-          tolink={"movie.idx.link"}
+          tolink={movie.link}
         />
       ))}
       <br />
