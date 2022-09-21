@@ -14,7 +14,7 @@ const MovieList = (props) => {
 
   return (
     <ItemCard className="rowDirection">
-      <img src={props.thumbnail} alt={props.title} />
+      <img src={props.thumbnail} alt={temp_title + " 이미지"} />
       <ContentsDiv>
         <StyledLink
           to={props.tolink}
