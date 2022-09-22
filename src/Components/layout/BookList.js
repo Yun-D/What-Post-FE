@@ -2,7 +2,6 @@ import React from "react";
 
 import theme from "../../Styles/theme";
 import styled from "styled-components";
-
 import { StyledLink } from "../etc/StyledLink";
 
 /////////////////////////////// 책 검색 결과를 리스트형태로 보여주는 컴포넌트
@@ -14,6 +13,7 @@ const ListItem = (props) => {
           <p>{props.is_end}</p>
         </dd>
       </dl>
+
       <img
         src={props.thumbnail}
         alt={props.thumbnail}
@@ -60,13 +60,12 @@ const ItemCard = styled.div`
   border-radius: 8px;
 `;
 const ContentsDiv = styled.div`
-  flex: 1;
   margin-left: 30px;
   margin-bottom: 10px;
 `;
 
 const H4 = styled.h4`
-  color: rgb(97, 97, 97);
+  color: gray;
 `;
 const SmallTxt = styled.p`
   color: gray;

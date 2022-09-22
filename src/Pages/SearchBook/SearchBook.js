@@ -1,6 +1,6 @@
 import { React, useLayoutEffect, useState } from "react";
 import { bookSearch } from "../../APIs/api";
-import Item from "../../Components/layout/ListItem";
+import Item from "../../Components/layout/BookList";
 
 import styled from "styled-components";
 import { SearchBar } from "../../Components/etc/SearchBar";

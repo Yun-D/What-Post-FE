@@ -6,7 +6,7 @@ import theme from "../../../Styles/theme";
 
 import BookInfo from "../../../Components/layout/BookInfo";
 import { bookSearch } from "APIs/api";
-import Item from "Components/layout/ListItem";
+import Item from "Components/layout/BookList";
 import ModalFrame from "Components/layout/ModalFrame";
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
 import { SearchBar } from "Components/etc/SearchBar";
