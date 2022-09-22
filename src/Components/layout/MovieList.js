@@ -1,9 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { StyledLink } from "Components/etc/StyledLink";
 import theme from "Styles/theme";
 import styled from "styled-components";
 
 const MovieList = (props) => {
+  const [isSubtitleExist, setIsSubtitleExist] = useState(false);
+
+  useEffect(() => {
+    if (props.subtitle !== "") {
+      setIsSubtitleExist(true);
+    }
+  }, [props.subtitle]);
+
   ////// 결과 텍스트 수정
   let temp_title = props.title;
   let temp_director = props.director;
@@ -14,7 +22,7 @@ const MovieList = (props) => {
 
   return (
     <ItemCard className="rowDirection">
-      <img src={props.thumbnail} alt={temp_title + " 이미지"} />
+      <img src={props.thumbnail} alt={temp_title + " 이미지"} width="9%" />
       <ContentsDiv>
         <StyledLink
           to={props.tolink}
@@ -32,9 +40,13 @@ const MovieList = (props) => {
           decoration_thckness="2px"
           onClick={props.onClick}
         >
-          <h3>
-            {temp_title} | {props.subtitle}
-          </h3>
+          {isSubtitleExist ? (
+            <h3>
+              {temp_title} | {props.subtitle}
+            </h3>
+          ) : (
+            <h3>{temp_title}</h3>
+          )}
         </StyledLink>
 
         <H4>
