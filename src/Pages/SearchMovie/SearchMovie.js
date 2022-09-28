@@ -13,6 +13,7 @@ import { m_setQuery, m_setItems, m_nextPage, m_setPage } from "Store/store";
 const SearchMovie = () => {
   const { query } = useParams();
   const [search, setSearch] = useState(query);
+  const [isEnd, setIsEnd] = useState(false);
 
   //저장소에서 영화검색 데이터 읽어오기
   const queryData = useSelector((state) => state.movieSearch.query);
@@ -25,7 +26,6 @@ const SearchMovie = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryData, pageNum]);
 
-  //영화 검색
   const onClickSearch = () => {
     dispatch(m_setQuery(search));
     dispatch(m_setPage(1));
@@ -44,7 +44,7 @@ const SearchMovie = () => {
     setSearch(e.target.value);
   };
 
-  //책 검색
+  //영화 검색
   const movieSearchHandler = async (query, start) => {
     const params = {
       query: query, //검색어
@@ -56,10 +56,18 @@ const SearchMovie = () => {
     if (start === 1) {
       dispatch(m_setItems(data.items));
     } else if (start >= 11) {
-      dispatch(m_setItems(movies.concat(data.items)));
+      let beforeData = movies[start - 2].title;
+
+      if (data.items[9].title === beforeData) {
+        //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
+        setIsEnd(true);
+        alert("더이상 결과가 없습니다.");
+      } else {
+        dispatch(m_setItems(movies.concat(data.items)));
+      }
     }
   };
-  /////////////////////////////////책 검색용 함수들 닫음
+  /////////////////////////////////영화 검색용 함수들 닫음
 
   return (
     <div className="contents_div">
@@ -84,17 +92,17 @@ const SearchMovie = () => {
       ))}
       <br />
 
-      {/* <FlexZone>
+      <FlexZone>
         {!isEnd && (
           <SmallBtn
             onClick={() => {
-              dispatch(nextPage());
+              dispatch(m_nextPage());
             }}
           >
             더보기
           </SmallBtn>
         )}
-      </FlexZone> */}
+      </FlexZone>
     </div>
   );
 };
