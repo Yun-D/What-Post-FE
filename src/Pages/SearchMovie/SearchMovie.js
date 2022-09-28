@@ -53,12 +53,17 @@ const SearchMovie = () => {
     };
 
     const { data } = await movieSearch(params); //api 호출
+    if (data.items.length < 10) {
+      //더이상 더보기로 보여줄 데이터가 없는 경우 더보기 버튼 제거
+      setIsEnd(true);
+    }
+
     if (start === 1) {
       dispatch(m_setItems(data.items));
     } else if (start >= 11) {
       let beforeData = movies[start - 2].title;
 
-      if (data.items[9].title === beforeData) {
+      if (data.items[data.items.length - 1].title === beforeData) {
         //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
         setIsEnd(true);
         alert("더이상 결과가 없습니다.");
