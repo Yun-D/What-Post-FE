@@ -92,7 +92,8 @@ const SearchMovie = () => {
           datetime={movie.pubDate}
           director={movie.director}
           actor={movie.actor}
-          tolink={movie.link}
+          tolink={"/search_movie/info"}
+          detailLink={movie.link}
         />
       ))}
       <br />

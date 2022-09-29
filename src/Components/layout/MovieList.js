@@ -3,6 +3,8 @@ import { StyledLink } from "Components/etc/StyledLink";
 import theme from "Styles/theme";
 import styled from "styled-components";
 
+import HtmlParser from "react-html-parser";
+
 const MovieList = (props) => {
   const [isSubtitleExist, setIsSubtitleExist] = useState(false);
 
@@ -30,11 +32,12 @@ const MovieList = (props) => {
           state={{
             thumbnail: props.thumbnail,
             title: temp_title,
-            subtitle: props.subtitle,
-            datetime: props.pubDate,
-            director: props.director,
-            actor: props.actor,
+            subtitle: HtmlParser(props.subtitle),
+            datetime: props.datetime,
+            director: temp_director,
+            actor: temp_actors,
             tolink: props.link,
+            detailLink: props.detailLink,
           }}
           decoration_color={`${theme.colors.peacock}`}
           decoration_thckness="2px"
@@ -42,7 +45,7 @@ const MovieList = (props) => {
         >
           {isSubtitleExist ? (
             <h3>
-              {temp_title} | {props.subtitle}
+              {temp_title} | {HtmlParser(props.subtitle)}
             </h3>
           ) : (
             <h3>{temp_title}</h3>
