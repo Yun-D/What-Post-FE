@@ -1,9 +1,9 @@
 import { React, useLayoutEffect, useState } from "react";
 import { bookSearch } from "../../APIs/api";
 import Item from "../../Components/layout/BookList";
+import BookSearchFunc from "Utils/BookSearchFunc";
 
 import styled from "styled-components";
-import { SearchBar } from "../../Components/etc/SearchBar";
 import { SmallBtn } from "../../Components/etc/Buttons";
 
 import { useParams } from "react-router-dom";
@@ -35,25 +35,6 @@ const SearchBook = () => {
   }, [queryData, pageNum]);
 
   //책 검색
-  const onClickSearch = () => {
-    dispatch(setQuery(search));
-    dispatch(setPage(1));
-    dispatch(setBooks([]));
-  };
-
-  //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
-  const onEnter = (e) => {
-    if (e.keyCode === 13) {
-      onClickSearch();
-    }
-  };
-
-  //text 검색어가 바뀔 때 호출되는 함수.
-  const onTextUpdate = (e) => {
-    setSearch(e.target.value);
-  };
-
-  //책 검색
   const bookSearchHandler = async (query, page) => {
     const params = {
       query: query, //검색어
@@ -75,11 +56,14 @@ const SearchBook = () => {
 
   return (
     <div className="contents_div">
-      <SearchBar
-        value={search}
-        onKeyDown={onEnter}
-        onChange={onTextUpdate}
-        onClick={onClickSearch}
+      <BookSearchFunc
+        setQuery={setQuery}
+        setPage={setPage}
+        setBooks={setBooks}
+        setSearch={setSearch}
+        search={search}
+        dispatch={dispatch}
+        onChange={(searchQuery) => setSearch(...searchQuery)}
       />
 
       {bookList.map((book, idx) => (
