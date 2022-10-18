@@ -9,7 +9,7 @@ import { bookSearch } from "APIs/api";
 import Item from "Components/layout/BookList";
 import ModalFrame from "Components/layout/ModalFrame";
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
-import { SearchBar } from "Components/etc/SearchBar";
+import BookSearchFunc from "Utils/BookSearchFunc";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setQuery, setBooks, setPage, nextPage, isEndPage } from "Store/store";
@@ -57,25 +57,6 @@ const WritePost = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryData, pageNum]);
 
-  /////////////////////////////////책 검색용 함수들
-  const onClickSearch = () => {
-    dispatch(setQuery(searchItem));
-    dispatch(setPage(1));
-    dispatch(setBooks([]));
-  };
-
-  //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
-  const onEnter = (e) => {
-    if (e.keyCode === 13) {
-      onClickSearch();
-    }
-  };
-
-  //text 검색어가 바뀔 때 호출되는 함수.
-  const onTextUpdate = (e) => {
-    setSearch(e.target.value);
-  };
-
   //책 검색
   const bookSearchHandler = async (query, page) => {
     const params = {
@@ -97,9 +78,14 @@ const WritePost = () => {
   /////////////////////////////////책 검색용 함수들 닫음
 
   /////////////////////////////////모달용 함수들
-  const openModal = () => {
+  const openModal = (props) => {
     //e.preventDefault();
     setModalState(true);
+
+    if (props === "book") {
+      console.log("boooooK");
+      //TODO: 현재 state 책으로 변경, 추후 state에 따라 렌더 내용 다르게 할 것
+    }
   };
   const closeModal = () => {
     setModalState(false);
@@ -144,14 +130,14 @@ const WritePost = () => {
 
       <div>
         <SubjectDiv>
-          <SubjectButton onClick={openModal}>
+          <SubjectButton onClick={() => openModal("book")}>
             <ImgIcon src={require("Assets/icn_book.png")} alt="book" /> 도서
           </SubjectButton>
           <SubjectButton>
             <ImgIcon src={require("Assets/icn_drama.png")} alt="drama" />
             드라마
           </SubjectButton>
-          <SubjectButton>
+          <SubjectButton onClick={() => openModal("movie")}>
             <ImgIcon src={require("Assets/icn_movie.png")} alt="movie" />
             영화
           </SubjectButton>
@@ -211,11 +197,14 @@ const WritePost = () => {
 
       {modalState && (
         <ModalFrame state={modalState} closeModal={closeModal}>
-          <SearchBar
-            value={searchItem}
-            onKeyDown={onEnter}
-            onChange={onTextUpdate}
-            onClick={onClickSearch}
+          <BookSearchFunc
+            setQuery={setQuery}
+            setPage={setPage}
+            setBooks={setBooks}
+            setSearch={setSearch}
+            search={searchItem}
+            dispatch={dispatch}
+            onChange={(searchQuery) => setSearch(...searchQuery)}
           />
           <Blank />
           {bookList.map((book, idx) => (
