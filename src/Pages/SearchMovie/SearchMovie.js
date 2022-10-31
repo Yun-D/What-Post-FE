@@ -3,12 +3,13 @@ import { movieSearch } from "../../APIs/api";
 
 import MovieList from "Components/layout/MovieList";
 import styled from "styled-components";
-import { SearchBar } from "Components/etc/SearchBar";
 import { SmallBtn } from "Components/etc/Buttons";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { m_setQuery, m_setItems, m_nextPage, m_setPage } from "Store/store";
+
+import MovieSearchFunc from "Utils/MovieSearchFunc";
 
 const SearchMovie = () => {
   const { query } = useParams();
@@ -25,24 +26,6 @@ const SearchMovie = () => {
     movieSearchHandler(search, pageNum);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryData, pageNum]);
-
-  const onClickSearch = () => {
-    dispatch(m_setQuery(search));
-    dispatch(m_setPage(1));
-    dispatch(m_setItems([]));
-  };
-
-  //엔터를 눌렀을 때 쿼리를 검색어로 교체하는 함수
-  const onEnter = (e) => {
-    if (e.keyCode === 13) {
-      onClickSearch();
-    }
-  };
-
-  //text 검색어가 바뀔 때 호출되는 함수.
-  const onTextUpdate = (e) => {
-    setSearch(e.target.value);
-  };
 
   //영화 검색
   const movieSearchHandler = async (query, start) => {
@@ -76,11 +59,14 @@ const SearchMovie = () => {
 
   return (
     <div className="contents_div">
-      <SearchBar
-        value={search}
-        onKeyDown={onEnter}
-        onChange={onTextUpdate}
-        onClick={onClickSearch}
+      <MovieSearchFunc
+        m_setQuery={m_setQuery}
+        m_setPage={m_setPage}
+        m_setItems={m_setItems}
+        setSearch={setSearch}
+        search={search}
+        dispatch={dispatch}
+        onChange={(searchQuery) => setSearch(...searchQuery)}
       />
 
       {movies.map((movie, idx) => (
@@ -96,6 +82,7 @@ const SearchMovie = () => {
           detailLink={movie.link}
         />
       ))}
+
       <br />
 
       <FlexZone>
