@@ -5,26 +5,45 @@ import "./WritePost.css";
 import theme from "../../../Styles/theme";
 
 import BookInfo from "../../../Components/layout/BookInfo";
-import { bookSearch } from "APIs/api";
+import MovieInfo from "Components/layout/MovieInfo";
+import { bookSearch, movieSearch } from "APIs/api";
 import Item from "Components/layout/BookList";
+import MovieList from "Components/layout/MovieList";
+import BookSearchFunc from "Utils/BookSearchFunc";
+import MovieSearchFunc from "Utils/MovieSearchFunc";
+
 import ModalFrame from "Components/layout/ModalFrame";
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
-import BookSearchFunc from "Utils/BookSearchFunc";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setQuery, setBooks, setPage, nextPage, isEndPage } from "Store/store";
+import {
+  setQuery,
+  setBooks,
+  setPage,
+  nextPage,
+  isEndPage,
+  m_setQuery,
+  m_setItems,
+  m_nextPage,
+  m_setPage,
+} from "Store/store";
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import ReactHtmlParser from "react-html-parser";
 
 const WritePost = () => {
+  const dispatch = useDispatch(); //작업 전달하기
   //저장소에서 책검색 데이터 읽어오기
   const queryData = useSelector((state) => state.bookSearch.query);
   const bookList = useSelector((state) => state.bookSearch.books);
   const pageNum = useSelector((state) => state.bookSearch.page);
   const isEnd = useSelector((state) => state.bookSearch.isEnd);
-  const dispatch = useDispatch(); //작업 전달하기
+
+  //저장소에서 영화검색 데이터 읽어오기
+  const m_queryData = useSelector((state) => state.movieSearch.query);
+  const movies = useSelector((state) => state.movieSearch.items);
+  const m_pageNum = useSelector((state) => state.movieSearch.start);
 
   ///////////////////////////////////////////  state 선언
   //(임시) 글 내용 state들
@@ -33,18 +52,24 @@ const WritePost = () => {
     content: "",
   });
   const [viewContent, setViewContent] = useState([]);
-  //도서 state
+  /////////////////임시 선언 닫음
+  //선택 컨텐츠별 구분
+  const [thisContent, setThisContent] = useState("");
   const [modalState, setModalState] = useState(false); //모달
-  const [searchItem, setSearch] = useState("");
   //주제 state
+  const [m_isEnd, setMIsEnd] = useState(false);
+  const [searchItem, setSearch] = useState(""); //검색창에 입력되는 텍스트 추적용 state
   const [isBookSelected, setIsBookSelected] = useState(false); //책 데이터 선택 됐을 경우 true
+  const [isMovieSelected, setIsMovieSelected] = useState(false);
   ///////////////////////////////////////////  state 선언 닫음
 
   useLayoutEffect(() => {
-    //componentDidMount/Update/WillUnmount 일 경우 실행
-    //(query state가 업데이트되면 api 호출)
     if (searchItem.length > 1) {
-      bookSearchHandler(queryData, pageNum);
+      if (thisContent === "book") {
+        bookSearchHandler(queryData, pageNum);
+      } else if (thisContent === "movie") {
+        movieSearchHandler(m_queryData, m_pageNum);
+      }
     }
 
     if (!modalState) {
@@ -53,9 +78,12 @@ const WritePost = () => {
       dispatch(setPage(1));
       dispatch(setBooks([]));
       dispatch(isEndPage(true));
+      dispatch(m_setQuery(""));
+      dispatch(m_setPage(1));
+      dispatch(m_setItems([]));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryData, pageNum]);
+  }, [queryData, pageNum, m_queryData, m_pageNum]);
 
   //책 검색
   const bookSearchHandler = async (query, page) => {
@@ -76,6 +104,35 @@ const WritePost = () => {
     dispatch(isEndPage(data.meta.is_end)); //다음 페이지가 있으면 false
   };
   /////////////////////////////////책 검색용 함수들 닫음
+  //영화 검색
+  const movieSearchHandler = async (query, start) => {
+    const params = {
+      query: query, //검색어
+      start: start, //검색 시작 위치 지정
+      display: 10, //1~50. 출력할 검색 결과 수
+    };
+
+    const { data } = await movieSearch(params); //api 호출
+    if (data.items.length < 10) {
+      //더이상 더보기로 보여줄 데이터가 없는 경우 더보기 버튼 제거
+      setMIsEnd(true);
+    }
+
+    if (start === 1) {
+      dispatch(m_setItems(data.items));
+    } else if (start >= 11) {
+      let beforeData = movies[start - 2].title;
+
+      if (data.items[data.items.length - 1].title === beforeData) {
+        //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
+        setMIsEnd(true);
+        alert("더이상 결과가 없습니다.");
+      } else {
+        dispatch(m_setItems(movies.concat(data.items)));
+      }
+    }
+  };
+  /////////////////////////////////영화 검색용 함수들 닫음
 
   /////////////////////////////////모달용 함수들
   const openModal = (props) => {
@@ -83,8 +140,9 @@ const WritePost = () => {
     setModalState(true);
 
     if (props === "book") {
-      console.log("boooooK");
-      //TODO: 현재 state 책으로 변경, 추후 state에 따라 렌더 내용 다르게 할 것
+      setThisContent("book");
+    } else if (props === "movie") {
+      setThisContent("movie");
     }
   };
   const closeModal = () => {
@@ -96,6 +154,9 @@ const WritePost = () => {
     dispatch(setPage(1));
     dispatch(setBooks([]));
     dispatch(isEndPage(true));
+    dispatch(m_setQuery(""));
+    dispatch(m_setPage(1));
+    dispatch(m_setItems([]));
   };
   /////////////////////////////////모달용 함수들 닫음
 
@@ -105,9 +166,15 @@ const WritePost = () => {
     setIsBookSelected(true);
     closeModal();
   };
+  const selectMovie = () => {
+    //영화 주제 선택
+    setIsMovieSelected(true);
+    closeModal();
+  };
   const cancelSubject = () => {
     //주제 선택 취소
     setIsBookSelected(false);
+    setIsMovieSelected(false);
   };
   ////////////////////////////주제 선택용 함수 닫음
 
@@ -160,6 +227,15 @@ const WritePost = () => {
               </Div>
             </div>
           )}
+          {isMovieSelected && (
+            <div className="contents_div">
+              <MovieInfo />
+              <Div className="rowDirection">
+                <Blank />
+                <TinyButton onClick={cancelSubject}>주제 선택 취소</TinyButton>
+              </Div>
+            </div>
+          )}
 
           <CKEditor
             editor={ClassicEditor}
@@ -197,39 +273,85 @@ const WritePost = () => {
 
       {modalState && (
         <ModalFrame state={modalState} closeModal={closeModal}>
-          <BookSearchFunc
-            setQuery={setQuery}
-            setPage={setPage}
-            setBooks={setBooks}
-            setSearch={setSearch}
-            search={searchItem}
-            dispatch={dispatch}
-            onChange={(searchQuery) => setSearch(...searchQuery)}
-          />
-          <Blank />
-          {bookList.map((book, idx) => (
-            <Item
-              key={idx}
-              thumbnail={book.thumbnail}
-              title={book.title}
-              authors={book.authors}
-              datetime={book.datetime.substr(0, 4)}
-              publisher={book.publisher}
-              contents={book.contents}
-              tolink={"./"}
-              onClick={selectBook}
-            />
-          ))}
-          <Blank />
+          {/* // ************************ 책 검색 모달 ************************ */}
+          {thisContent === "book" && (
+            <>
+              <BookSearchFunc
+                setQuery={setQuery}
+                setPage={setPage}
+                setBooks={setBooks}
+                setSearch={setSearch}
+                search={searchItem}
+                dispatch={dispatch}
+                onChange={(searchQuery) => setSearch(...searchQuery)}
+              />
+              <Blank />
+              {bookList.map((book, idx) => (
+                <Item
+                  key={idx}
+                  thumbnail={book.thumbnail}
+                  title={book.title}
+                  authors={book.authors}
+                  datetime={book.datetime.substr(0, 4)}
+                  publisher={book.publisher}
+                  contents={book.contents}
+                  tolink={"./"}
+                  onClick={selectBook}
+                />
+              ))}
+              <Blank />
 
-          {!isEnd && (
-            <SmallBtn
-              onClick={() => {
-                dispatch(nextPage());
-              }}
-            >
-              더보기
-            </SmallBtn>
+              {!isEnd && (
+                <SmallBtn
+                  onClick={() => {
+                    dispatch(nextPage());
+                  }}
+                >
+                  더보기
+                </SmallBtn>
+              )}
+            </>
+          )}
+
+          {/* // ************************ 영화 검색 모달 ************************ */}
+          {thisContent === "movie" && (
+            <>
+              <MovieSearchFunc
+                m_setQuery={m_setQuery}
+                m_setPage={m_setPage}
+                m_setItems={m_setItems}
+                setSearch={setSearch}
+                search={searchItem}
+                dispatch={dispatch}
+                onChange={(searchQuery) => setSearch(...searchQuery)}
+              />
+              <Blank />
+
+              {movies.map((movie, idx) => (
+                <MovieList
+                  key={idx}
+                  thumbnail={movie.image}
+                  title={movie.title}
+                  subtitle={movie.subtitle}
+                  datetime={movie.pubDate}
+                  director={movie.director}
+                  actor={movie.actor}
+                  tolink={"./"}
+                  onClick={selectMovie}
+                  detailLink={movie.link}
+                />
+              ))}
+              <Blank />
+              {m_isEnd && (
+                <SmallBtn
+                  onClick={() => {
+                    dispatch(m_nextPage());
+                  }}
+                >
+                  더보기
+                </SmallBtn>
+              )}
+            </>
           )}
         </ModalFrame>
       )}
