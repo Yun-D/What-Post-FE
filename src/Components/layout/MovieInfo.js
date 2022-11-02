@@ -6,7 +6,6 @@ import { useLocation } from "react-router-dom";
 
 const BookInfo = () => {
   const location = useLocation();
-  console.log(location.state.detailLink);
 
   return (
     <Div className="rowDirection">
@@ -52,11 +51,6 @@ const DivBookInfo = styled.div`
   }
 `;
 
-const Hr = styled.hr`
-  background-color: ${theme.colors.lightGray};
-  border-width: 1px 0px 0px 0px;
-  height: 1px;
-`;
 const H1 = styled.h1`
   color: ${theme.colors.peacock};
 
