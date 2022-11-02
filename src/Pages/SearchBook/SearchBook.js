@@ -1,6 +1,6 @@
 import { React, useLayoutEffect, useState } from "react";
 import { bookSearch } from "../../APIs/api";
-import Item from "../../Components/layout/BookList";
+import BookList from "../../Components/layout/BookList";
 import BookSearchFunc from "Utils/BookSearchFunc";
 
 import styled from "styled-components";
@@ -67,7 +67,7 @@ const SearchBook = () => {
       />
 
       {bookList.map((book, idx) => (
-        <Item
+        <BookList
           key={idx}
           thumbnail={book.thumbnail}
           title={book.title}

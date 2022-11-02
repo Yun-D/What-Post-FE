@@ -7,7 +7,7 @@ import theme from "../../../Styles/theme";
 import BookInfo from "../../../Components/layout/BookInfo";
 import MovieInfo from "Components/layout/MovieInfo";
 import { bookSearch, movieSearch } from "APIs/api";
-import Item from "Components/layout/BookList";
+import BookList from "Components/layout/BookList";
 import MovieList from "Components/layout/MovieList";
 import BookSearchFunc from "Utils/BookSearchFunc";
 import MovieSearchFunc from "Utils/MovieSearchFunc";
@@ -287,7 +287,7 @@ const WritePost = () => {
               />
               <Blank />
               {bookList.map((book, idx) => (
-                <Item
+                <BookList
                   key={idx}
                   thumbnail={book.thumbnail}
                   title={book.title}
