@@ -2,6 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
+import ScrollToTop from "Utils/ScrollToTop";
 import theme from "./Styles/theme";
 import GlobalStyle from "./Styles/GlobalStyle";
 import NavBar from "./Components/navigation/NavBar";
@@ -26,6 +27,7 @@ function App() {
 
         <BrowserRouter>
           <NavBar />
+          <ScrollToTop />
 
           <div className="wrapper">
             <Routes>
