@@ -1,3 +1,4 @@
 node_modules/
 node_modules/.cache/
 src/APIs/api_key.js
+src/Assets/dummy.js
