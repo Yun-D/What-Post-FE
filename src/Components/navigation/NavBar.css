@@ -1,29 +1,5 @@
-.navBar {
-  background: #6badb6;
-  height: 80px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 2rem;
-  font-size: 1.1rem;
-
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-}
-
 .sidebarBtn {
   color: transparent;
-}
-.temp-logo {
-  text-decoration: none;
-  font-weight: bold;
-  color: white;
-  transition: 0.3s all;
-  position: absolute;
-  left: 70px;
 }
 
 .nav-menu {

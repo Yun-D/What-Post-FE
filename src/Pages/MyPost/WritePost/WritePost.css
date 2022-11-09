@@ -1,18 +1,4 @@
-.temp_postTest {
-  border: 1px solid;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 30px;
-}
-
-.photoArea {
-  background-color: darkgrey;
-  width: 5%;
-  height: 8%;
-}
-
-.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+.ck.ck-editor__editable {
   min-height: 400px;
   margin-bottom: 20px;
-  /* padding-left: 30px; */
 }

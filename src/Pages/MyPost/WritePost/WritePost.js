@@ -189,10 +189,10 @@ const WritePost = () => {
   return (
     <div className="contents_div">
       {viewContent.map((ele) => (
-        <div className="temp_postTest">
+        <TempPostTest>
           <h3>{ele.title}</h3>
           <div>{ReactHtmlParser(ele.content)}</div>
-        </div>
+        </TempPostTest>
       ))}
 
       <div>
@@ -244,7 +244,7 @@ const WritePost = () => {
             }}
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
-              console.log("Editor is ready to use!", editor);
+              //console.log("Editor is ready to use!", editor);
             }}
             onChange={(event, editor) => {
               const data = editor.getData();
@@ -415,6 +415,13 @@ const Blank = styled.div`
   @media only screen and (max-width: ${theme.size.tablet}) {
     flex: 6;
   }
+`;
+
+const TempPostTest = styled.div`
+  border: 1px solid;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 30px;
 `;
 
 export default WritePost;

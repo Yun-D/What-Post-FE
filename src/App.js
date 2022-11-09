@@ -1,4 +1,3 @@
-import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
@@ -15,7 +14,7 @@ import SearchBook from "./Pages/SearchBook/SearchBook";
 import BookDetail from "./Pages/SearchBook/BookDetail";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
-import MovieMain from "Pages/SearchMovie/MovieMain";
+import MovieMain from "./Pages/SearchMovie/MovieMain";
 import SearchMovie from "./Pages/SearchMovie/SearchMovie";
 import MovieDetail from "./Pages/SearchMovie/MovieDetail";
 

@@ -5,8 +5,10 @@ import "../navigation/NavBar.css";
 import MenuIcon from "@material-ui/icons/Menu";
 import logo from "../../Assets/logo.png";
 import { Grid } from "@material-ui/core";
+import styled from "styled-components";
+import theme from "Styles/theme";
 
-function NavBar(props) {
+function NavBar() {
   const [sidebar, setSidebar] = useState(false);
   const resetSidebar = () => setSidebar(false);
   const showSidebar = () => setSidebar(!sidebar);
@@ -36,10 +38,11 @@ function NavBar(props) {
 
   return (
     <>
-      <nav className="navBar">
+      <StyledNavBar>
         <MenuIcon onClick={showSidebar} className="sidebarBtn" />
-        <Link to="/" className="temp-logo">
-          <img src={logo} alt="logo" width="80px" height="auto" />
+
+        <Link to="/">
+          <ImageLogo src={logo} alt="logo" width="80px" height="auto" />
         </Link>
 
         <ul className={sidebar ? "nav-menu active" : "nav-menu"}>
@@ -61,9 +64,31 @@ function NavBar(props) {
             );
           })}
         </ul>
-      </nav>
+      </StyledNavBar>
     </>
   );
 }
+
+const StyledNavBar = styled.nav`
+  background: ${theme.colors.mainColor};
+  height: 80px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  font-size: 1.1rem;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+`;
+
+const ImageLogo = styled.img`
+  position: absolute;
+  top: 35%;
+  left: 70px;
+`;
 
 export default NavBar;
