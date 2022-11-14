@@ -12,4 +12,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/api",
+    createProxyMiddleware({
+      target: "https://book.interpark.com",
+      changeOrigin: true,
+    })
+  );
 };

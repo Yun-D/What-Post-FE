@@ -27,3 +27,10 @@ export const bookSearch = (params) => {
 export const movieSearch = (params) => {
   return naverMovieSearch.get("/v1/search/movie.json", { params });
 };
+
+//인터파크 베스트셀러 API
+export const getBestSeller = (params) => {
+  return axios.get("/api/bestSeller.api", {
+    params,
+  });
+};

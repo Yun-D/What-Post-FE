@@ -1,11 +1,19 @@
 import React from "react";
 
+import { SearchBar } from "Components/etc/SearchBar";
+import BestSeller from "Pages/SearchBook/BestSeller";
+
 const Home = () => {
   return (
     <div className="contents_div">
-      <div>통합검색</div>
+      <div>
+        <SearchBar />
+      </div>
       <div>
         <p>각 분야별 최신 포스트</p>
+      </div>
+      <div>
+        <BestSeller categoryID={100} />
       </div>
     </div>
   );
