@@ -34,3 +34,8 @@ export const getBestSeller = (params) => {
     params,
   });
 };
+
+//영화진흥위원회 주간 박스오피스 API
+export const getBoxOffice = (params) => {
+  return axios.get("/searchWeeklyBoxOfficeList.json", { params });
+};

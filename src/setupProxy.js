@@ -19,4 +19,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/searchWeeklyBoxOfficeList.json",
+    createProxyMiddleware({
+      target: "http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice",
+      changeOrigin: true,
+    })
+  );
 };
