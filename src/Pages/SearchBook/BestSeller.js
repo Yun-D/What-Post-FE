@@ -10,11 +10,29 @@ const BestSeller = (props) => {
   const [bestSeller, setBestSeller] = useState([]);
   const [carouselCount, setCarouselCount] = useState(0);
 
-  const moveButton = useRef();
+  const moveCarousel = useRef();
+  const leftBtn = useRef();
+  const rightBtn = useRef();
 
   useEffect(() => {
     getBestSellerHandler(props.categoryID);
-  }, [props.categoryID]);
+
+    if (carouselCount < 0) {
+      setCarouselCount(1);
+    }
+
+    if (carouselCount === 0) {
+      moveCarousel.current.style.transform = `translateX(0%)`;
+      leftBtn.current.style.visibility = `hidden`;
+    } else {
+      leftBtn.current.style.visibility = `visible`;
+      moveCarousel.current.style.transform = `translateX(-${
+        20 * carouselCount
+      }%)`;
+    }
+
+    console.log(moveCarousel.current.style.transform + " c: " + carouselCount);
+  }, [props.categoryID, carouselCount]);
 
   const getBestSellerHandler = async (categoryID) => {
     const params = {
@@ -27,14 +45,17 @@ const BestSeller = (props) => {
     setBestSeller(data.item);
   };
 
-  const carouselHandler = () => {
-    moveButton.current.style.transform = `translateX(-30%)`;
+  const goCarouselLeft = () => {
+    setCarouselCount(carouselCount - 1);
+  };
+  const goCarouselRight = () => {
+    setCarouselCount(carouselCount + 1);
   };
 
   return (
     <Div>
       <ItemArea className="rowDirection">
-        <ULarea ref={moveButton}>
+        <ULarea ref={moveCarousel}>
           {bestSeller.map((book, idx) => (
             <RowDirecImages
               key={idx}
@@ -48,12 +69,12 @@ const BestSeller = (props) => {
       </ItemArea>
 
       <ButtonArea>
-        <MoveBtn onClick={carouselHandler}>
+        <MoveBtn onClick={goCarouselLeft} ref={leftBtn}>
           <LeftIcon fontSize="large" />
         </MoveBtn>
 
         <Blank />
-        <MoveBtn>
+        <MoveBtn onClick={goCarouselRight} ref={rightBtn}>
           <RightIcon fontSize="large" />
         </MoveBtn>
       </ButtonArea>
@@ -77,6 +98,7 @@ const ItemArea = styled.div`
   margin-bottom: 4px;
   background-color: white;
   border-radius: 8px;
+  overflow: hidden;
 `;
 const ButtonArea = styled.div`
   width: 100%;
@@ -88,7 +110,6 @@ const ButtonArea = styled.div`
 const ULarea = styled.ul`
   display: inline-block;
   white-space: nowrap;
-  overflow: hidden;
 `;
 
 const MoveBtn = styled.button`
