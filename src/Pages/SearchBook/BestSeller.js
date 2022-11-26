@@ -27,11 +27,9 @@ const BestSeller = (props) => {
     } else {
       leftBtn.current.style.visibility = `visible`;
       moveCarousel.current.style.transform = `translateX(-${
-        20 * carouselCount
-      }%)`;
+        50 * carouselCount
+      }vh)`;
     }
-
-    console.log(moveCarousel.current.style.transform + " c: " + carouselCount);
   }, [props.categoryID, carouselCount]);
 
   const getBestSellerHandler = async (categoryID) => {
@@ -110,6 +108,7 @@ const ButtonArea = styled.div`
 const ULarea = styled.ul`
   display: inline-block;
   white-space: nowrap;
+  transition: 0.3s;
 `;
 
 const MoveBtn = styled.button`
