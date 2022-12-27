@@ -9,6 +9,7 @@ import RightIcon from "@material-ui/icons/ChevronRight";
 const BestSeller = (props) => {
   const [bestSeller, setBestSeller] = useState([]);
   const [carouselCount, setCarouselCount] = useState(0);
+  const [carouselLocation, setCarouselLocation] = useState(0); //현재 캐러셀의 이동 위치
 
   const moveCarousel = useRef();
   const leftBtn = useRef();
@@ -26,11 +27,25 @@ const BestSeller = (props) => {
       leftBtn.current.style.visibility = `hidden`;
     } else {
       leftBtn.current.style.visibility = `visible`;
-      moveCarousel.current.style.transform = `translateX(-${
-        50 * carouselCount
-      }vh)`;
+
+      setCarouselLocation(170 * 3 * carouselCount);
+      moveCarousel.current.style.transform = `translateX(-${carouselLocation}px)`;
+
+      if (window.innerWidth < 1200) {
+        if (carouselLocation >= window.innerWidth * 3 + 170 * carouselCount) {
+          rightBtn.current.style.visibility = `hidden`;
+        } else {
+          rightBtn.current.style.visibility = `visible`;
+        }
+      } else {
+        if ((510 * carouselCount) / 2 > window.innerWidth + 170) {
+          rightBtn.current.style.visibility = `hidden`;
+        } else {
+          rightBtn.current.style.visibility = `visible`;
+        }
+      }
     }
-  }, [props.categoryID, carouselCount]);
+  }, [props.categoryID, carouselCount, moveCarousel, carouselLocation]);
 
   const getBestSellerHandler = async (categoryID) => {
     const params = {
