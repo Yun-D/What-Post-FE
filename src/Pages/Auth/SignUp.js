@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import styled from "styled-components";
 import theme from "../../Styles/theme";
 import { LongBtn } from "../../Components/etc/Buttons";
 
+import { onIdCheck } from "Utils/auth";
+
 const SignUp = () => {
+  const idRef = useRef();
+
   return (
     <Container>
       <DivBox>
         <H2>회원가입</H2>
+
         <InputBox>
           <label>아이디</label>
-          <input />
+          <IDdiv className="rowDirection">
+            <IDinput ref={idRef} />
+            <button onClick={() => onIdCheck(idRef.current.value)}>
+              중복확인
+            </button>
+          </IDdiv>
         </InputBox>
+
         <InputBox>
           <label>이메일</label>
           <input type="email" />
@@ -65,11 +76,27 @@ const DivBox = styled.div`
     height: auto;
   }
 `;
+
 const InputBox = styled.div`
   flex-direction: column;
   display: flex;
   width: 70%;
   margin-bottom: 10px;
+`;
+const IDdiv = styled.div`
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 35px;
+  border: 0.5px solid gray;
+  border-radius: 8px;
+  padding: 5px;
+`;
+const IDinput = styled.input`
+  height: 40px;
+  margin-bottom: 0px;
+  margin-right: 10px;
+  border: 0.5px solid transparent;
 `;
 
 const H2 = styled.h2`
