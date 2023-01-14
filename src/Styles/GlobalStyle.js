@@ -28,7 +28,7 @@ button {
 input {
   font-size: ${theme.textSize.placeholder};
   width: 100%;
-  height: 40px;
+  height: 45px;
   padding: 2%;
   margin-bottom: 10px;
   border-radius: 8px;
