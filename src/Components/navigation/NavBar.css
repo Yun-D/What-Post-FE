@@ -1,0 +1,66 @@
+.sidebarBtn {
+  color: transparent;
+}
+
+.nav-menu {
+  display: grid;
+  grid-template-columns: repeat(5, auto);
+  column-gap: 35px;
+  list-style: none;
+}
+
+.nav-items {
+  width: 100%;
+  list-style: none;
+  align-items: center;
+}
+.nav-item {
+  /* 네비게이션 텍스트 및 로고 */
+  text-decoration: none;
+  color: white;
+  transition: 0.3s all;
+  list-style: none;
+}
+
+.nav-item span:hover {
+  background-color: rgba(70, 115, 121, 60%);
+  color: white;
+}
+
+span {
+  margin-left: 8px;
+}
+
+/* ////////// 반응형 /////////// */
+@media only screen and (max-width: 640px) {
+  .sidebarBtn {
+    color: #467379;
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 80px;
+    left: -100%;
+    /* 
+    추후 위에서 아래로 떨어지게끔 수정해보기
+    top: -200px;
+    left: 0; */
+    transition: 0.5s all;
+    z-index: -999;
+  }
+
+  .nav-menu.active {
+    background: rgba(69, 114, 120, 90%);
+    /* top: 80px; */
+    left: 0;
+  }
+
+  .nav-items {
+    padding: 10px 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 20%);
+  }
+}

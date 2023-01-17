@@ -1,1 +1,6 @@
 node_modules/
+node_modules/.cache/
+.vscode/
+package-lock.json
+src/APIs/api_key.js
+src/Assets/dummy.js
