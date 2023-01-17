@@ -1,3 +1,5 @@
+import keys from "APIs/api_key";
+
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = function (app) {
@@ -26,4 +28,12 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+
+  // app.use(
+  //   "/user",
+  //   createProxyMiddleware({
+  //     target: `${keys.SERVER_URL}`,
+  //     changeOrigin: true,
+  //   })
+  // );
 };

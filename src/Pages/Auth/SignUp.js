@@ -4,10 +4,12 @@ import styled from "styled-components";
 import theme from "../../Styles/theme";
 import { LongBtn } from "../../Components/etc/Buttons";
 
-import { onIdCheck } from "Utils/auth";
+import { onIdCheck, onSignUp } from "Utils/auth";
 
 const SignUp = () => {
   const idRef = useRef();
+  const emailRef = useRef();
+  const pwdRef = useRef();
 
   return (
     <Container>
@@ -26,15 +28,25 @@ const SignUp = () => {
 
         <InputBox>
           <label>이메일</label>
-          <input type="email" />
+          <input type="email" ref={emailRef} />
         </InputBox>
         <InputBox>
           <label>비밀번호</label>
-          <input type="password" />
+          <input type="password" ref={pwdRef} />
         </InputBox>
 
         <br />
-        <LongBtn>회원가입</LongBtn>
+        <LongBtn
+          onClick={() =>
+            onSignUp(
+              idRef.current.value,
+              pwdRef.current.value,
+              emailRef.current.value
+            )
+          }
+        >
+          회원가입
+        </LongBtn>
       </DivBox>
     </Container>
   );
