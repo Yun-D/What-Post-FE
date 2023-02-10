@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import theme from "../../Styles/theme";
 import styled from "styled-components";
 import { LongBtn } from "../../Components/etc/Buttons";
 import { StyledLink } from "../../Components/etc/StyledLink";
 
+import { onLogin } from "Utils/auth";
+
 const Login = () => {
+  const idRef = useRef();
+  const pwdRef = useRef();
+
   return (
     <Container>
       <DivBox>
         <H2>로그인</H2>
-        <Input placeholder="아이디" />
-        <Input placeholder="비밀번호" type="password" />
+        <Input placeholder="아이디" ref={idRef} />
+        <Input placeholder="비밀번호" type="password" ref={pwdRef} />
         <br />
-        <LongBtn>로그인</LongBtn>
+        <LongBtn
+          onClick={() => onLogin(idRef.current.value, pwdRef.current.value)}
+        >
+          로그인
+        </LongBtn>
         <br />
         <br />
         <StyledLink

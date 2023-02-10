@@ -4,16 +4,22 @@ import keys from "APIs/api_key";
 //const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
 axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 
-export const onLogin = (userid, pwd) => {
+export const onLogin = (userid, userpwd) => {
   const data = {
     userid,
-    pwd,
+    userpwd,
   };
   axios
-    .post("/user/signin", data)
-    .then(onLoginSuccess)
+    .post(`${keys.SERVER_URL}/user/signin`, {
+      username: userid,
+      pwd: userpwd,
+    })
+    //.then(onLoginSuccess)
+    .then((response) => {
+      console.log(response);
+    })
     .catch((error) => {
-      // ... 에러 처리
+      console.log(error);
     });
 };
 
@@ -39,6 +45,7 @@ export const onSignUp = (userid, userpwd, useremail) => {
     .post(`${keys.SERVER_URL}/user/signup`, data)
     .then(function (response) {
       console.log(response);
+      //TODO: 회원가입 후 로그인 페이지로 이동하도록 수정
     })
     .catch(function (error) {
       console.log(error.response);
