@@ -9,7 +9,7 @@ import App from "./App";
 import store from "./Store/store";
 
 axios.defaults.baseURL = "";
-axios.defaults.withCredentials = true; //refreshToken cookie 주고받기위한 코드
+//axios.defaults.withCredentials = true; //refreshToken cookie 주고받기위한 코드
 
 ReactDOM.render(
   <Provider store={store}>

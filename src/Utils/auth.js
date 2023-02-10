@@ -1,7 +1,8 @@
 import axios from "axios";
 import keys from "APIs/api_key";
 
-const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
+//const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
+axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 
 export const onLogin = (userid, pwd) => {
   const data = {
@@ -34,25 +35,14 @@ export const onIdCheck = (userid) => {
 
 export const onSignUp = (userid, userpwd, useremail) => {
   const data = { username: userid, pwd: userpwd, email: useremail };
-
-  const json = JSON.stringify(data);
-  console.log(json);
   axios
     .post(`${keys.SERVER_URL}/user/signup`, data)
-
     .then(function (response) {
       console.log(response);
     })
     .catch(function (error) {
       console.log(error.response);
     });
-
-  // axios({
-  //   method: "post",
-  //   url: `${keys.SERVER_URL}/user/signup`,
-  //   data: { username: userid, pwd: pwd, email: email },
-  //   headers: { "Content-Type": "application/json" },
-  // });
 };
 
 // export const onSilentRefresh = () => {
