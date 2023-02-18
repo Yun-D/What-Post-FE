@@ -14,6 +14,7 @@ import SearchBook from "./Pages/SearchBook/SearchBook";
 import BookDetail from "./Pages/SearchBook/BookDetail";
 import Login from "./Pages/Auth/Login";
 import SignUp from "./Pages/Auth/SignUp";
+import SignupSuccess from "Pages/Auth/SignUpSuccess";
 import MovieMain from "./Pages/SearchMovie/MovieMain";
 import SearchMovie from "./Pages/SearchMovie/SearchMovie";
 import MovieDetail from "./Pages/SearchMovie/MovieDetail";
@@ -34,6 +35,7 @@ function App() {
               <Route path="/" exact element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
+              <Route path="/signup/success" element={<SignupSuccess />} />
               <Route path="/search_book" element={<BookMain />} />
               <Route
                 path="/search_book/search/:query"
