@@ -13,12 +13,18 @@ export const onLogin = (userid, userpwd) => {
     .then((response) => {
       console.log(response.data.data.accessToken);
 
-      const { accessToken } = response.data.data.accessToken;
-
-      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`; // accessToken 설정
-
-      if (accessToken) {
+      if (response.data.status === 200) {
+        const { accessToken } = response.data.data.accessToken;
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${accessToken}`; // accessToken 설정
         localStorage.setItem("login-token", accessToken);
+
+        if (accessToken) {
+          window.location.replace("/");
+        }
+      } else {
+        console.log(response);
       }
 
       // accessToken 만료하기 1분 전에 로그인 연장
@@ -49,7 +55,7 @@ export const onSignUp = (userid, userpwd, useremail) => {
   const data = { username: userid, pwd: userpwd, email: useremail };
   axios
     .post(`${keys.SERVER_URL}/user/signup`, data)
-    .then(function (response) {
+    .then((response) => {
       if (response.data.status === 201) {
         //navigate("/signup/success");
         window.location.replace("/signup/success");
