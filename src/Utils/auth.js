@@ -44,8 +44,12 @@ export const onSignUp = (userid, userpwd, useremail) => {
   axios
     .post(`${keys.SERVER_URL}/user/signup`, data)
     .then(function (response) {
-      console.log(response);
-      //TODO: 회원가입 후 로그인 페이지로 이동하도록 수정
+      if (response.data.status === 201) {
+        //navigate("/signup/success");
+        window.location.replace("/signup/success");
+      } else {
+        console.log(response);
+      }
     })
     .catch(function (error) {
       console.log(error.response);
