@@ -5,18 +5,24 @@ import keys from "APIs/api_key";
 axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 
 export const onLogin = (userid, userpwd) => {
-  const data = {
-    userid,
-    userpwd,
-  };
   axios
     .post(`${keys.SERVER_URL}/user/signin`, {
       username: userid,
       pwd: userpwd,
     })
-    //.then(onLoginSuccess)
     .then((response) => {
-      console.log(response);
+      console.log(response.data.data.accessToken);
+
+      const { accessToken } = response.data.data.accessToken;
+
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`; // accessToken 설정
+
+      if (accessToken) {
+        localStorage.setItem("login-token", accessToken);
+      }
+
+      // accessToken 만료하기 1분 전에 로그인 연장
+      //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
     })
     .catch((error) => {
       console.log(error);
@@ -63,13 +69,3 @@ export const onSignUp = (userid, userpwd, useremail) => {
 //             // ... 로그인 실패 처리
 //         });
 // }
-
-export const onLoginSuccess = (response) => {
-  const { accessToken } = response.data;
-
-  // accessToken 설정
-  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-
-  // accessToken 만료하기 1분 전에 로그인 연장
-  //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
-};
