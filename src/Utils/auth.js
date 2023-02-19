@@ -11,10 +11,8 @@ export const onLogin = (userid, userpwd) => {
       pwd: userpwd,
     })
     .then((response) => {
-      console.log(response.data.data.accessToken);
-
       if (response.data.status === 200) {
-        const { accessToken } = response.data.data.accessToken;
+        const accessToken = response.data.data.accessToken;
         axios.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${accessToken}`; // accessToken 설정
@@ -57,7 +55,6 @@ export const onSignUp = (userid, userpwd, useremail) => {
     .post(`${keys.SERVER_URL}/user/signup`, data)
     .then((response) => {
       if (response.data.status === 201) {
-        //navigate("/signup/success");
         window.location.replace("/signup/success");
       } else {
         console.log(response);
