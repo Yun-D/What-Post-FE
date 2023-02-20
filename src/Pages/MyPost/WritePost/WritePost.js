@@ -11,6 +11,7 @@ import BookList from "Components/layout/BookList";
 import MovieList from "Components/layout/MovieList";
 import BookSearchFunc from "Utils/BookSearchFunc";
 import MovieSearchFunc from "Utils/MovieSearchFunc";
+import { postCreate } from "Utils/post";
 
 import ModalFrame from "Components/layout/ModalFrame";
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
@@ -54,7 +55,8 @@ const WritePost = () => {
   const [viewContent, setViewContent] = useState([]);
   /////////////////임시 선언 닫음
   //선택 컨텐츠별 구분
-  const [thisContent, setThisContent] = useState("");
+  const [selectData, setSelectData] = useState(""); //선택한 컨텐츠 제목 담는 state
+  const [thisContent, setThisContent] = useState(""); //현재 선택된 컨텐츠 종류 담는 state(book, movie, drama)
   const [modalState, setModalState] = useState(false); //모달
   //주제 state
   const [m_isEnd, setMIsEnd] = useState(false);
@@ -161,18 +163,21 @@ const WritePost = () => {
   /////////////////////////////////모달용 함수들 닫음
 
   ////////////////////////////////주제 선택용 함수
-  const selectBook = () => {
+  const selectBook = (data) => {
     //도서 주제 선택
     setIsBookSelected(true);
+    setSelectData(data);
     closeModal();
   };
-  const selectMovie = () => {
+  const selectMovie = (data) => {
     //영화 주제 선택
     setIsMovieSelected(true);
+    setSelectData(data);
     closeModal();
   };
   const cancelSubject = () => {
     //주제 선택 취소
+    setSelectData("");
     setIsBookSelected(false);
     setIsMovieSelected(false);
   };
@@ -253,17 +258,19 @@ const WritePost = () => {
                 content: data,
               });
             }}
-            onBlur={(event, editor) => {
-              console.log("Blur.", editor);
-            }}
-            onFocus={(event, editor) => {
-              console.log("Focus.", editor);
-            }}
+            onBlur={(event, editor) => {}}
+            onFocus={(event, editor) => {}}
           />
 
           <FullSizeBtn
             onClick={() => {
               setViewContent(viewContent.concat({ ...postContent }));
+              postCreate(
+                thisContent,
+                selectData,
+                postContent.title,
+                postContent.content
+              );
             }}
           >
             업로드
@@ -296,7 +303,7 @@ const WritePost = () => {
                   publisher={book.publisher}
                   contents={book.contents}
                   tolink={"./"}
-                  onClick={selectBook}
+                  onClick={() => selectBook(book.title)}
                 />
               ))}
               <Blank />
@@ -337,7 +344,7 @@ const WritePost = () => {
                   director={movie.director}
                   actor={movie.actor}
                   tolink={"./"}
-                  onClick={selectMovie}
+                  onClick={() => selectMovie(movie.title)}
                   detailLink={movie.link}
                 />
               ))}
