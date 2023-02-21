@@ -5,6 +5,7 @@ import ScrollToTop from "Utils/ScrollToTop";
 import theme from "./Styles/theme";
 import GlobalStyle from "./Styles/GlobalStyle";
 import NavBar from "./Components/navigation/NavBar";
+import NavBarNoauth from "Components/navigation/NavBarNoauth";
 import Footer from "./Components/layout/Footer";
 import Home from "./Pages/Home/Home";
 import MyPost from "./Pages/MyPost/MyPost";
@@ -18,15 +19,23 @@ import SignupSuccess from "Pages/Auth/SignUpSuccess";
 import MovieMain from "./Pages/SearchMovie/MovieMain";
 import SearchMovie from "./Pages/SearchMovie/SearchMovie";
 import MovieDetail from "./Pages/SearchMovie/MovieDetail";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [token, setToken] = useState();
+
+  useEffect(() => {
+    setToken(localStorage.getItem("login-token"));
+    //localStorage.clear();
+  }, localStorage);
+
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
         <GlobalStyle />
 
         <BrowserRouter>
-          <NavBar />
+          {token ? <NavBar /> : <NavBarNoauth />}
           <ScrollToTop />
 
           <div className="wrapper">

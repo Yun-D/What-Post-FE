@@ -8,15 +8,15 @@ import { Grid } from "@material-ui/core";
 import styled from "styled-components";
 import theme from "Styles/theme";
 
-function NavBar() {
+function NavBar_noauth() {
   const [sidebar, setSidebar] = useState(false);
   const resetSidebar = () => setSidebar(false);
   const showSidebar = () => setSidebar(!sidebar);
 
   const menuItems = [
     {
-      path: "/",
-      name: "로그아웃",
+      path: "/login",
+      name: "로그인",
     },
     {
       path: "/",
@@ -29,10 +29,6 @@ function NavBar() {
     {
       path: "/search_movie",
       name: "영화",
-    },
-    {
-      path: "/my_post",
-      name: "나의 포스트",
     },
   ];
 
@@ -91,4 +87,4 @@ const ImageLogo = styled.img`
   left: 70px;
 `;
 
-export default NavBar;
+export default NavBar_noauth;
