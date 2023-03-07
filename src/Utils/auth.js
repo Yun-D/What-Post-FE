@@ -32,6 +32,11 @@ export const onLogin = (userid, userpwd) => {
       console.log(error);
     });
 };
+export const onLogout = () => {
+  //localStorage.clear();
+  localStorage.removeItem("login-token");
+  window.location.replace("/");
+};
 
 export const onIdCheck = (userid) => {
   axios
