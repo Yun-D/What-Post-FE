@@ -13,6 +13,13 @@ module.exports = function (app) {
     })
   );
   app.use(
+    "/v3",
+    createProxyMiddleware({
+      target: "https://dapi.kakao.com",
+      changeOrigin: true,
+    })
+  );
+  app.use(
     "/api",
     createProxyMiddleware({
       target: "https://book.interpark.com",

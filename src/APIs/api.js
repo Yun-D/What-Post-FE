@@ -1,14 +1,6 @@
 import axios from "axios";
 import keys from "./api_key";
 
-//카카오 책 검색 API
-const kakaoBookSearch = axios.create({
-  baseURL: "https://dapi.kakao.com",
-  headers: {
-    Authorization: `KakaoAK ${keys.KAKAO_REST_API_KEY}`,
-  },
-});
-
 //네이버 영화 검색 API
 const naverMovieSearch = axios.create({
   //baseURL: "https://openapi.naver.com",
@@ -18,14 +10,16 @@ const naverMovieSearch = axios.create({
   },
 });
 
-export const bookSearch = (params) => {
-  return kakaoBookSearch.get("/v3/search/book", {
-    params,
-  });
-};
-
 export const movieSearch = (params) => {
   return naverMovieSearch.get("/v1/search/movie.json", { params });
+};
+
+//카카오 책 검색 API
+export const bookSearch = (params) => {
+  return axios.get("/v3/search/book", {
+    params,
+    headers: { Authorization: `KakaoAK ${keys.KAKAO_REST_API_KEY}` },
+  });
 };
 
 //인터파크 베스트셀러 API
