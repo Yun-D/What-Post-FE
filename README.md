@@ -4,7 +4,8 @@
 
 ## 왓포스트
 #### 📝 컨텐츠 감상평 기록 웹 서비스, 왓포스트
-다양한 컨텐츠의 긴 포스트를 남길 수 있는 곳이 있었으면 하여 제작하게 되었습니다. 다른이의 느낌, 감상은 컨텐츠를 선택하는 이유가 되기도 하므로 접근성이 좋은 창구를 만들고 싶었습니다.
+다양한 컨텐츠의 긴 포스트를 남길 수 있는 곳이 있었으면 하여 제작하게 되었습니다. <br />
+다른이의 느낌, 감상은 컨텐츠를 선택하는 이유가 되기도 하므로 접근성이 좋은 창구를 만들고 싶었습니다.
 
 <br /> <br /><br /> <br /><br /> <br />
 
@@ -12,7 +13,7 @@
 <table>
 	<tbody>
 		<tr>
-			<td align="center"><a href="https://github.com/Yun-D"><img src="https://avatars.githubusercontent.com/u/46706905?v=4"width=100px;" alt="[FE] Yun-D"/><br /><sub><b>[FE] Yun-D </b></sub></a></td>
+			<td align="center"><a href="https://github.com/Yun-D"><img src="https://avatars.githubusercontent.com/u/46706905?s=400&v=4"width=100px;" alt="[FE] Yun-D"/><br /><sub><b>[FE] Yun-D </b></sub></a></td>
 			<td align="center"><a href="https://github.com/bbaecco"><img src="https://avatars.githubusercontent.com/u/46706915?v=4"width=100px;" alt="[BE] bbaecco"/><br /><sub><b>[BE] bbaecco </b></sub></a></td>
 		</tr>
 	</tbody>
