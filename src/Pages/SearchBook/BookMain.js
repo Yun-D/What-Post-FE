@@ -3,7 +3,7 @@ import { React, useState, memo, useCallback, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Masonry from "../../Components/layout/Masonry";
-import { initialTexts, initialImages } from "../../Assets/dummy";
+import { initialTexts } from "../../Assets/dummy";
 import theme from "../../Styles/theme";
 import { SearchBar } from "../../Components/etc/SearchBar";
 
@@ -14,17 +14,11 @@ import useIsMount from "../../Utils/hooks/useIsMount";
 //Masonry 레이아웃을 위한 코드
 const MasonryElement = memo(({ value }) => (
   <StyledMasonryCard>
-    <p style={{ textAlign: "center" }}>{value}</p>
+    <ItemIMG src={value.thumbnail} alt={value.thumbnail} />
+    <PBox>
+      <ItemP>{value.text}</ItemP>
+    </PBox>
   </StyledMasonryCard>
-));
-const ImageElement = memo(({ value }) => (
-  <div style={{ borderRadius: "10px", margin: "5px" }}>
-    <img
-      src={value}
-      style={{ width: "100%", borderRadius: "10px", flex: 1 }}
-      alt="images"
-    />
-  </div>
 ));
 
 const BookMain = () => {
@@ -60,21 +54,15 @@ const BookMain = () => {
 
   //////////////////////////////Masonry 레이아웃을 위한 코드
   const [data, setData] = useState(initialTexts);
-  const [images, setImages] = useState(initialImages);
 
   const handleData = useCallback(
     () => setData((prev) => [...prev, ...initialTexts]),
     [setData]
   );
-  const handleImages = useCallback(
-    () => setImages((prev) => [...prev, ...initialImages]),
-    [setImages]
-  );
 
   /**
    * this code is example of responsive column, how many columns will be rendered if width of screen reach a certain value
    */
-
   const settingColumns = useCallback(() => {
     if (window.innerWidth >= 1400) return 4;
     if (window.innerWidth >= 800) return 3;
@@ -110,7 +98,10 @@ const BookMain = () => {
         onClick={onClickSearch}
       />
 
-      <div> 최신/랜덤 이용자 포스트 </div>
+      <div className="subText" style={{ margin: "3% 0 0.5%" }}>
+        {" "}
+        최신/랜덤 이용자 포스트{" "}
+      </div>
       <div style={{ padding: "5px" }}>
         <Masonry
           dataArray={data}
@@ -134,12 +125,36 @@ const BookMain = () => {
 };
 
 const StyledMasonryCard = styled.div`
-  padding: 10px;
+  height: 100%;
   border-radius: 10px;
   margin: 10px;
-  background-color: ${theme.colors.boxColor};
+  margin-bottom: 40%;
   color: black;
+  position: relative;
+`;
+const ItemIMG = styled.img`
+  width: 110px;
+  box-shadow: ${theme.size.boxShadow};
+  border-radius: 5px;
+  z-index: 10;
+`;
+const PBox = styled.div`
+  //height: 100%;
+  z-index: -1;
+  position: absolute;
+  top: 100px;
+  padding: 75px 10px 10px;
+  background-color: ${theme.colors.boxColor};
+  border-radius: 10px;
   box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.1);
+`;
+const ItemP = styled.p`
+  text-overflow: ellipsis; //글자 자르고 생략(...) 표시
+  overflow: hidden; //지정 너비 넘어간 글 숨기기
+
+  display: -webkit-box;
+  -webkit-line-clamp: 5; //몇 줄까지 띄울 건지 원하는 라인 수
+  -webkit-box-orient: vertical;
 `;
 
 export default BookMain;
