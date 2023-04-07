@@ -26,11 +26,29 @@ export const postCreate = (postType, work_title, post_title, post_content) => {
       },
     })
     .then((response) => {
-      console.log(response.data.data);
-
       if (response.data.status === 201) {
         console.log("글 등록 성공");
       }
+    })
+    .catch((error) => {
+      console.log(error);
+      if (error) {
+        console.log("글 등록 실패");
+        alert("컨텐츠를 선택해주세요.");
+      }
+    });
+};
+
+export const postRead = () => {
+  axios
+    .get(`${keys.SERVER_URL}/user/mypost`, {
+      headers: {
+        //"Content-Type": "multipart/form-data",
+        Authorization: localStorage.getItem("login-token"),
+      },
+    })
+    .then((response) => {
+      console.log(response);
     })
     .catch((error) => {
       console.log(error);

@@ -1,16 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "Styles/theme";
+import ModalFrame from "./ModalFrame";
+
+import NoteIcon from "@material-ui/icons/TextsmsOutlined";
 
 const RowDirecImages = (props) => {
-  return (
-    <ContainerDiv>
-      <ItemCard>
-        <ItemIMG src={props.thumbnail} alt={props.thumbnail} />
-        <ItemP>{props.title}</ItemP>
-      </ItemCard>
-    </ContainerDiv>
-  );
+  const [modalState, setModalState] = useState(false); //모달
+  const isViewPost = props.isViewPost;
+
+  /////////////////////////////////모달용 함수들
+  const openModal = (props) => {
+    //e.preventDefault();
+    setModalState(true);
+  };
+  const closeModal = () => {
+    setModalState(false);
+  };
+  /////////////////////////////////모달용 함수들 닫음
+
+  if (isViewPost) {
+    return (
+      <ContainerDiv>
+        <ItemCard onClick={() => openModal()}>
+          <ItemIMG src={props.thumbnail} alt={props.thumbnail} />
+          <ItemP>{props.title}</ItemP>
+        </ItemCard>
+
+        {modalState && (
+          <ModalFrame state={modalState} closeModal={closeModal}>
+            <ModalContents>
+              <PadDiv marginBottom="80px">
+                <PostTitle notFullSize>{props.title}</PostTitle>
+                <StyledLine />
+              </PadDiv>
+
+              <PadDiv marginBottom="40px">
+                <Div className="rowDirection">
+                  <Blank />
+                  <NoteIcon
+                    style={{
+                      color: `${theme.colors.peacock}`,
+                      marginRight: "5px",
+                    }}
+                  />
+                  <PostContents>{props.nickname}</PostContents>
+                </Div>
+              </PadDiv>
+
+              <PostContents>{props.contents}</PostContents>
+            </ModalContents>
+          </ModalFrame>
+        )}
+      </ContainerDiv>
+    );
+  } else {
+    return (
+      <ContainerDiv>
+        <ItemCard>
+          <ItemIMG src={props.thumbnail} alt={props.thumbnail} />
+          <ItemP>{props.title}</ItemP>
+        </ItemCard>
+      </ContainerDiv>
+    );
+  }
 };
 
 const ContainerDiv = styled.ul`
@@ -18,6 +71,7 @@ const ContainerDiv = styled.ul`
   white-space: nowrap;
   align-items: center;
   justify-content: center;
+  margin-bottom: 3%;
 `;
 const ItemCard = styled.div`
   flex-direction: column;
@@ -43,6 +97,73 @@ const ItemP = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+`;
+
+const ModalContents = styled.div`
+  width: 95%;
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 1rem;
+  word-break: break-all;
+  white-space: pre-line;
+`;
+
+const PostTitle = styled.p`
+  font-size: ${theme.textSize.postTitle};
+  font-weight: 600;
+  height: auto;
+
+  ${(props) =>
+    props.notFullSize
+      ? ` //////////////////////ellipsis 처리 위한 코드부분
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 15px;
+  `
+      : `
+    font-size: 2.5rem
+  `};
+`;
+const PostContents = styled.p`
+  font-size: ${theme.textSize.postContents};
+  height: auto;
+  //overflow: auto;
+
+  ${(props) =>
+    props.notFullSize
+      ? ` //////////////////////ellipsis 처리 위한 코드부분
+    text-overflow: ellipsis; // 글자 자르고 생략 표시
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    `
+      : `
+    line-height: 27px;
+    `}
+`;
+
+const StyledLine = styled.hr`
+  width: 25%;
+  height: 5px;
+  background-color: ${theme.colors.peacock};
+  margin-top: 10px;
+  border: 0;
+`;
+
+const PadDiv = styled.div`
+  margin-bottom: ${(props) => props.marginBottom};
+`;
+const Div = styled.div`
+  flex: 1;
+  width: 100%;
+`;
+const Blank = styled.div`
+  flex: 999;
+  width: 100%;
+  height: 100%;
 `;
 
 export default RowDirecImages;
