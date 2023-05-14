@@ -23,6 +23,7 @@
 
 
 ### 🔧 기술 스택
+#### FE
 <div>
 	<img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black">
 	<img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
@@ -33,6 +34,13 @@
 <div>
 	<img src="https://img.shields.io/badge/ESLint-4B32C3?style=for-the-badge&logo=ESLint&logoColor=white">
 	<img src="https://img.shields.io/badge/Prettier-F7B93E?style=for-the-badge&logo=Prettier&logoColor=black">
+</div>
+
+#### BE
+<div>
+	<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white">
+	<img src="https://img.shields.io/badge/express-000000?style=for-the-badge&logo=express&logoColor=white">
+	<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
 </div>
 
 <br /><br />
