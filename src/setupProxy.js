@@ -33,4 +33,11 @@ module.exports = function (app) {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/search_json2.jsp",
+    createProxyMiddleware({
+      target: "http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api",
+      changeOrigin: true,
+    })
+  );
 };
