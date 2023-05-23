@@ -87,7 +87,7 @@ function NavBar() {
         ) : (
           <ul className={sidebar ? "nav-menu active" : "nav-menu"}>
             <li className="nav-items" onClick={resetSidebar}>
-              <Link to={"/login"} className="nav-item" onClick={onLogout}>
+              <Link to={"/login"} className="nav-item">
                 <span>{"로그인"}</span>
               </Link>
             </li>
