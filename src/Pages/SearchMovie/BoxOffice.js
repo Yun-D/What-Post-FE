@@ -30,13 +30,6 @@ const BoxOffice = (props) => {
   }, []);
 
   const getResponseMovieData = (response) => {
-    // let temp, posterData;
-    // response.then((appData) => {
-    //   temp = appData.data.Data[0].Result[0].posters;
-    //   posterData = temp.substring(0, temp.indexOf("|"));
-    //   return posterData;
-    // });
-
     try {
       const temp = response.data.Data[0].Result[0].posters;
       const posterData = temp.substring(0, temp.indexOf("|"));
@@ -76,29 +69,6 @@ const BoxOffice = (props) => {
 
   //박스오피스 영화 포스터 검색
   const getMoviePosterHandler = async (boxOfficeData) => {
-    // let postList = [];
-
-    // for await (const data of boxOfficeData) {
-    //   //console.log(data);
-
-    //   const params = {
-    //     ServiceKey: `${keys.KMDB_API_KEY}`,
-    //     collection: "kmdb_new2",
-    //     detail: "Y",
-    //     title: data.title,
-    //     releaseDts: data.releaseDate,
-    //   };
-
-    //   const resData = getMoviePoster(params);
-    //   const responseData = getResponseMovieData(resData);
-
-    //   postList.push(responseData);
-    // }
-
-    // setMovePosters(postList);
-    // //console.log(postList);
-    // return postList;
-
     try {
       const postList = await Promise.all(
         boxOfficeData.map(async (data) => {
@@ -135,17 +105,20 @@ const BoxOffice = (props) => {
     }
   };
 
-  return (
-    <ItemArea className="rowDirection">
-      {boxOffice.map((movie, idx) => (
-        <RowDirecImages
-          key={idx}
-          title={movie.movieNm}
-          thumbnail={moviePosters}
-        />
-      ))}
-    </ItemArea>
-  );
+  //두가지 배열 쓰기 위해 컴포넌트로 변경
+  const componentR = boxOffice.map((movie, idx) => {
+    const thumbnailData = moviePosters[idx];
+
+    return (
+      <RowDirecImages
+        key={idx}
+        title={movie.movieNm}
+        thumbnail={thumbnailData}
+      />
+    );
+  });
+
+  return <ItemArea className="rowDirection">{componentR}</ItemArea>;
 };
 
 const ItemArea = styled.div`
