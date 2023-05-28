@@ -8,6 +8,7 @@ const BoxOffice = (props) => {
   const [boxOffice, setBoxOffice] = useState([]);
   const [moviePosters, setMoviePosters] = useState([]);
 
+  //boxOffice API 호출 시 필요한 날짜 데이터 가공
   let now = new Date();
   let newDay = new Date(now);
   newDay.setDate(now.getDate() - 7); //에러 방지용으로 일주일 전으로 연산
@@ -16,32 +17,24 @@ const BoxOffice = (props) => {
   let day = ("0" + newDay.getDate()).slice(-2);
 
   const today = year + month + day;
+  //////////////////////////////////////////////////////////////
 
+  //컴포넌트가 렌더링 되자마자 실행되는 부분
   useEffect(() => {
+    const setBoxOfficeList = async () => {
+      try {
+        const returnData = await getBoxOfficeHandler(props.weekGB);
+        const posters = await getMoviePosterHandler(returnData); //박스오피스 데이터를 받아 moviePoster 메소드로 전달
+
+        setMoviePosters(posters);
+      } catch (error) {
+        console.error("세팅 박스오피스 리스트에서 에러 .: ", error);
+      }
+    };
+
     setBoxOfficeList();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.weekGB]);
-
-  useEffect(() => {
-    setBoxOfficeList();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const getResponseMovieData = (response) => {
-    try {
-      const temp = response.data.Data[0].Result[0].posters;
-      const posterData = temp.substring(0, temp.indexOf("|"));
-      return posterData;
-    } catch (error) {
-      console.error(
-        "Failed to get movie poster data from the response:",
-        error
-      );
-      return ""; // 오류 발생 시 빈 문자열 반환 또는 다른 적절한 오류 처리 방식 적용
-    }
-  };
 
   //박스오피스 데이터를 가지고 오는 핸들러
   const getBoxOfficeHandler = async (weekGB) => {
@@ -56,7 +49,7 @@ const BoxOffice = (props) => {
       const tempBoxOffice = data.boxOfficeResult.weeklyBoxOfficeList;
       setBoxOffice(tempBoxOffice); //2. 주간 박스오피스 리스트를 추출하여 boxOffice state에 저장
 
-      const responseData = boxOffice;
+      const responseData = tempBoxOffice;
       return responseData.map((data) => ({
         movieCode: data.movieCd,
         title: data.movieNm,
@@ -68,10 +61,11 @@ const BoxOffice = (props) => {
   };
 
   //박스오피스 영화 포스터 검색
-  const getMoviePosterHandler = async (boxOfficeData) => {
+  const getMoviePosterHandler = (boxOfficeData) => {
     try {
-      const postList = await Promise.all(
+      const postList = Promise.all(
         boxOfficeData.map(async (data) => {
+          //boxOfficeData 배열에 담긴 데이터 하나하나를 getMoviePoster API 파라미터에 담아 보냄
           const params = {
             ServiceKey: keys.KMDB_API_KEY,
             collection: "kmdb_new2",
@@ -80,14 +74,12 @@ const BoxOffice = (props) => {
             releaseDts: data.releaseDate,
           };
 
-          const resData = await getMoviePoster(params);
-          const responseData = getResponseMovieData(resData);
+          const resData = await getMoviePoster(params); //API 호출
+          const responseData = getResponseMovieData(resData); //호출되어 돌아온 resData를 가공하여 필요한 데이터(poster)만 가져오도록 getResponseMovieData 호출
 
           return responseData;
         })
       );
-
-      setMoviePosters(postList);
 
       return postList;
     } catch (error) {
@@ -95,13 +87,18 @@ const BoxOffice = (props) => {
     }
   };
 
-  const setBoxOfficeList = async () => {
+  //데이터 가공
+  const getResponseMovieData = (response) => {
     try {
-      const returnData = await getBoxOfficeHandler(props.weekGB);
-      const finalData = await getMoviePosterHandler(returnData);
-      console.log(finalData);
+      const temp = response.data.Data[0].Result[0].posters;
+      const posterData = temp.substring(0, temp.indexOf("|"));
+      return posterData;
     } catch (error) {
-      console.log(error);
+      console.error(
+        "Failed to get movie poster data from the response:",
+        error
+      );
+      return ""; // 오류 발생 시 빈 문자열 반환 또는 다른 적절한 오류 처리 방식 적용
     }
   };
 
