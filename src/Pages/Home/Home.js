@@ -1,7 +1,6 @@
 import React from "react";
 
 import { SearchBar } from "Components/etc/SearchBar";
-import BestSeller from "Pages/SearchBook/BestSeller";
 import BoxOffice from "Pages/SearchMovie/BoxOffice";
 
 const Home = () => {
@@ -14,7 +13,6 @@ const Home = () => {
         <p>각 분야별 최신 포스트</p>
       </div>
       <div>
-        <BestSeller categoryID={100} />
         <BoxOffice weekGB={0} />
       </div>
     </div>

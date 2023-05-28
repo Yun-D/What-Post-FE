@@ -34,7 +34,7 @@ export const getBoxOffice = (params) => {
   return axios.get("/searchWeeklyBoxOfficeList.json", { params });
 };
 
-//KMDb 영화 db API (포스터 얻어오는 용도) KMDB_API_KEY
+//KMDb 영화 db API (포스터 얻어오는 용도)
 export const getMoviePoster = (params) => {
   return axios.get("/search_json2.jsp", { params });
 };
