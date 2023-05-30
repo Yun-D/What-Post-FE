@@ -163,8 +163,7 @@ const BoxOffice = (props) => {
   return (
     <Div>
       <ULarea ref={moveCarousel}>
-        {" "}
-        <ItemArea className="rowDirection">{componentR}</ItemArea>
+        <div className="rowDirection">{componentR}</div>
       </ULarea>
       <ButtonArea>
         <MoveBtn onClick={goCarouselLeft} ref={leftBtn}>
@@ -181,8 +180,13 @@ const BoxOffice = (props) => {
 };
 
 const Div = styled.div`
-  height: 100%;
   position: relative;
+
+  border: 0.5px solid #bbbbbb;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
 `;
 const Blank = styled.div`
   flex: 999;
@@ -192,8 +196,9 @@ const Blank = styled.div`
 const ButtonArea = styled.div`
   width: 100%;
   position: absolute;
-  top: 40%;
-  padding: 1%;
+  top: 30%;
+  left: 1%;
+  padding: 2%;
   display: flex;
 `;
 
@@ -212,16 +217,6 @@ const MoveBtn = styled.button`
   flex: 1;
   align-items: center;
   justify-content: center;
-`;
-
-const ItemArea = styled.div`
-  width: 100%;
-  border: 0.5px solid #bbbbbb;
-  padding: 20px;
-  margin-bottom: 4px;
-  background-color: white;
-  border-radius: 8px;
-  overflow: hidden;
 `;
 
 export default BoxOffice;
