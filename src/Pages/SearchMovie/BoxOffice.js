@@ -1,12 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { getBoxOffice, getMoviePoster } from "APIs/api";
 import keys from "APIs/api_key";
 import RowDirecImages from "Components/layout/RowDirecImages";
 import styled from "styled-components";
 
+import LeftIcon from "@material-ui/icons/ChevronLeft";
+import RightIcon from "@material-ui/icons/ChevronRight";
+
 const BoxOffice = (props) => {
   const [boxOffice, setBoxOffice] = useState([]);
   const [moviePosters, setMoviePosters] = useState([]);
+  const [carouselCount, setCarouselCount] = useState(0);
+  const [carouselLocation, setCarouselLocation] = useState(0); //현재 캐러셀의 이동 위치
+
+  const moveCarousel = useRef(null);
+  const leftBtn = useRef(null);
+  const rightBtn = useRef(null);
 
   //boxOffice API 호출 시 필요한 날짜 데이터 가공
   let now = new Date();
@@ -19,7 +28,6 @@ const BoxOffice = (props) => {
   const today = year + month + day;
   //////////////////////////////////////////////////////////////
 
-  //컴포넌트가 렌더링 되자마자 실행되는 부분
   useEffect(() => {
     const setBoxOfficeList = async () => {
       try {
@@ -35,6 +43,36 @@ const BoxOffice = (props) => {
     setBoxOfficeList();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (carouselCount < 0) {
+      setCarouselCount(1);
+    }
+
+    if (carouselCount === 0) {
+      moveCarousel.current.style.transform = `translateX(0%)`;
+      leftBtn.current.style.visibility = `hidden`;
+    } else {
+      leftBtn.current.style.visibility = `visible`;
+
+      setCarouselLocation(170 * 3 * carouselCount);
+      moveCarousel.current.style.transform = `translateX(-${carouselLocation}px)`;
+
+      if (window.innerWidth < 1200) {
+        if (carouselLocation >= window.innerWidth * 3 + 170 * carouselCount) {
+          rightBtn.current.style.visibility = `hidden`;
+        } else {
+          rightBtn.current.style.visibility = `visible`;
+        }
+      } else {
+        if ((510 * carouselCount) / 2 > window.innerWidth + 170) {
+          rightBtn.current.style.visibility = `hidden`;
+        } else {
+          rightBtn.current.style.visibility = `visible`;
+        }
+      }
+    }
+  }, [carouselCount, moveCarousel, carouselLocation]);
 
   //박스오피스 데이터를 가지고 오는 핸들러
   const getBoxOfficeHandler = async (weekGB) => {
@@ -102,6 +140,13 @@ const BoxOffice = (props) => {
     }
   };
 
+  const goCarouselLeft = () => {
+    setCarouselCount(carouselCount - 1);
+  };
+  const goCarouselRight = () => {
+    setCarouselCount(carouselCount + 1);
+  };
+
   //두가지 배열 쓰기 위해 컴포넌트로 변경
   const componentR = boxOffice.map((movie, idx) => {
     const thumbnailData = moviePosters[idx];
@@ -115,8 +160,59 @@ const BoxOffice = (props) => {
     );
   });
 
-  return <ItemArea className="rowDirection">{componentR}</ItemArea>;
+  return (
+    <Div>
+      <ULarea ref={moveCarousel}>
+        {" "}
+        <ItemArea className="rowDirection">{componentR}</ItemArea>
+      </ULarea>
+      <ButtonArea>
+        <MoveBtn onClick={goCarouselLeft} ref={leftBtn}>
+          <LeftIcon fontSize="large" />
+        </MoveBtn>
+
+        <Blank />
+        <MoveBtn onClick={goCarouselRight} ref={rightBtn}>
+          <RightIcon fontSize="large" />
+        </MoveBtn>
+      </ButtonArea>
+    </Div>
+  );
 };
+
+const Div = styled.div`
+  height: 100%;
+  position: relative;
+`;
+const Blank = styled.div`
+  flex: 999;
+  width: 90%;
+  height: 100%;
+`;
+const ButtonArea = styled.div`
+  width: 100%;
+  position: absolute;
+  top: 40%;
+  padding: 1%;
+  display: flex;
+`;
+
+const ULarea = styled.ul`
+  display: inline-block;
+  white-space: nowrap;
+  transition: 0.3s;
+`;
+
+const MoveBtn = styled.button`
+  height: 52px;
+  width: 52px;
+  border-radius: 50px;
+  background-color: #6badb6cc;
+
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+`;
 
 const ItemArea = styled.div`
   width: 100%;
