@@ -2,16 +2,14 @@ import axios from "axios";
 import keys from "./api_key";
 
 //네이버 영화 검색 API
-const naverMovieSearch = axios.create({
-  //baseURL: "https://openapi.naver.com",
-  headers: {
-    "X-Naver-Client-Id": `${keys.NAVER_CLIENT_ID}`,
-    "X-Naver-Client-Secret": `${keys.NAVER_CLIENT_SECRET}`,
-  },
-});
-
 export const movieSearch = (params) => {
-  return naverMovieSearch.get("/v1/search/movie.json", { params });
+  return axios.get("/v1/search/movie.json", {
+    params,
+    headers: {
+      "X-Naver-Client-Id": `${keys.NAVER_CLIENT_ID}`,
+      "X-Naver-Client-Secret": `${keys.NAVER_CLIENT_SECRET}`,
+    },
+  });
 };
 
 //카카오 책 검색 API
