@@ -36,7 +36,7 @@ const BoxOffice = (props) => {
 
         setMoviePosters(posters);
       } catch (error) {
-        console.error("세팅 박스오피스 리스트에서 에러 .: ", error);
+        console.error(error);
       }
     };
 
@@ -58,18 +58,10 @@ const BoxOffice = (props) => {
       setCarouselLocation(170 * 3 * carouselCount);
       moveCarousel.current.style.transform = `translateX(-${carouselLocation}px)`;
 
-      if (window.innerWidth < 1200) {
-        if (carouselLocation >= window.innerWidth * 3 + 170 * carouselCount) {
-          rightBtn.current.style.visibility = `hidden`;
-        } else {
-          rightBtn.current.style.visibility = `visible`;
-        }
+      if (window.innerWidth <= 1000) {
+        if (carouselLocation >= 2000) setCarouselCount(0);
       } else {
-        if ((510 * carouselCount) / 2 > window.innerWidth + 170) {
-          rightBtn.current.style.visibility = `hidden`;
-        } else {
-          rightBtn.current.style.visibility = `visible`;
-        }
+        if (carouselLocation >= window.innerWidth) setCarouselCount(0);
       }
     }
   }, [carouselCount, moveCarousel, carouselLocation]);
