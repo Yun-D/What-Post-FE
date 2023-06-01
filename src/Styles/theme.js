@@ -27,6 +27,7 @@ const size = {
   boxShadow:
     "0 6px 10px rgba(0, 0, 0, 0.1), 0 3px 5px rgba(226, 235, 238, 0.5)",
   boxLightShadow: "0 3px 3px rgba(0, 0, 0, 0.1)",
+  smallThingShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
 };
 
 const device = {
