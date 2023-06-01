@@ -4,6 +4,8 @@ import theme from "Styles/theme";
 import ModalFrame from "./ModalFrame";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined";
+import VisibilityOff from "@material-ui/icons/VisibilityOffOutlined";
+//TODO: 비공개인 것만 서클 보이게끔 처리해야함
 
 const RowDirecImages = (props) => {
   const [modalState, setModalState] = useState(false); //모달
@@ -23,6 +25,14 @@ const RowDirecImages = (props) => {
     return (
       <ContainerDiv>
         <ItemCard onClick={() => openModal()}>
+          <Circle>
+            <VisibilityOff
+              style={{
+                color: `${theme.colors.shadowColor}`,
+                margin: 5,
+              }}
+            />
+          </Circle>
           <ItemIMG src={props.thumbnail} alt={props.thumbnail} />
           <ItemP>{props.title}</ItemP>
         </ItemCard>
@@ -79,6 +89,7 @@ const ItemCard = styled.div`
   width: 170px;
   white-space: pre-line;
   overflow: hidden;
+  position: relative;
 `;
 
 const ItemIMG = styled.img`
@@ -164,6 +175,18 @@ const Blank = styled.div`
   flex: 999;
   width: 100%;
   height: 100%;
+`;
+
+const Circle = styled.div`
+  width: 34px;
+  height: 34px;
+  background-color: white;
+  opacity: 0.8;
+  box-shadow: ${theme.size.smallThingShadow};
+  border-radius: 50%;
+  position: absolute;
+  top: 2%;
+  right: 14.5%;
 `;
 
 export default RowDirecImages;
