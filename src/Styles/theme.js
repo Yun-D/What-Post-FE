@@ -15,7 +15,7 @@ const textSize = {
   postTitle: "1.45rem", //p태그 등 텍스트 타이틀
   postContents: "1rem", //본문 텍스트
   subText: "1.1rem",
-  buttonText: "1.10rem", //버튼에 들어가는 텍스트
+  buttonText: "1rem", //버튼에 들어가는 텍스트
 };
 
 const size = {

@@ -85,6 +85,10 @@ input {
   border: 0.5px solid ${theme.colors.lightGray};
 }
 
+.shadow {
+  box-shadow: ${theme.size.boxLightShadow};
+}
+
 
 
 /* ////////// 반응형 /////////// */

@@ -139,14 +139,13 @@ const ItemIMG = styled.img`
   z-index: 10;
 `;
 const PBox = styled.div`
-  //height: 100%;
   z-index: -1;
   position: absolute;
   top: 100px;
   padding: 75px 10px 10px;
   background-color: ${theme.colors.boxColor};
   border-radius: 10px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1), 3px 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: ${theme.size.boxShadow};
 `;
 const ItemP = styled.p`
   text-overflow: ellipsis; //글자 자르고 생략(...) 표시
