@@ -11,6 +11,7 @@ import styled from "styled-components";
 const MyPost = () => {
   useEffect(() => {
     postRead();
+    //TODO: 유저네임 뽑아서 매핑하기
   });
 
   return (
@@ -33,8 +34,8 @@ const MyPost = () => {
         ))}
       </MyBookshelfDiv>
 
-      <FullSizeBtn>로그아웃</FullSizeBtn>
-      <FullSizeBtn>회원 탈퇴</FullSizeBtn>
+      <FullSizeBtn className="whiteButton">로그아웃</FullSizeBtn>
+      <FullSizeBtn className="whiteButton">회원 탈퇴</FullSizeBtn>
     </Div>
   );
 };

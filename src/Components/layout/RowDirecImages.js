@@ -28,7 +28,7 @@ const RowDirecImages = (props) => {
           <Circle>
             <VisibilityOff
               style={{
-                color: `${theme.colors.shadowColor}`,
+                color: "gray",
                 margin: 5,
               }}
             />

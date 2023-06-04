@@ -3,6 +3,7 @@ const colors = {
   boxColor: "#EFF6F6",
   boxColor_light: "#F1F5F5",
   shadowColor: "#467379",
+  textColor: "#242424",
 
   lightGray: "#bbbbbb",
   peacock: "#1491a1", //mainColor 텍스트 버전
@@ -14,7 +15,7 @@ const textSize = {
   postTitle: "1.45rem", //p태그 등 텍스트 타이틀
   postContents: "1rem", //본문 텍스트
   subText: "1.1rem",
-  buttonText: "1.15rem", //버튼에 들어가는 텍스트
+  buttonText: "1.10rem", //버튼에 들어가는 텍스트
 };
 
 const size = {

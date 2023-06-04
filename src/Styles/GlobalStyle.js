@@ -79,6 +79,14 @@ input {
   }
 }
 
+.whiteButton {
+  background-color: white;
+  color: ${theme.colors.textColor};
+  border: 0.5px solid ${theme.colors.lightGray};
+}
+
+
+
 /* ////////// 반응형 /////////// */
 @media only screen and (max-width: ${theme.size.mobile}) {
   .contents_div {
