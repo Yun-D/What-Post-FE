@@ -19,12 +19,11 @@ const Container = styled.div`
 `;
 const Overlay = styled.div`
   //Container를 덮는 블러
-  //position: relative;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.13);
   backdrop-filter: blur(5px);
-  animation: modal-bg-show 1s;
+  animation: modal-bg-show 0.3s;
   @keyframes modal-bg-show {
     from {
       opacity: 0;
