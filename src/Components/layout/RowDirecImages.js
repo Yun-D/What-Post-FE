@@ -38,7 +38,11 @@ const RowDirecImages = (props) => {
         </ItemCard>
 
         {modalState && (
-          <ModalFrame state={modalState} closeModal={closeModal}>
+          <ModalFrame
+            state={modalState}
+            closeModal={closeModal}
+            widthSize="80%"
+          >
             <ModalContents>
               <PadDiv marginBottom="80px">
                 <PostTitle notFullSize>{props.title}</PostTitle>

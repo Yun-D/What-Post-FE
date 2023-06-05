@@ -37,7 +37,7 @@ const Overlay = styled.div`
 
 const ModalBlock = styled.div`
   //Contents가 담길 상자
-  width: 80%;
+  width: ${(props) => props.widthSize};
   height: 75vh;
   position: absolute; //static이 아닌 가까운 요소의 위치 기준으로 상대적 속성주기
   display: flex;
@@ -71,7 +71,7 @@ const Close = styled.div`
   }
 `;
 
-const ModalFrame = ({ state, closeModal, children }) => {
+const ModalFrame = ({ closeModal, children, widthSize }) => {
   useEffect(() => {
     // 모달 오버레이에서 스크롤 방지
     document.body.style.cssText = `
@@ -92,7 +92,7 @@ const ModalFrame = ({ state, closeModal, children }) => {
   return (
     <Container>
       <Overlay onClick={(e) => closeModal(e)} />
-      <ModalBlock>
+      <ModalBlock widthSize={widthSize}>
         <Close onClick={(e) => closeModal(e)}>
           <CloseIcon />
         </Close>

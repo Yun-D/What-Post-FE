@@ -68,7 +68,7 @@ const PostItem = (data) => {
 
       {/***************** 모달&전체 데이터 출력 부분 ******************/}
       {modalState && (
-        <ModalFrame state={modalState} closeModal={closeModal}>
+        <ModalFrame state={modalState} closeModal={closeModal} widthSize="80%">
           <ModalContents>
             <PadDiv marginBottom="80px">
               <PostTitle>{data.title}</PostTitle>

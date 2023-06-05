@@ -279,7 +279,7 @@ const WritePost = () => {
       </div>
 
       {modalState && (
-        <ModalFrame state={modalState} closeModal={closeModal}>
+        <ModalFrame state={modalState} closeModal={closeModal} widthSize="80%">
           {/* // ************************ 책 검색 모달 ************************ */}
           {thisContent === "book" && (
             <>
