@@ -47,6 +47,16 @@ input {
   width: 100%;
   position: flex;
 }
+.subText {
+  font-size: ${theme.textSize.subText};
+  color: gray;
+
+  @media only screen and (max-width: ${theme.size.tablet}) {
+    font-size: 0.9rem;
+  }
+}
+
+
 
 .contents_div {
   margin: auto 5%;
@@ -57,32 +67,24 @@ input {
     padding: 4%;
   }
 }
-.rowDirection {
-  //컴포넌트 가로정렬
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: 100%;
-}
 .wrapper {
   height: auto;
   min-height: calc(100vh - 280px);
   //padding-bottom: 100px;
 }
 
-.subText {
-  font-size: ${theme.textSize.subText};
-  color: gray;
-
-  @media only screen and (max-width: ${theme.size.tablet}) {
-    font-size: 0.9rem;
-  }
-}
 
 .whiteButton {
   background-color: white;
   color: ${theme.colors.textColor};
   border: 0.5px solid ${theme.colors.lightGray};
+}
+.rowDirection {
+  //컴포넌트 가로정렬
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
 }
 
 .shadow {

@@ -18,7 +18,7 @@ const BookInfo = () => {
         height="auto"
       />
       <DivBookInfo>
-        <H1>{location.state.title}</H1>
+        <H2>{location.state.title}</H2>
         <div className="rowDirection">
           <H3>{location.state.authors}</H3>
           <CircleIcon
@@ -65,7 +65,7 @@ const Hr = styled.hr`
   border-width: 1px 0px 0px 0px;
   height: 1px;
 `;
-const H1 = styled.h1`
+const H2 = styled.h2`
   color: ${theme.colors.peacock};
 
   @media only screen and (max-width: ${theme.size.tablet}) {

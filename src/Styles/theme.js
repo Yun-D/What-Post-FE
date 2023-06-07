@@ -12,9 +12,9 @@ const colors = {
 
 const textSize = {
   placeholder: "1rem",
-  postTitle: "1.45rem", //p태그 등 텍스트 타이틀
+  postTitle: "1.3rem", //p태그 등 텍스트 타이틀
   postContents: "1rem", //본문 텍스트
-  subText: "1.1rem",
+  subText: "1rem",
   buttonText: "1rem", //버튼에 들어가는 텍스트
 };
 

@@ -99,8 +99,7 @@ const BookMain = () => {
       />
 
       <div className="subText" style={{ margin: "3% 0 0.5%" }}>
-        {" "}
-        최신/랜덤 이용자 포스트{" "}
+        최신/랜덤 이용자 포스트
       </div>
       <div style={{ padding: "5px" }}>
         <Masonry
