@@ -44,7 +44,7 @@ const ModalBlock = styled.div`
   border-radius: 10px;
   background-color: ${theme.colors.boxColor};
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.3);
-  padding: 30px;
+  padding: 15px;
 `;
 
 const Contents = styled.div`
@@ -57,12 +57,13 @@ const Contents = styled.div`
   scroll-behavior: smooth;
   display: flex;
   align-items: center;
+  margin-top: 40px;
 `;
 
 const Close = styled.div`
   position: absolute;
   right: 30px;
-  top: 4%;
+  top: 20px;
   color: gray;
 
   &:hover {
