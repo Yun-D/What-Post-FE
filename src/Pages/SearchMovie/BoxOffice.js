@@ -6,6 +6,7 @@ import styled from "styled-components";
 
 import LeftIcon from "@material-ui/icons/ChevronLeft";
 import RightIcon from "@material-ui/icons/ChevronRight";
+import Blank from "Components/etc/Blank";
 
 const BoxOffice = (props) => {
   const [boxOffice, setBoxOffice] = useState([]);
@@ -179,11 +180,6 @@ const Div = styled.div`
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
-`;
-const Blank = styled.div`
-  flex: 999;
-  width: 90%;
-  height: 100%;
 `;
 const ButtonArea = styled.div`
   width: 100%;

@@ -4,6 +4,7 @@ import theme from "../../Styles/theme";
 import styled from "styled-components";
 import ModalFrame from "../../Components/layout/ModalFrame";
 import { TextButton } from "Components/etc/Buttons";
+import Blank from "Components/etc/Blank";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined"; //ModeCommentOutlined
 
@@ -166,11 +167,6 @@ const PadDiv = styled.div`
 const Div = styled.div`
   flex: 1;
   width: 100%;
-`;
-const Blank = styled.div`
-  flex: 999;
-  width: 100%;
-  height: 100%;
 `;
 
 export default PostItem;

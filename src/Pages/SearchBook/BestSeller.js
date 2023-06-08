@@ -5,6 +5,7 @@ import RowDirecImages from "Components/layout/RowDirecImages";
 import styled from "styled-components";
 import LeftIcon from "@material-ui/icons/ChevronLeft";
 import RightIcon from "@material-ui/icons/ChevronRight";
+import Blank from "Components/etc/Blank";
 
 const BestSeller = (props) => {
   const [bestSeller, setBestSeller] = useState([]);
@@ -98,11 +99,6 @@ const BestSeller = (props) => {
 const Div = styled.div`
   height: 100%;
   position: relative;
-`;
-const Blank = styled.div`
-  flex: 999;
-  width: 90%;
-  height: 100%;
 `;
 const ItemArea = styled.div`
   width: 100%;

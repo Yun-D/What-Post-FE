@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import theme from "Styles/theme";
 import ModalFrame from "./ModalFrame";
+import Blank from "Components/etc/Blank";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined";
 import VisibilityOff from "@material-ui/icons/VisibilityOffOutlined";
@@ -174,11 +175,6 @@ const PadDiv = styled.div`
 const Div = styled.div`
   flex: 1;
   width: 100%;
-`;
-const Blank = styled.div`
-  flex: 999;
-  width: 100%;
-  height: 100%;
 `;
 
 const Circle = styled.div`
