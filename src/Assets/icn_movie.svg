@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 111 98" width="current" height="current">
+  <defs>
+    <style>
+      .cls-1{fill:blue;}.cls-2{fill:#fff;}.cls-3{fill:current;}
+    </style>
+  </defs>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <rect class="cls-3" x="3" y="3" width="105" height="92" rx="5"/>
+      <path class="cls-3" d="M103,98H8a8,8,0,0,1-8-8V8A8,8,0,0,1,8,0h95a8,8,0,0,1,8,8V90A8,8,0,0,1,103,98ZM8,6A2,2,0,0,0,6,8V90a2,2,0,0,0,2,2h95a2,2,0,0,0,2-2V8a2,2,0,0,0-2-2Z"/>
+      <polygon class="cls-2" points="6.01 86 5.99 75.85 18.48 75.74 18.52 85.89 6.01 86"/>
+      <path class="cls-2" d="M28.84,85.8l0-10.15,21.51-.18,0,10.15Zm31.84-.27,0-10.15,21.51-.18,0,10.15Z"/>
+      <polygon class="cls-2" points="92.52 85.26 92.48 75.11 104.98 75 105.02 85.15 92.52 85.26"/>
+      <polygon class="cls-2" points="6.01 26 5.99 15.85 18.48 15.74 18.52 25.89 6.01 26"/>
+      <path class="cls-2" d="M28.84,25.8l0-10.15,21.51-.18,0,10.15Zm31.84-.27,0-10.15,21.51-.18,0,10.15Z"/>
+      <polygon class="cls-2" points="92.52 25.26 92.48 15.11 104.98 15 105.02 25.15 92.52 25.26"/>
+    </g>
+  </g>
+</svg>
