@@ -3,6 +3,8 @@ import styled from "styled-components";
 import "./WritePost.css";
 
 import theme from "../../../Styles/theme";
+import { ReactComponent as BooKIcn } from "Assets/icn_book.svg";
+import { ReactComponent as MovieIcn } from "Assets/icn_movie.svg";
 
 import BookInfo from "../../../Components/layout/BookInfo";
 import MovieInfo from "Components/layout/MovieInfo";
@@ -203,14 +205,25 @@ const WritePost = () => {
       <div>
         <SubjectDiv>
           <SubjectButton onClick={() => openModal("book")}>
-            <ImgIcon src={require("Assets/icn_book.png")} alt="book" /> 도서
+            <BooKIcn
+              width="35"
+              height="35"
+              fill="#929292"
+              style={{ marginRight: "10px" }}
+            />
+            도서
           </SubjectButton>
           <SubjectButton>
             <ImgIcon src={require("Assets/icn_drama.png")} alt="drama" />
             드라마
           </SubjectButton>
           <SubjectButton onClick={() => openModal("movie")}>
-            <ImgIcon src={require("Assets/icn_movie.png")} alt="movie" />
+            <MovieIcn
+              width="35"
+              height="35"
+              fill="#929292"
+              style={{ marginRight: "10px" }}
+            />
             영화
           </SubjectButton>
         </SubjectDiv>
