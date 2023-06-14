@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from "react";
 import { movieSearch } from "../../APIs/api";
+import keys from "APIs/api_key";
 
 import MovieList from "Components/layout/MovieList";
 import styled from "styled-components";
@@ -30,29 +31,33 @@ const SearchMovie = () => {
   //영화 검색
   const movieSearchHandler = async (query, start) => {
     const params = {
+      ServiceKey: keys.KMDB_API_KEY,
+      collection: "kmdb_new2",
       query: query, //검색어
-      start: start, //검색 시작 위치 지정
-      display: 10, //1~50. 출력할 검색 결과 수
+      startCount: start, //검색 시작 위치 지정
+      listCount: 10, //1~50. 출력할 검색 결과 수
     };
 
     const { data } = await movieSearch(params); //api 호출
-    if (data.items.length < 10) {
+    console.log(data.Data[0].Result);
+
+    if (data.Data[0].Result.length < 10) {
       //더이상 더보기로 보여줄 데이터가 없는 경우 더보기 버튼 제거
       setIsEnd(true);
     }
-
     if (start === 1) {
-      dispatch(m_setItems(data.items));
+      dispatch(m_setItems(data.Data[0].Result));
     } else if (start >= 11) {
-      let beforeData = movies[start - 2].title;
-
-      if (data.items[data.items.length - 1].title === beforeData) {
-        //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
-        setIsEnd(true);
-        alert("더이상 결과가 없습니다.");
-      } else {
-        dispatch(m_setItems(movies.concat(data.items)));
-      }
+      let lengthData = data.Data[0].Result.length;
+      //let beforeData = movies[start - 2].title;
+      console.log(movies[start - 2]);
+      // if (data.Data[lengthData - 1].title === beforeData) {
+      //   //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
+      //   setIsEnd(true);
+      //   alert("더이상 결과가 없습니다.");
+      // } else {
+      dispatch(m_setItems(movies.concat(data.Data[0].Result)));
+      //}
     }
   };
   /////////////////////////////////영화 검색용 함수들 닫음
@@ -72,19 +77,19 @@ const SearchMovie = () => {
       {movies.map((movie, idx) => (
         <MovieList
           key={idx}
-          thumbnail={movie.image}
+          thumbnail={movie.posters}
           title={movie.title}
-          subtitle={movie.subtitle}
-          datetime={movie.pubDate}
-          director={movie.director}
-          actor={movie.actor}
+          subtitle={movie.titleEng}
+          datetime={movie.repRlsDate.substring(0, 4)}
+          director={movie.directors.director[0].directorNm}
+          actor={movie.actors.actor
+            .map((data) => data.actorNm.replace(/!HS | !HE /g, ""))
+            .join(" ")}
           tolink={"/search_movie/info"}
           detailLink={movie.link}
         />
       ))}
-
       <br />
-
       <FlexZone>
         {!isEnd && (
           <SmallBtn
