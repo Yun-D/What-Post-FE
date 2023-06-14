@@ -14,12 +14,16 @@ const MovieList = (props) => {
 
   ////// 결과 텍스트 수정
   let temp_title = props.title;
+  let temp_subtitle = props.subtitle;
   let temp_poster = props.thumbnail;
 
   temp_title = temp_title.replace(/!HS | !HE /g, ""); // 타이틀에 HS, HE 붙어있던 것 치환
+  const index1 = temp_subtitle.indexOf("(");
+  temp_subtitle =
+    index1 !== -1 ? temp_subtitle.substring(0, index1) : temp_subtitle;
 
-  const index = temp_poster.indexOf("|") || temp_poster.indexOf("%7C");
-  temp_poster = index !== -1 ? temp_poster.substring(0, index) : temp_poster;
+  const index2 = temp_poster.indexOf("|") || temp_poster.indexOf("%7C"); // '|'나 '%7C'와 함께 다른 url이 더 존재한다면
+  temp_poster = index2 !== -1 ? temp_poster.substring(0, index2) : temp_poster; //해당 부분부터 뒷 부분을 지워주고, 없다면 기본 url 사용
 
   return (
     <ItemCard className="rowDirection">
@@ -31,7 +35,7 @@ const MovieList = (props) => {
           state={{
             thumbnail: temp_poster,
             title: temp_title,
-            subtitle: props.subtitle,
+            subtitle: temp_subtitle,
             datetime: props.datetime,
             director: props.director,
             actor: props.actor,
@@ -44,7 +48,7 @@ const MovieList = (props) => {
         >
           {isSubtitleExist ? (
             <h3>
-              {temp_title} | {props.subtitle}
+              {temp_title} | {temp_subtitle}
             </h3>
           ) : (
             <h3>{temp_title}</h3>
