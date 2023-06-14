@@ -39,7 +39,6 @@ const SearchMovie = () => {
     };
 
     const { data } = await movieSearch(params); //api 호출
-    console.log(data.Data[0].Result);
 
     if (data.Data[0].Result.length < 10) {
       //더이상 더보기로 보여줄 데이터가 없는 경우 더보기 버튼 제거
@@ -48,16 +47,7 @@ const SearchMovie = () => {
     if (start === 1) {
       dispatch(m_setItems(data.Data[0].Result));
     } else if (start >= 11) {
-      let lengthData = data.Data[0].Result.length;
-      //let beforeData = movies[start - 2].title;
-      console.log(movies[start - 2]);
-      // if (data.Data[lengthData - 1].title === beforeData) {
-      //   //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
-      //   setIsEnd(true);
-      //   alert("더이상 결과가 없습니다.");
-      // } else {
       dispatch(m_setItems(movies.concat(data.Data[0].Result)));
-      //}
     }
   };
   /////////////////////////////////영화 검색용 함수들 닫음
