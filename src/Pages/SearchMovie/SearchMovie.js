@@ -74,7 +74,7 @@ const SearchMovie = () => {
           director={movie.directors.director[0].directorNm}
           actor={movie.actors.actor
             .map((data) => data.actorNm.replace(/!HS | !HE /g, ""))
-            .join(" ")}
+            .join(" | ")}
           tolink={"/search_movie/info"}
           detailLink={movie.link}
         />

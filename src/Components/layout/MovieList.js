@@ -14,10 +14,13 @@ const MovieList = (props) => {
 
   ////// 결과 텍스트 수정
   let temp_title = props.title;
+  let temp_director = props.director;
   let temp_subtitle = props.subtitle;
   let temp_poster = props.thumbnail;
 
   temp_title = temp_title.replace(/!HS | !HE /g, ""); // 타이틀에 HS, HE 붙어있던 것 치환
+  temp_director = temp_director.replace(/!HS | !HE /g, "");
+
   const index1 = temp_subtitle.indexOf("(");
   temp_subtitle =
     index1 !== -1 ? temp_subtitle.substring(0, index1) : temp_subtitle;
@@ -37,7 +40,7 @@ const MovieList = (props) => {
             title: temp_title,
             subtitle: temp_subtitle,
             datetime: props.datetime,
-            director: props.director,
+            director: temp_director,
             actor: props.actor,
             tolink: props.link,
             detailLink: props.detailLink,
@@ -56,7 +59,7 @@ const MovieList = (props) => {
         </StyledLink>
 
         <H4>
-          {props.director} | {props.datetime}
+          {temp_director} | {props.datetime}
         </H4>
         <br />
         <SmallTxt>{props.actor}</SmallTxt>
