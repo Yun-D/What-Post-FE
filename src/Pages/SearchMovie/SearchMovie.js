@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { m_setQuery, m_setItems, m_nextPage, m_setPage } from "Store/store";
 
 import MovieSearchFunc from "Utils/MovieSearchFunc";
+import FloatingButton from "Components/etc/FloatingButton";
 
 const SearchMovie = () => {
   const { query } = useParams();
@@ -101,6 +102,8 @@ const SearchMovie = () => {
           </SmallBtn>
         )}
       </FlexZone>
+
+      <FloatingButton />
     </div>
   );
 };
