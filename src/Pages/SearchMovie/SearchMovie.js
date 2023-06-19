@@ -39,15 +39,25 @@ const SearchMovie = () => {
     };
 
     const { data } = await movieSearch(params); //api 호출
+    let movieData = data.Data[0].Result;
+    const filtedData = movieData.filter((originalData) => {
+      //성인물, 장르/감독 없는 항목 필터링
+      return (
+        originalData.genre !== "에로" &&
+        originalData.directors.length !== 0 &&
+        originalData.genre.length !== 0
+      );
+    });
 
-    if (data.Data[0].Result.length < 10) {
+    if (data.Data[0].TotalCount - start < 10) {
       //더이상 더보기로 보여줄 데이터가 없는 경우 더보기 버튼 제거
       setIsEnd(true);
     }
+
     if (start === 1) {
-      dispatch(m_setItems(data.Data[0].Result));
+      dispatch(m_setItems(filtedData));
     } else if (start >= 11) {
-      dispatch(m_setItems(movies.concat(data.Data[0].Result)));
+      dispatch(m_setItems(movies.concat(filtedData)));
     }
   };
   /////////////////////////////////영화 검색용 함수들 닫음
