@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import theme from "../../Styles/theme";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import ModalFrame from "../../Components/layout/ModalFrame";
 import { TextButton } from "Components/etc/Buttons";
 import Blank from "Components/etc/Blank";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined"; //ModeCommentOutlined
+import HeartIcon from "@material-ui/icons/FavoriteBorder";
+import HeartIconFull from "@material-ui/icons/Favorite";
 
 const PostItem = (data) => {
   const [modalState, setModalState] = useState(false); //모달 출력을 위한 state
   const [isShowMore, setIsShowMore] = useState(false); //ellipsis처리되어 더보기 버튼 출력해야하는지 (필요하면 true, 아니면 false)
+  const [isLiked, setIsLiked] = useState(false); //좋아요 버튼이 눌렸는지 확인하는 state
 
   ////////////////////////////////////데이터 Ref
   const postTitleRef = useRef();
@@ -39,6 +42,10 @@ const PostItem = (data) => {
     }
   }, []);
 
+  const clickedLike = () => {
+    setIsLiked(!isLiked);
+  };
+
   return (
     <div>
       <PostBoxArea>
@@ -62,7 +69,7 @@ const PostItem = (data) => {
                 marginRight: "5px",
               }}
             />
-            <PostContents>{data.nickname}</PostContents>
+            {data.nickname}
           </Div>
         </Contents>
       </PostBoxArea>
@@ -85,11 +92,33 @@ const PostItem = (data) => {
                     marginRight: "5px",
                   }}
                 />
-                <PostContents>{data.nickname}</PostContents>
+                {data.nickname}
               </Div>
             </PadDiv>
 
             <PostContents>{data.contents}</PostContents>
+            <StickyWraper isScrollable={data.contents.length > 500}>
+              <StickyButton onClick={clickedLike}>
+                <Div className="rowDirction">
+                  {isLiked ? (
+                    <HeartIconFull
+                      style={{
+                        color: `${theme.colors.peacock}`,
+                        marginRight: "5px",
+                      }}
+                    />
+                  ) : (
+                    <HeartIcon
+                      style={{
+                        color: `${theme.colors.peacock}`,
+                        marginRight: "5px",
+                      }}
+                    />
+                  )}
+                  좋아요 ({"갯수"})
+                </Div>
+              </StickyButton>
+            </StickyWraper>
           </ModalContents>
         </ModalFrame>
       )}
@@ -114,8 +143,42 @@ const Contents = styled.div`
 const ModalContents = styled.div`
   flex: 1;
   background-color: white;
+  width: 95%;
+  height: auto;
   border-radius: 8px;
   padding: 1rem;
+  margin-bottom: 5%;
+
+  align-items: center;
+  justify-content: center;
+`;
+
+const StickyWraper = styled.div`
+  height: 50px;
+  width: 150px;
+
+  position: absolute;
+  bottom: 8vh;
+  left: 50%;
+  transform: translate(-50%, 0);
+  z-index: 999;
+
+  display: flex;
+
+  ${({ isScrollable }) =>
+    isScrollable &&
+    css`
+      position: -webkit-sticky;
+      position: sticky; /* 스크롤이 생기면 sticky로 변경됩니다. */
+      bottom: 2vh;
+    `}
+`;
+const StickyButton = styled.button`
+  background-color: #ddeeee;
+  border-radius: 25%;
+  box-shadow: ${theme.size.boxShadow};
+  color: ${theme.colors.textColor};
+  font-weight: 400;
 `;
 
 const PostTitle = styled.p`
@@ -133,7 +196,7 @@ const PostTitle = styled.p`
     margin-bottom: 15px;
   `
       : `
-    font-size: 2.5rem
+    font-size: 1.6rem
   `};
 `;
 const PostContents = styled.div`
@@ -150,7 +213,9 @@ const PostContents = styled.div`
     -webkit-box-orient: vertical;
     `
       : `
-    line-height: 27px;`}
+    line-height: 27px;
+    margin-bottom: 30px;
+    `}
 `;
 
 const StyledLine = styled.hr`
@@ -165,8 +230,10 @@ const PadDiv = styled.div`
   margin-bottom: ${(props) => props.marginBottom};
 `;
 const Div = styled.div`
-  flex: 1;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default PostItem;
