@@ -7,16 +7,21 @@ import Blank from "Components/etc/Blank";
 import VisibilityOff from "@material-ui/icons/VisibilityOffOutlined";
 import LikedSticker from "./LikedSticker";
 import { TextButton } from "Components/etc/Buttons";
+import { Link } from "react-router-dom";
 //TODO: 비공개인 것만 서클 보이게끔 처리해야함
+
+/////// 포스터, 타이틀을 가지는 아이템들을 가로형으로 보여주는 컴포넌트 ///////
+// props로 모달 컨트롤 여부 선택 가능
+// 현재 마이 포스트 내 포스트 조회에서 사용중
 
 const RowDirecImages = (props) => {
   const [modalState, setModalState] = useState(false); //모달
   const [isLiked, setIsLiked] = useState(false); //좋아요
 
-  const isViewPost = props.isViewPost;
+  const isViewPost = props.isViewPost; //클릭 시 모달을 띄울지 여부
 
   /////////////////////////////////모달용 함수들
-  const openModal = (props) => {
+  const openModal = () => {
     //e.preventDefault();
     setModalState(true);
   };
@@ -24,6 +29,11 @@ const RowDirecImages = (props) => {
     setModalState(false);
   };
   /////////////////////////////////모달용 함수들 닫음
+
+  const deletePost = () => {
+    alert("정말 삭제하시겠습니까?");
+    //TODO: 삭제 코드 추가
+  };
 
   if (isViewPost) {
     return (
@@ -56,8 +66,10 @@ const RowDirecImages = (props) => {
               <PadDiv marginBottom="40px">
                 <Div className="rowDirection">
                   <Blank />
-                  <TextButton> 수정 </TextButton>
-                  <TextButton> 삭제 </TextButton>
+                  <Link to="/my_post/write_post">
+                    <TextButton> 수정 </TextButton>
+                  </Link>
+                  <TextButton onClick={deletePost}> 삭제 </TextButton>
                   <PostContents>{props.nickname}</PostContents>
                 </Div>
               </PadDiv>
