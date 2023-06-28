@@ -232,6 +232,7 @@ const WritePost = () => {
             placeholder="포스트 제목을 입력하세요."
             onChange={getValue}
             name="title"
+            value={postContent.title}
           />
 
           {isBookSelected && (
@@ -258,6 +259,7 @@ const WritePost = () => {
             config={{
               placeholder: "내용을 입력하세요.",
             }}
+            data={postContent.content}
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
               //console.log("Editor is ready to use!", editor);
