@@ -6,10 +6,13 @@ import Blank from "Components/etc/Blank";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined";
 import VisibilityOff from "@material-ui/icons/VisibilityOffOutlined";
+import LikedSticker from "./LikedSticker";
 //TODO: 비공개인 것만 서클 보이게끔 처리해야함
 
 const RowDirecImages = (props) => {
   const [modalState, setModalState] = useState(false); //모달
+  const [isLiked, setIsLiked] = useState(false); //좋아요
+
   const isViewPost = props.isViewPost;
 
   /////////////////////////////////모달용 함수들
@@ -64,6 +67,12 @@ const RowDirecImages = (props) => {
               </PadDiv>
 
               <PostContents>{props.contents}</PostContents>
+
+              <LikedSticker
+                isLiked={isLiked}
+                setIsLiked={setIsLiked}
+                isScrollable={props.contents.length > 400}
+              />
             </ModalContents>
           </ModalFrame>
         )}
