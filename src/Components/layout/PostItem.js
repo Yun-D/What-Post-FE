@@ -53,7 +53,11 @@ const PostItem = (data) => {
             <PostContents notFullSize ref={postContentRef}>
               {data.contents}
             </PostContents>
-            {isShowMore && <TextButton onClick={showMore}>더보기</TextButton>}
+            {isShowMore && (
+              <TextButton onClick={showMore} isJustText={true}>
+                더보기
+              </TextButton>
+            )}
           </div>
 
           <Blank />

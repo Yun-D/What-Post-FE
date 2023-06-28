@@ -4,9 +4,9 @@ import theme from "Styles/theme";
 import ModalFrame from "./ModalFrame";
 import Blank from "Components/etc/Blank";
 
-import NoteIcon from "@material-ui/icons/TextsmsOutlined";
 import VisibilityOff from "@material-ui/icons/VisibilityOffOutlined";
 import LikedSticker from "./LikedSticker";
+import { TextButton } from "Components/etc/Buttons";
 //TODO: 비공개인 것만 서클 보이게끔 처리해야함
 
 const RowDirecImages = (props) => {
@@ -56,12 +56,8 @@ const RowDirecImages = (props) => {
               <PadDiv marginBottom="40px">
                 <Div className="rowDirection">
                   <Blank />
-                  <NoteIcon
-                    style={{
-                      color: `${theme.colors.peacock}`,
-                      marginRight: "5px",
-                    }}
-                  />
+                  <TextButton> 수정 </TextButton>
+                  <TextButton> 삭제 </TextButton>
                   <PostContents>{props.nickname}</PostContents>
                 </Div>
               </PadDiv>
