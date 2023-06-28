@@ -7,7 +7,7 @@ import { bookDummy } from "Assets/dummy";
 import { postRead } from "Utils/post";
 
 import ModalFrame from "Components/layout/ModalFrame";
-import LikedPostList from "Components/layout/LikedPostList";
+import LikedPostList from "Pages/MyPost/LikedPostList";
 import RowDirecImages from "Components/layout/RowDirecImages";
 
 const MyPost = () => {

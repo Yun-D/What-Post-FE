@@ -16,50 +16,48 @@ const LikedPostList = () => {
   // };
 
   return (
-    <div>
-      <Container>
-        <RowDiv className="rowDirection">
-          <ChannelThumb>
-            {/* <BooKIcn fill={`${theme.colors.mainColor}`} /> */}
-            <MovieIcn fill={`${theme.colors.mainColor}`} />
-          </ChannelThumb>
+    <Container>
+      <RowDiv className="rowDirection">
+        <ChannelThumb>
+          {/* <BooKIcn fill={`${theme.colors.mainColor}`} /> */}
+          <MovieIcn fill={`${theme.colors.mainColor}`} />
+        </ChannelThumb>
 
-          <div>
-            <p className="p_title">포스트 제목</p>
-            <p className="subText">책/영화 제목</p>
-          </div>
-          <Blank />
-          <Circle>
-            <VisibilityOff
-              style={{
-                color: "gray",
-                margin: 5,
-              }}
-            />
-          </Circle>
-        </RowDiv>
-
-        <PreviewContents>글 내용 미리보기 2줄</PreviewContents>
-
+        <div>
+          <p className="p_title">포스트 제목</p>
+          <p className="subText">책/영화 제목</p>
+        </div>
         <Blank />
-        <div className="rowDirection">
-          <Blank />
-          <NoteIcon
+        <Circle>
+          <VisibilityOff
             style={{
-              color: `${theme.colors.peacock}`,
-              marginRight: "5px",
+              color: "gray",
+              margin: 5,
             }}
           />
-          유저 네임
-        </div>
-      </Container>
-    </div>
+        </Circle>
+      </RowDiv>
+
+      <PreviewContents>글 내용 미리보기</PreviewContents>
+
+      <Blank />
+      <div className="rowDirection">
+        <Blank />
+        <NoteIcon
+          style={{
+            color: `${theme.colors.peacock}`,
+            marginRight: "5px",
+          }}
+        />
+        유저 네임
+      </div>
+    </Container>
   );
 };
 
 const Container = styled.div`
   width: 100%;
-  height: 17vh;
+  //height: 20vh;
   background: white;
   border-radius: 10px;
   padding: 1rem;
@@ -80,12 +78,13 @@ const PreviewContents = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
+  margin: 3% 1%;
 `;
 
 const ChannelThumb = styled.div`
   width: 45px;
   height: 45px;
-  margin-right: 2%;
+  margin-right: 3%;
 `;
 const Circle = styled.div`
   width: 34px;
