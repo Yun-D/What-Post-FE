@@ -6,6 +6,7 @@ import Blank from "Components/etc/Blank";
 
 import VisibilityOff from "@material-ui/icons/VisibilityOffOutlined";
 import LikedSticker from "./LikedSticker";
+import { onErrorImg } from "Utils/onErrorImg";
 import { TextButton } from "Components/etc/Buttons";
 import { Link } from "react-router-dom";
 //TODO: 비공개인 것만 서클 보이게끔 처리해야함
@@ -90,7 +91,11 @@ const RowDirecImages = (props) => {
     return (
       <ContainerDiv>
         <ItemCard>
-          <ItemIMG src={props.thumbnail} alt={props.thumbnail} />
+          <ItemIMG
+            src={props.thumbnail}
+            alt={props.thumbnail}
+            onError={onErrorImg}
+          />
           <ItemP>{props.title}</ItemP>
         </ItemCard>
       </ContainerDiv>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyledLink } from "Components/etc/StyledLink";
 import theme from "Styles/theme";
 import styled from "styled-components";
-import defaultImage from "Assets/no_image_box.svg";
+import { onErrorImg } from "Utils/onErrorImg";
 
 const MovieList = (props) => {
   const [isSubtitleExist, setIsSubtitleExist] = useState(false);
@@ -12,10 +12,6 @@ const MovieList = (props) => {
       setIsSubtitleExist(true);
     }
   }, [props.subtitle]);
-
-  const onErrorImg = (e) => {
-    e.target.src = defaultImage;
-  };
 
   ////// 결과 텍스트 수정
   let temp_title = props.title;

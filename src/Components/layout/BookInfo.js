@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+
 import theme from "../../Styles/theme";
+import { onErrorImg } from "Utils/onErrorImg";
 
 import { useLocation } from "react-router-dom";
 import CircleIcon from "@material-ui/icons/RadioButtonUnchecked";
@@ -14,8 +16,9 @@ const BookInfo = () => {
       <img
         src={location.state.thumbnail}
         alt={location.state.thumbnail}
-        width="20%"
+        width="18%"
         height="auto"
+        onError={onErrorImg}
       />
       <DivBookInfo>
         <H2>{location.state.title}</H2>
