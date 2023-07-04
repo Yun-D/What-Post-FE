@@ -2,11 +2,11 @@ import { React, useState, useLayoutEffect } from "react";
 import styled from "styled-components";
 import "./WritePost.css";
 
-import theme from "../../../Styles/theme";
+import theme from "Styles/theme";
 import { ReactComponent as BooKIcn } from "Assets/icn_book.svg";
 import { ReactComponent as MovieIcn } from "Assets/icn_movie.svg";
 
-import BookInfo from "../../../Components/layout/BookInfo";
+import BookInfo from "Components/layout/BookInfo";
 import MovieInfo from "Components/layout/MovieInfo";
 import { bookSearch, movieSearch } from "APIs/api";
 import BookList from "Components/layout/BookList";
@@ -34,7 +34,6 @@ import {
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import ReactHtmlParser from "react-html-parser";
 
 const WritePost = () => {
   const dispatch = useDispatch(); //작업 전달하기
@@ -66,6 +65,7 @@ const WritePost = () => {
   const [searchItem, setSearch] = useState(""); //검색창에 입력되는 텍스트 추적용 state
   const [isBookSelected, setIsBookSelected] = useState(false); //책 데이터 선택 됐을 경우 true
   const [isMovieSelected, setIsMovieSelected] = useState(false);
+  const [isOpen, setIsOpen] = useState("1"); //게시글 공개 비공개 여부(1이면 공개)
   ///////////////////////////////////////////  state 선언 닫음
 
   useLayoutEffect(() => {
@@ -190,17 +190,13 @@ const WritePost = () => {
       [name]: value, //여기서 name은 "title"
     });
   };
+  const radiobuttonHandler = (e) => {
+    setIsOpen(e.target.value);
+  };
 
   return (
     <div className="contents_div">
-      {viewContent.map((ele) => (
-        <TempPostTest>
-          <h3>{ele.title}</h3>
-          <div>{ReactHtmlParser(ele.content)}</div>
-        </TempPostTest>
-      ))}
-
-      <div>
+      <>
         <SubjectDiv>
           <SubjectButton onClick={() => openModal("book")}>
             <BooKIcn
@@ -271,9 +267,26 @@ const WritePost = () => {
                 content: data,
               });
             }}
-            onBlur={(event, editor) => {}}
-            onFocus={(event, editor) => {}}
           />
+
+          <SubjectDiv className="rowDirection">
+            <p>공개 여부</p>
+            <RadioButton
+              type="radio"
+              name="openpost"
+              value="1"
+              onChange={radiobuttonHandler}
+              defaultChecked
+            />
+            <label>공개</label>
+            <RadioButton
+              type="radio"
+              name="openpost"
+              value="0"
+              onChange={radiobuttonHandler}
+            />
+            <label>비공개</label>
+          </SubjectDiv>
 
           <FullSizeBtn
             onClick={() => {
@@ -282,14 +295,15 @@ const WritePost = () => {
                 thisContent,
                 selectData,
                 postContent.title,
-                postContent.content
+                postContent.content,
+                isOpen
               );
             }}
           >
             업로드
           </FullSizeBtn>
         </div>
-      </div>
+      </>
 
       {modalState && (
         <ModalFrame state={modalState} closeModal={closeModal} widthSize="80%">
@@ -440,11 +454,10 @@ const Blank = styled.div`
   }
 `;
 
-const TempPostTest = styled.div`
-  border: 1px solid;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 30px;
+const RadioButton = styled.input`
+  height: auto;
+  width: auto;
+  margin: 0 10px 0 20px;
 `;
 
 export default WritePost;

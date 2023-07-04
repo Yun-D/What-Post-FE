@@ -3,8 +3,15 @@ import keys from "APIs/api_key";
 
 axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 
-export const postCreate = (postType, work_title, post_title, post_content) => {
+export const postCreate = (
+  postType,
+  work_title,
+  post_title,
+  post_content,
+  openOX
+) => {
   let data = {
+    openOX: openOX,
     type: postType,
     work_title: work_title,
     post_title: post_title,
