@@ -17,6 +17,7 @@ export const onLogin = (userid, userpwd) => {
           "Authorization"
         ] = `Bearer ${accessToken}`; // accessToken 설정
         localStorage.setItem("login-token", accessToken);
+        localStorage.setItem("userID", userid);
 
         if (accessToken) {
           window.location.replace("/");
@@ -33,8 +34,8 @@ export const onLogin = (userid, userpwd) => {
     });
 };
 export const onLogout = () => {
-  //localStorage.clear();
-  localStorage.removeItem("login-token");
+  localStorage.clear();
+  //localStorage.removeItem("login-token");
   window.location.replace("/");
 };
 

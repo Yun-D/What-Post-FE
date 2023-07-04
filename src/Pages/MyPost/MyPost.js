@@ -22,13 +22,12 @@ const MyPost = () => {
 
   useEffect(() => {
     postRead();
-    //TODO: 유저네임 뽑아서 매핑하기
   });
 
   return (
     <Div>
       <div className="rowDirection">
-        <p className="p_title">유저 네임의 책장</p>
+        <p className="p_title">{localStorage.getItem("userID")}의 책장</p>
 
         <SmallBtn className="whiteButton shadow" onClick={() => openModal()}>
           좋아요한 포스트
