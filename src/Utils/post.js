@@ -34,13 +34,12 @@ export const postCreate = (
     })
     .then((response) => {
       if (response.data.status === 201) {
-        console.log("글 등록 성공");
+        window.location.replace("/my_post");
       }
     })
     .catch((error) => {
       console.log(error);
       if (error) {
-        console.log("글 등록 실패");
         alert("컨텐츠를 선택해주세요.");
       }
     });
