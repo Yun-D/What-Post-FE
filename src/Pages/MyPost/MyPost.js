@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
 import { bookDummy } from "Assets/dummy";
 import { postRead } from "Utils/post";
+import { onLogout } from "Utils/auth";
 
 import ModalFrame from "Components/layout/ModalFrame";
 import LikedPostList from "Pages/MyPost/LikedPostList";
@@ -13,7 +14,7 @@ import RowDirecImages from "Components/layout/RowDirecImages";
 const MyPost = () => {
   const [modalState, setModalState] = useState(false); //모달
 
-  const openModal = (props) => {
+  const openModal = () => {
     setModalState(true);
   };
   const closeModal = () => {
@@ -48,7 +49,9 @@ const MyPost = () => {
         ))}
       </MyBookshelfDiv>
 
-      <FullSizeBtn className="whiteButton">로그아웃</FullSizeBtn>
+      <FullSizeBtn className="whiteButton" onClick={onLogout}>
+        로그아웃
+      </FullSizeBtn>
       <FullSizeBtn className="whiteButton">회원 탈퇴</FullSizeBtn>
 
       {modalState && (
