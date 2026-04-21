@@ -1,4 +1,4 @@
-import { React, useLayoutEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { bookSearch } from "../../APIs/api";
 import BookList from "../../Components/layout/BookList";
 import BookSearchFunc from "Utils/BookSearchFunc";
@@ -28,7 +28,7 @@ const SearchBook = () => {
   const isEnd = useSelector((state) => state.bookSearch.isEnd);
   const dispatch = useDispatch(); //작업 전달하기
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     //if (search === queryData) {
     bookSearchHandler(search, pageNum);
     //}

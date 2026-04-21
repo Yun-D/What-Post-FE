@@ -1,4 +1,4 @@
-import { React, useState, useLayoutEffect } from "react";
+import { React, useState, useEffect } from "react";
 import styled from "styled-components";
 import "./WritePost.css";
 
@@ -68,7 +68,7 @@ const WritePost = () => {
   const [isOpen, setIsOpen] = useState("1"); //게시글 공개 비공개 여부(1이면 공개)
   ///////////////////////////////////////////  state 선언 닫음
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (searchItem.length > 1) {
       if (thisContent === "book") {
         bookSearchHandler(queryData, pageNum);
@@ -296,7 +296,7 @@ const WritePost = () => {
                 selectData,
                 postContent.title,
                 postContent.content,
-                isOpen
+                isOpen,
               );
             }}
           >
