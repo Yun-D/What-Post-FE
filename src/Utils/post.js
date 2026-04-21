@@ -29,7 +29,10 @@ export const postCreate = (
     .post(`${keys.SERVER_URL}/post/createPost`, data, {
       headers: {
         //"Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         Authorization: localStorage.getItem("login-token"),
+        "Access-Control-Allow-Origin": `http://localhost:3000`,
+        "Access-Control-Allow-Credentials": "true",
       },
     })
     .then((response) => {
@@ -49,8 +52,11 @@ export const postRead = () => {
   axios
     .get(`${keys.SERVER_URL}/user/mypost`, {
       headers: {
-        //"Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
         Authorization: localStorage.getItem("login-token"),
+        //Authorization: `Bearer ${localStorage.getItem("login-token")}`,
+        // "Access-Control-Allow-Origin": `http://localhost:3000`,
+        // "Access-Control-Allow-Credentials": "true",
       },
     })
     .then((response) => {

@@ -13,9 +13,7 @@ export const onLogin = (userid, userpwd) => {
     .then((response) => {
       if (response.data.status === 200) {
         const accessToken = response.data.data.accessToken;
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${accessToken}`; // accessToken 설정
+        axios.defaults.headers.common["Authorization"] = `${accessToken}`; // accessToken 설정
         localStorage.setItem("login-token", accessToken);
         localStorage.setItem("userID", userid);
 

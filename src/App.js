@@ -20,6 +20,8 @@ import SearchMovie from "./Pages/SearchMovie/SearchMovie";
 import MovieDetail from "./Pages/SearchMovie/MovieDetail";
 
 function App() {
+  //localStorage.setItem("login-token", "ddd");
+
   return (
     <div className="app">
       <ThemeProvider theme={theme}>
