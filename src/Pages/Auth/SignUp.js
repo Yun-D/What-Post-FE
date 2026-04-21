@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styled from "styled-components";
 import theme from "../../Styles/theme";
@@ -10,6 +11,7 @@ const SignUp = () => {
   const idRef = useRef();
   const emailRef = useRef();
   const pwdRef = useRef();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -41,7 +43,8 @@ const SignUp = () => {
             onSignUp(
               idRef.current.value,
               pwdRef.current.value,
-              emailRef.current.value
+              emailRef.current.value,
+              navigate
             )
           }
         >

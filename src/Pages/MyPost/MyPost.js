@@ -1,5 +1,5 @@
 import { React, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
@@ -12,6 +12,7 @@ import LikedPostList from "Pages/MyPost/LikedPostList";
 import RowDirecImages from "Components/layout/RowDirecImages";
 
 const MyPost = () => {
+  const navigate = useNavigate();
   const [modalState, setModalState] = useState(false); //모달
 
   const openModal = () => {
@@ -23,7 +24,7 @@ const MyPost = () => {
 
   useEffect(() => {
     postRead();
-  });
+  }, []);
 
   return (
     <Div>
@@ -49,7 +50,7 @@ const MyPost = () => {
         ))}
       </MyBookshelfDiv>
 
-      <FullSizeBtn className="whiteButton" onClick={onLogout}>
+      <FullSizeBtn className="whiteButton" onClick={() => onLogout(navigate)}>
         로그아웃
       </FullSizeBtn>
       <FullSizeBtn className="whiteButton">회원 탈퇴</FullSizeBtn>

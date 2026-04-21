@@ -4,7 +4,7 @@ import keys from "APIs/api_key";
 //const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
 axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 
-export const onLogin = (userid, userpwd) => {
+export const onLogin = (userid, userpwd, navigate) => {
   axios
     .post(`${keys.SERVER_URL}/user/signin`, {
       username: userid,
@@ -18,7 +18,7 @@ export const onLogin = (userid, userpwd) => {
         localStorage.setItem("userID", userid);
 
         if (accessToken) {
-          window.location.replace("/");
+          navigate("/");
         }
       } else {
         console.log(response);
@@ -31,10 +31,10 @@ export const onLogin = (userid, userpwd) => {
       console.log(error);
     });
 };
-export const onLogout = () => {
+export const onLogout = (navigate) => {
   localStorage.clear();
   //localStorage.removeItem("login-token");
-  window.location.replace("/");
+  navigate("/");
 };
 
 export const onIdCheck = (userid) => {
@@ -53,13 +53,13 @@ export const onIdCheck = (userid) => {
     });
 };
 
-export const onSignUp = (userid, userpwd, useremail) => {
+export const onSignUp = (userid, userpwd, useremail, navigate) => {
   const data = { username: userid, pwd: userpwd, email: useremail };
   axios
     .post(`${keys.SERVER_URL}/user/signup`, data)
     .then((response) => {
       if (response.data.status === 201) {
-        window.location.replace("/signup/success");
+        navigate("/signup/success");
       } else {
         console.log(response);
       }

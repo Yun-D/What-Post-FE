@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 import theme from "../../Styles/theme";
 import styled from "styled-components";
@@ -10,6 +11,7 @@ import { onLogin } from "Utils/auth";
 const Login = () => {
   const idRef = useRef();
   const pwdRef = useRef();
+  const navigate = useNavigate();
 
   return (
     <Container>
@@ -19,7 +21,7 @@ const Login = () => {
         <Input placeholder="비밀번호" type="password" ref={pwdRef} />
         <br />
         <LongBtn
-          onClick={() => onLogin(idRef.current.value, pwdRef.current.value)}
+          onClick={() => onLogin(idRef.current.value, pwdRef.current.value, navigate)}
         >
           로그인
         </LongBtn>
