@@ -2,14 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 
 import theme from "../../Styles/theme";
 import styled from "styled-components";
+
 import ModalFrame from "../../Components/layout/ModalFrame";
+import LikedSticker from "./LikedSticker";
 import { TextButton } from "Components/etc/Buttons";
+import Blank from "Components/etc/Blank";
 
 import NoteIcon from "@material-ui/icons/TextsmsOutlined"; //ModeCommentOutlined
 
 const PostItem = (data) => {
   const [modalState, setModalState] = useState(false); //모달 출력을 위한 state
   const [isShowMore, setIsShowMore] = useState(false); //ellipsis처리되어 더보기 버튼 출력해야하는지 (필요하면 true, 아니면 false)
+  const [isLiked, setIsLiked] = useState(false); //좋아요 버튼이 눌렸는지 확인하는 state
 
   ////////////////////////////////////데이터 Ref
   const postTitleRef = useRef();
@@ -49,7 +53,11 @@ const PostItem = (data) => {
             <PostContents notFullSize ref={postContentRef}>
               {data.contents}
             </PostContents>
-            {isShowMore && <TextButton onClick={showMore}>더보기</TextButton>}
+            {isShowMore && (
+              <TextButton onClick={showMore} isJustText={true}>
+                더보기
+              </TextButton>
+            )}
           </div>
 
           <Blank />
@@ -61,14 +69,14 @@ const PostItem = (data) => {
                 marginRight: "5px",
               }}
             />
-            <PostContents>{data.nickname}</PostContents>
+            {data.nickname}
           </Div>
         </Contents>
       </PostBoxArea>
 
       {/***************** 모달&전체 데이터 출력 부분 ******************/}
       {modalState && (
-        <ModalFrame state={modalState} closeModal={closeModal}>
+        <ModalFrame state={modalState} closeModal={closeModal} widthSize="80%">
           <ModalContents>
             <PadDiv marginBottom="80px">
               <PostTitle>{data.title}</PostTitle>
@@ -84,11 +92,17 @@ const PostItem = (data) => {
                     marginRight: "5px",
                   }}
                 />
-                <PostContents>{data.nickname}</PostContents>
+                {data.nickname}
               </Div>
             </PadDiv>
 
             <PostContents>{data.contents}</PostContents>
+
+            <LikedSticker
+              isLiked={isLiked}
+              setIsLiked={setIsLiked}
+              isScrollable={data.contents.length > 400}
+            />
           </ModalContents>
         </ModalFrame>
       )}
@@ -113,8 +127,14 @@ const Contents = styled.div`
 const ModalContents = styled.div`
   flex: 1;
   background-color: white;
+  width: 95%;
+  height: auto;
   border-radius: 8px;
   padding: 1rem;
+  margin-bottom: 5%;
+
+  align-items: center;
+  justify-content: center;
 `;
 
 const PostTitle = styled.p`
@@ -132,7 +152,7 @@ const PostTitle = styled.p`
     margin-bottom: 15px;
   `
       : `
-    font-size: 2.5rem
+    font-size: 1.6rem
   `};
 `;
 const PostContents = styled.div`
@@ -149,7 +169,9 @@ const PostContents = styled.div`
     -webkit-box-orient: vertical;
     `
       : `
-    line-height: 27px;`}
+    line-height: 27px;
+    margin-bottom: 30px;
+    `}
 `;
 
 const StyledLine = styled.hr`
@@ -164,13 +186,10 @@ const PadDiv = styled.div`
   margin-bottom: ${(props) => props.marginBottom};
 `;
 const Div = styled.div`
-  flex: 1;
   width: 100%;
-`;
-const Blank = styled.div`
-  flex: 999;
-  width: 100%;
-  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export default PostItem;

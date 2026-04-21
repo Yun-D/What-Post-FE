@@ -5,6 +5,7 @@ import BookSearchFunc from "Utils/BookSearchFunc";
 
 import styled from "styled-components";
 import { SmallBtn } from "../../Components/etc/Buttons";
+import FloatingButton from "Components/etc/FloatingButton";
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -91,6 +92,8 @@ const SearchBook = () => {
           </SmallBtn>
         )}
       </FlexZone>
+
+      <FloatingButton />
     </div>
   );
 };

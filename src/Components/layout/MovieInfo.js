@@ -3,8 +3,9 @@ import styled from "styled-components";
 import theme from "../../Styles/theme";
 
 import { useLocation } from "react-router-dom";
+import { onErrorImg } from "Utils/onErrorImg";
 
-const BookInfo = () => {
+const MovieInfo = () => {
   const location = useLocation();
 
   return (
@@ -14,6 +15,7 @@ const BookInfo = () => {
         alt={location.state.thumbnail}
         width="17%"
         height="auto"
+        onError={onErrorImg}
       />
       <DivBookInfo>
         <H1>{location.state.title}</H1>
@@ -74,4 +76,4 @@ const InfoTitle = styled.h3`
   }
 `;
 
-export default BookInfo;
+export default MovieInfo;

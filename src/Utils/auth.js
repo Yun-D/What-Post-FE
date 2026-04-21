@@ -1,19 +1,40 @@
 import axios from "axios";
 import keys from "APIs/api_key";
 
-const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
+//const JWT_EXPIRY_TIME = 24 * 3600 * 1000; // 만료 시간 (24시간 밀리 초로 표현)
+axios.defaults.headers["Access-Control-Allow-Origin"] = "*";
 
-export const onLogin = (userid, pwd) => {
-  const data = {
-    userid,
-    pwd,
-  };
+export const onLogin = (userid, userpwd) => {
   axios
-    .post("/user/signin", data)
-    .then(onLoginSuccess)
+    .post(`${keys.SERVER_URL}/user/signin`, {
+      username: userid,
+      pwd: userpwd,
+    })
+    .then((response) => {
+      if (response.data.status === 200) {
+        const accessToken = response.data.data.accessToken;
+        axios.defaults.headers.common["Authorization"] = `${accessToken}`; // accessToken 설정
+        localStorage.setItem("login-token", accessToken);
+        localStorage.setItem("userID", userid);
+
+        if (accessToken) {
+          window.location.replace("/");
+        }
+      } else {
+        console.log(response);
+      }
+
+      // accessToken 만료하기 1분 전에 로그인 연장
+      //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
+    })
     .catch((error) => {
-      // ... 에러 처리
+      console.log(error);
     });
+};
+export const onLogout = () => {
+  localStorage.clear();
+  //localStorage.removeItem("login-token");
+  window.location.replace("/");
 };
 
 export const onIdCheck = (userid) => {
@@ -34,25 +55,18 @@ export const onIdCheck = (userid) => {
 
 export const onSignUp = (userid, userpwd, useremail) => {
   const data = { username: userid, pwd: userpwd, email: useremail };
-
-  const json = JSON.stringify(data);
-  console.log(json);
   axios
     .post(`${keys.SERVER_URL}/user/signup`, data)
-
-    .then(function (response) {
-      console.log(response);
+    .then((response) => {
+      if (response.data.status === 201) {
+        window.location.replace("/signup/success");
+      } else {
+        console.log(response);
+      }
     })
     .catch(function (error) {
       console.log(error.response);
     });
-
-  // axios({
-  //   method: "post",
-  //   url: `${keys.SERVER_URL}/user/signup`,
-  //   data: { username: userid, pwd: pwd, email: email },
-  //   headers: { "Content-Type": "application/json" },
-  // });
 };
 
 // export const onSilentRefresh = () => {
@@ -62,13 +76,3 @@ export const onSignUp = (userid, userpwd, useremail) => {
 //             // ... 로그인 실패 처리
 //         });
 // }
-
-export const onLoginSuccess = (response) => {
-  const { accessToken } = response.data;
-
-  // accessToken 설정
-  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
-
-  // accessToken 만료하기 1분 전에 로그인 연장
-  //setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000);
-};

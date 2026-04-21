@@ -3,6 +3,7 @@ const colors = {
   boxColor: "#EFF6F6",
   boxColor_light: "#F1F5F5",
   shadowColor: "#467379",
+  textColor: "#242424",
 
   lightGray: "#bbbbbb",
   peacock: "#1491a1", //mainColor 텍스트 버전
@@ -11,10 +12,10 @@ const colors = {
 
 const textSize = {
   placeholder: "1rem",
-  postTitle: "1.45rem", //p태그 등 텍스트 타이틀
+  postTitle: "1.3rem", //p태그 등 텍스트 타이틀
   postContents: "1rem", //본문 텍스트
-  subText: "1.1rem",
-  buttonText: "1.15rem", //버튼에 들어가는 텍스트
+  subText: "1rem",
+  buttonText: "1rem", //버튼에 들어가는 텍스트
 };
 
 const size = {
@@ -27,6 +28,7 @@ const size = {
   boxShadow:
     "0 6px 10px rgba(0, 0, 0, 0.1), 0 3px 5px rgba(226, 235, 238, 0.5)",
   boxLightShadow: "0 3px 3px rgba(0, 0, 0, 0.1)",
+  smallThingShadow: "0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23)",
 };
 
 const device = {

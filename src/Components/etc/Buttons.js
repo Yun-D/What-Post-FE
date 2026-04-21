@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import theme from "Styles/theme";
 
 //글로벌 스타일 button 확장
@@ -17,13 +17,24 @@ export const SmallBtn = styled.button`
 `;
 
 export const TextButton = styled.button`
-  max-height: 2rem;
-  line-height: 2rem;
   width: auto;
   font-size: ${theme.textSize.postContents};
   font-weight: 700;
-  padding: 0px;
-  background-color: unset;
+  padding: 5px 15px;
+  margin: 0 0 0 8px;
+  background-color: ${theme.colors.boxColor_light};
   cursor: pointer;
   color: ${theme.colors.peacockGray};
+
+  ${(
+    { isJustText } //뒷배경 없이 오직 텍스트만
+  ) =>
+    isJustText &&
+    css`
+      max-height: 2rem;
+      line-height: 2rem;
+      background-color: unset;
+      padding: 0px;
+      margin: 0px;
+    `}
 `;
