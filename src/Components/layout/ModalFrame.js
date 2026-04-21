@@ -19,12 +19,11 @@ const Container = styled.div`
 `;
 const Overlay = styled.div`
   //Container를 덮는 블러
-  //position: relative;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.13);
   backdrop-filter: blur(5px);
-  animation: modal-bg-show 1s;
+  animation: modal-bg-show 0.3s;
   @keyframes modal-bg-show {
     from {
       opacity: 0;
@@ -37,7 +36,7 @@ const Overlay = styled.div`
 
 const ModalBlock = styled.div`
   //Contents가 담길 상자
-  width: 80%;
+  width: ${(props) => props.widthSize};
   height: 75vh;
   position: absolute; //static이 아닌 가까운 요소의 위치 기준으로 상대적 속성주기
   display: flex;
@@ -45,7 +44,7 @@ const ModalBlock = styled.div`
   border-radius: 10px;
   background-color: ${theme.colors.boxColor};
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.3);
-  padding: 30px;
+  padding: 15px;
 `;
 
 const Contents = styled.div`
@@ -58,12 +57,13 @@ const Contents = styled.div`
   scroll-behavior: smooth;
   display: flex;
   align-items: center;
+  margin-top: 40px;
 `;
 
 const Close = styled.div`
   position: absolute;
   right: 30px;
-  top: 4%;
+  top: 20px;
   color: gray;
 
   &:hover {
@@ -71,7 +71,7 @@ const Close = styled.div`
   }
 `;
 
-const ModalFrame = ({ state, closeModal, children }) => {
+const ModalFrame = ({ closeModal, children, widthSize }) => {
   useEffect(() => {
     // 모달 오버레이에서 스크롤 방지
     document.body.style.cssText = `
@@ -92,7 +92,7 @@ const ModalFrame = ({ state, closeModal, children }) => {
   return (
     <Container>
       <Overlay onClick={(e) => closeModal(e)} />
-      <ModalBlock>
+      <ModalBlock widthSize={widthSize}>
         <Close onClick={(e) => closeModal(e)}>
           <CloseIcon />
         </Close>

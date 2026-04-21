@@ -2,15 +2,19 @@ import { React, useState, useLayoutEffect } from "react";
 import styled from "styled-components";
 import "./WritePost.css";
 
-import theme from "../../../Styles/theme";
+import theme from "Styles/theme";
+import { ReactComponent as BooKIcn } from "Assets/icn_book.svg";
+import { ReactComponent as MovieIcn } from "Assets/icn_movie.svg";
 
-import BookInfo from "../../../Components/layout/BookInfo";
+import BookInfo from "Components/layout/BookInfo";
 import MovieInfo from "Components/layout/MovieInfo";
 import { bookSearch, movieSearch } from "APIs/api";
 import BookList from "Components/layout/BookList";
 import MovieList from "Components/layout/MovieList";
 import BookSearchFunc from "Utils/BookSearchFunc";
 import MovieSearchFunc from "Utils/MovieSearchFunc";
+import { postCreate } from "Utils/post";
+import keys from "APIs/api_key";
 
 import ModalFrame from "Components/layout/ModalFrame";
 import { FullSizeBtn, SmallBtn } from "Components/etc/Buttons";
@@ -30,7 +34,6 @@ import {
 
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import ReactHtmlParser from "react-html-parser";
 
 const WritePost = () => {
   const dispatch = useDispatch(); //작업 전달하기
@@ -54,13 +57,15 @@ const WritePost = () => {
   const [viewContent, setViewContent] = useState([]);
   /////////////////임시 선언 닫음
   //선택 컨텐츠별 구분
-  const [thisContent, setThisContent] = useState("");
+  const [selectData, setSelectData] = useState(""); //선택한 컨텐츠 제목 담는 state
+  const [thisContent, setThisContent] = useState(""); //현재 선택된 컨텐츠 종류 담는 state(book, movie, drama)
   const [modalState, setModalState] = useState(false); //모달
   //주제 state
   const [m_isEnd, setMIsEnd] = useState(false);
   const [searchItem, setSearch] = useState(""); //검색창에 입력되는 텍스트 추적용 state
   const [isBookSelected, setIsBookSelected] = useState(false); //책 데이터 선택 됐을 경우 true
   const [isMovieSelected, setIsMovieSelected] = useState(false);
+  const [isOpen, setIsOpen] = useState("1"); //게시글 공개 비공개 여부(1이면 공개)
   ///////////////////////////////////////////  state 선언 닫음
 
   useLayoutEffect(() => {
@@ -107,29 +112,23 @@ const WritePost = () => {
   //영화 검색
   const movieSearchHandler = async (query, start) => {
     const params = {
+      ServiceKey: keys.KMDB_API_KEY,
+      collection: "kmdb_new2",
       query: query, //검색어
-      start: start, //검색 시작 위치 지정
-      display: 10, //1~50. 출력할 검색 결과 수
+      startCount: start, //검색 시작 위치 지정
+      listCount: 10, //1~50. 출력할 검색 결과 수
     };
 
     const { data } = await movieSearch(params); //api 호출
-    if (data.items.length < 10) {
+    if (data.Data[0].Result.length < 10) {
       //더이상 더보기로 보여줄 데이터가 없는 경우 더보기 버튼 제거
       setMIsEnd(true);
-    }
+    } else setMIsEnd(false);
 
     if (start === 1) {
-      dispatch(m_setItems(data.items));
+      dispatch(m_setItems(data.Data[0].Result));
     } else if (start >= 11) {
-      let beforeData = movies[start - 2].title;
-
-      if (data.items[data.items.length - 1].title === beforeData) {
-        //다음에 올 데이터가 기존데이터(beforeData)와 같을 경우(더이상 검색 결과가 없을 경우) 더보기 버튼 제거, 알림창 출력
-        setMIsEnd(true);
-        alert("더이상 결과가 없습니다.");
-      } else {
-        dispatch(m_setItems(movies.concat(data.items)));
-      }
+      dispatch(m_setItems(movies.concat(data.Data[0].Result)));
     }
   };
   /////////////////////////////////영화 검색용 함수들 닫음
@@ -143,6 +142,7 @@ const WritePost = () => {
       setThisContent("book");
     } else if (props === "movie") {
       setThisContent("movie");
+      setMIsEnd(true);
     }
   };
   const closeModal = () => {
@@ -157,24 +157,29 @@ const WritePost = () => {
     dispatch(m_setQuery(""));
     dispatch(m_setPage(1));
     dispatch(m_setItems([]));
+    setMIsEnd(false);
   };
   /////////////////////////////////모달용 함수들 닫음
 
   ////////////////////////////////주제 선택용 함수
-  const selectBook = () => {
+  const selectBook = (data) => {
     //도서 주제 선택
     setIsBookSelected(true);
+    setSelectData(data);
     closeModal();
   };
-  const selectMovie = () => {
+  const selectMovie = (data) => {
     //영화 주제 선택
     setIsMovieSelected(true);
+    setSelectData(data);
     closeModal();
   };
   const cancelSubject = () => {
     //주제 선택 취소
+    setSelectData("");
     setIsBookSelected(false);
     setIsMovieSelected(false);
+    setMIsEnd(false);
   };
   ////////////////////////////주제 선택용 함수 닫음
 
@@ -185,27 +190,34 @@ const WritePost = () => {
       [name]: value, //여기서 name은 "title"
     });
   };
+  const radiobuttonHandler = (e) => {
+    setIsOpen(e.target.value);
+  };
 
   return (
     <div className="contents_div">
-      {viewContent.map((ele) => (
-        <TempPostTest>
-          <h3>{ele.title}</h3>
-          <div>{ReactHtmlParser(ele.content)}</div>
-        </TempPostTest>
-      ))}
-
-      <div>
+      <>
         <SubjectDiv>
           <SubjectButton onClick={() => openModal("book")}>
-            <ImgIcon src={require("Assets/icn_book.png")} alt="book" /> 도서
+            <BooKIcn
+              width="35"
+              height="35"
+              fill="#929292"
+              style={{ marginRight: "10px" }}
+            />
+            도서
           </SubjectButton>
           <SubjectButton>
             <ImgIcon src={require("Assets/icn_drama.png")} alt="drama" />
             드라마
           </SubjectButton>
           <SubjectButton onClick={() => openModal("movie")}>
-            <ImgIcon src={require("Assets/icn_movie.png")} alt="movie" />
+            <MovieIcn
+              width="35"
+              height="35"
+              fill="#929292"
+              style={{ marginRight: "10px" }}
+            />
             영화
           </SubjectButton>
         </SubjectDiv>
@@ -216,6 +228,7 @@ const WritePost = () => {
             placeholder="포스트 제목을 입력하세요."
             onChange={getValue}
             name="title"
+            value={postContent.title}
           />
 
           {isBookSelected && (
@@ -242,6 +255,7 @@ const WritePost = () => {
             config={{
               placeholder: "내용을 입력하세요.",
             }}
+            data={postContent.content}
             onReady={(editor) => {
               // You can store the "editor" and use when it is needed.
               //console.log("Editor is ready to use!", editor);
@@ -253,26 +267,46 @@ const WritePost = () => {
                 content: data,
               });
             }}
-            onBlur={(event, editor) => {
-              console.log("Blur.", editor);
-            }}
-            onFocus={(event, editor) => {
-              console.log("Focus.", editor);
-            }}
           />
+
+          <SubjectDiv className="rowDirection">
+            <p>공개 여부</p>
+            <RadioButton
+              type="radio"
+              name="openpost"
+              value="1"
+              onChange={radiobuttonHandler}
+              defaultChecked
+            />
+            <label>공개</label>
+            <RadioButton
+              type="radio"
+              name="openpost"
+              value="0"
+              onChange={radiobuttonHandler}
+            />
+            <label>비공개</label>
+          </SubjectDiv>
 
           <FullSizeBtn
             onClick={() => {
               setViewContent(viewContent.concat({ ...postContent }));
+              postCreate(
+                thisContent,
+                selectData,
+                postContent.title,
+                postContent.content,
+                isOpen
+              );
             }}
           >
             업로드
           </FullSizeBtn>
         </div>
-      </div>
+      </>
 
       {modalState && (
-        <ModalFrame state={modalState} closeModal={closeModal}>
+        <ModalFrame state={modalState} closeModal={closeModal} widthSize="80%">
           {/* // ************************ 책 검색 모달 ************************ */}
           {thisContent === "book" && (
             <>
@@ -296,7 +330,7 @@ const WritePost = () => {
                   publisher={book.publisher}
                   contents={book.contents}
                   tolink={"./"}
-                  onClick={selectBook}
+                  onClick={() => selectBook(book.title)}
                 />
               ))}
               <Blank />
@@ -330,19 +364,22 @@ const WritePost = () => {
               {movies.map((movie, idx) => (
                 <MovieList
                   key={idx}
-                  thumbnail={movie.image}
+                  thumbnail={movie.posters}
                   title={movie.title}
-                  subtitle={movie.subtitle}
-                  datetime={movie.pubDate}
-                  director={movie.director}
-                  actor={movie.actor}
+                  subtitle={movie.titleEng}
+                  datetime={movie.repRlsDate.substring(0, 4)}
+                  director={movie.directors.director[0].directorNm}
+                  actor={movie.actors.actor
+                    .map((data) => data.actorNm.replace(/!HS | !HE /g, ""))
+                    .join(" ")}
                   tolink={"./"}
-                  onClick={selectMovie}
+                  onClick={() => selectMovie(movie.title)}
                   detailLink={movie.link}
                 />
               ))}
               <Blank />
-              {m_isEnd && (
+
+              {!m_isEnd && (
                 <SmallBtn
                   onClick={() => {
                     dispatch(m_nextPage());
@@ -417,11 +454,10 @@ const Blank = styled.div`
   }
 `;
 
-const TempPostTest = styled.div`
-  border: 1px solid;
-  padding: 20px;
-  border-radius: 5px;
-  margin-bottom: 30px;
+const RadioButton = styled.input`
+  height: auto;
+  width: auto;
+  margin: 0 10px 0 20px;
 `;
 
 export default WritePost;

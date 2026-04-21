@@ -3,6 +3,7 @@ import React from "react";
 import theme from "../../Styles/theme";
 import styled from "styled-components";
 import { StyledLink } from "../etc/StyledLink";
+import { onErrorImg } from "Utils/onErrorImg";
 
 /////////////////////////////// 책 검색 결과를 리스트형태로 보여주는 컴포넌트
 const ListItem = (props) => {
@@ -19,6 +20,7 @@ const ListItem = (props) => {
         alt={props.thumbnail}
         width="9%"
         height="auto"
+        onError={onErrorImg}
       />
 
       <ContentsDiv>

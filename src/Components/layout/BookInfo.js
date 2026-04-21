@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+
 import theme from "../../Styles/theme";
+import { onErrorImg } from "Utils/onErrorImg";
 
 import { useLocation } from "react-router-dom";
 import CircleIcon from "@material-ui/icons/RadioButtonUnchecked";
@@ -14,11 +16,12 @@ const BookInfo = () => {
       <img
         src={location.state.thumbnail}
         alt={location.state.thumbnail}
-        width="20%"
+        width="18%"
         height="auto"
+        onError={onErrorImg}
       />
       <DivBookInfo>
-        <H1>{location.state.title}</H1>
+        <H2>{location.state.title}</H2>
         <div className="rowDirection">
           <H3>{location.state.authors}</H3>
           <CircleIcon
@@ -65,7 +68,7 @@ const Hr = styled.hr`
   border-width: 1px 0px 0px 0px;
   height: 1px;
 `;
-const H1 = styled.h1`
+const H2 = styled.h2`
   color: ${theme.colors.peacock};
 
   @media only screen and (max-width: ${theme.size.tablet}) {

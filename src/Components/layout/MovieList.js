@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StyledLink } from "Components/etc/StyledLink";
 import theme from "Styles/theme";
 import styled from "styled-components";
-
-import HtmlParser from "react-html-parser";
+import { onErrorImg } from "Utils/onErrorImg";
 
 const MovieList = (props) => {
   const [isSubtitleExist, setIsSubtitleExist] = useState(false);
@@ -17,25 +16,38 @@ const MovieList = (props) => {
   ////// 결과 텍스트 수정
   let temp_title = props.title;
   let temp_director = props.director;
-  let temp_actors = props.actor;
-  temp_title = temp_title.replace(/[<b>]|[</b>]/g, ""); // 타이틀에 <b> 처리 되어있는 것들 치환
-  temp_director = temp_director.split("|")[0]; // "|" 이후 문자 제거
-  temp_actors = temp_actors.replace(/[|]/g, " | "); // "|" 사이 공백 추가
+  let temp_subtitle = props.subtitle;
+  let temp_poster = props.thumbnail;
+
+  temp_title = temp_title.replace(/!HS | !HE /g, ""); // 타이틀에 HS, HE 붙어있던 것 치환
+  temp_director = temp_director.replace(/!HS | !HE /g, "");
+
+  const index1 = temp_subtitle.indexOf("(");
+  temp_subtitle =
+    index1 !== -1 ? temp_subtitle.substring(0, index1) : temp_subtitle;
+
+  const index2 = temp_poster.indexOf("|") || temp_poster.indexOf("%7C"); // '|'나 '%7C'와 함께 다른 url이 더 존재한다면
+  temp_poster = index2 !== -1 ? temp_poster.substring(0, index2) : temp_poster; //해당 부분부터 뒷 부분을 지워주고, 없다면 기본 url 사용
 
   return (
     <ItemCard className="rowDirection">
-      <img src={props.thumbnail} alt={temp_title + " 이미지"} width="9%" />
+      <img
+        src={temp_poster}
+        alt={temp_title + " 이미지"}
+        width="9%"
+        onError={onErrorImg}
+      />
       <ContentsDiv>
         <StyledLink
           to={props.tolink}
           color={`${theme.colors.peacock}`}
           state={{
-            thumbnail: props.thumbnail,
+            thumbnail: temp_poster,
             title: temp_title,
-            subtitle: HtmlParser(props.subtitle),
+            subtitle: temp_subtitle,
             datetime: props.datetime,
             director: temp_director,
-            actor: temp_actors,
+            actor: props.actor,
             tolink: props.link,
             detailLink: props.detailLink,
           }}
@@ -45,7 +57,7 @@ const MovieList = (props) => {
         >
           {isSubtitleExist ? (
             <h3>
-              {temp_title} | {HtmlParser(props.subtitle)}
+              {temp_title} | {temp_subtitle}
             </h3>
           ) : (
             <h3>{temp_title}</h3>
@@ -56,7 +68,7 @@ const MovieList = (props) => {
           {temp_director} | {props.datetime}
         </H4>
         <br />
-        <SmallTxt>{temp_actors}</SmallTxt>
+        <SmallTxt>{props.actor}</SmallTxt>
       </ContentsDiv>
     </ItemCard>
   );
