@@ -105,11 +105,13 @@ const BoxOffice = (props) => {
             releaseDts: data.releaseDate,
           };
 
-          const resData = await getMoviePoster(params); //API 호출
-          const responseData = getResponseMovieData(resData); //호출되어 돌아온 resData를 가공하여 필요한 데이터(poster)만 가져오도록 getResponseMovieData 호출
-
-          return responseData;
-        })
+          try {
+            const resData = await getMoviePoster(params); //API 호출
+            return getResponseMovieData(resData);
+          } catch (error) {
+            return "";
+          }
+        }),
       );
 
       return postList;
@@ -123,11 +125,12 @@ const BoxOffice = (props) => {
     try {
       const temp = response.data.Data[0].Result[0].posters;
       const posterData = temp.substring(0, temp.indexOf("|"));
+
       return posterData;
     } catch (error) {
       console.error(
         "Failed to get movie poster data from the response:",
-        error
+        error,
       );
       return ""; // 오류 발생 시 빈 문자열 반환 또는 다른 적절한 오류 처리 방식 적용
     }
